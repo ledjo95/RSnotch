@@ -329,6 +329,7 @@ final class NotchWindowController {
             _ = settings.screenPreference
             _ = settings.showWithoutNotch
             _ = settings.simulatedBarWidth
+            _ = settings.replaceSystemHUD
         } onChange: {
             Task { @MainActor [weak self] in
                 self?.applySettings()
@@ -344,6 +345,7 @@ final class NotchWindowController {
         model?.opensOnHover = settings.openOnHover
         model?.hoverOpenDelay = .milliseconds(settings.hoverDelayMilliseconds)
         setPanelActive(settings.panelEnabled)
+        applyHUDInterception(settings.replaceSystemHUD)
         repositionForCurrentScreen()
     }
 
@@ -403,6 +405,18 @@ final class NotchWindowController {
             return self.handleMediaKey(key)
         }
         mediaKeys.start()
+    }
+
+    /// Bascule l'interception A CHAUD. Sans ce chemin, changer le reglage
+    /// « Remplacer les jauges de macOS » ne prenait effet qu'au redemarrage
+    /// suivant : l'interrupteur bougeait, le comportement non.
+    private func applyHUDInterception(_ replace: Bool) {
+        guard isPanelActive else { return }
+        if replace {
+            startMediaKeyInterception()
+        } else {
+            mediaKeys.stop()
+        }
     }
 
     /// Rend `true` si RSnotch a traite la touche : elle est alors avalee.

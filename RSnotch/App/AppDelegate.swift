@@ -11,7 +11,7 @@ import SwiftUI
 final class AppDelegate: NSObject, NSApplicationDelegate {
 
     private let notchController = NotchWindowController()
-    private let settingsWindow = SettingsWindowController()
+    private let settingsWindow = SettingsWindowController.shared
     private var statusItem: NSStatusItem?
     #if DEBUG
     private var galleryWindow: NSWindow?
@@ -19,6 +19,13 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
 
     func applicationDidFinishLaunching(_ notification: Notification) {
         NSApp.setActivationPolicy(.accessory)
+        // AVANT TOUT LE RESTE. Le retrait du bac a sable a rendu l'ancien
+        // conteneur invisible : preferences, applications epinglees, historique
+        // et Pocket etaient toujours sur le disque, mais l'app repartait d'une
+        // ardoise vierge. La reprise doit se faire avant que quiconque lise une
+        // donnee — en particulier avant que SwiftData ne cree une base vide,
+        // qui prendrait la place de celle qu'on veut restaurer.
+        AppContainer.migrateFromSandboxContainer()
         notchController.start()
         installStatusItem()
         installDebugHooks()

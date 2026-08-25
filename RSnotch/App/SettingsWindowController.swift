@@ -18,6 +18,12 @@ import SwiftUI
 @MainActor
 final class SettingsWindowController {
 
+    /// Instance unique. L'onglet Reglages du notch doit pouvoir ouvrir la
+    /// fenetre complete, et faire descendre une fermeture depuis l'AppDelegate
+    /// jusqu'a une vue enfouie dans le panneau traverserait quatre couches pour
+    /// une action qui n'a rien de specifique au notch.
+    static let shared = SettingsWindowController()
+
     private var window: NSWindow?
 
     func show() {

@@ -143,6 +143,7 @@ enum Theme {
             case .timer: 860
             case .tray: 900
             case .pocket: 900
+            case .settings: 900
             default: defaultContentWidth
             }
             return base * scale

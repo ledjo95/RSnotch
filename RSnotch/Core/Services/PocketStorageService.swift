@@ -82,19 +82,12 @@ final class PocketStorageService {
     private let fileManager = FileManager.default
 
     /// Dossier de rangement. Cree a la demande.
+    ///
+    /// Passe par `AppContainer` : hors bac a sable,
+    /// `applicationSupportDirectory` rend le dossier PARTAGE de l'utilisateur,
+    /// et y creer un « Pocket » a la racine serait un squat.
     private var directory: URL? {
-        guard let support = try? fileManager.url(
-            for: .applicationSupportDirectory,
-            in: .userDomainMask,
-            appropriateFor: nil,
-            create: true
-        ) else { return nil }
-
-        let pocket = support.appending(path: "Pocket", directoryHint: .isDirectory)
-        if !fileManager.fileExists(atPath: pocket.path) {
-            try? fileManager.createDirectory(at: pocket, withIntermediateDirectories: true)
-        }
-        return pocket
+        AppContainer.directory(named: "Pocket")
     }
 
     // MARK: Cycle de vie

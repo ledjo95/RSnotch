@@ -18,12 +18,37 @@ import SwiftData
 enum ClipboardStore {
 
     static let container: ModelContainer = {
+        // La reprise de l'ancien conteneur doit avoir eu lieu AVANT qu'une base
+        // ne soit ouverte ici, sinon SwiftData en cree une vide et la migration
+        // la trouve deja en place — elle passe alors son chemin, et l'historique
+        // reste orphelin dans le conteneur du bac a sable.
+        //
+        // L'appel est place ICI, et pas seulement dans `applicationDidFinishLaunching`,
+        // parce que ce `static let` est evalue des l'initialisation de
+        // `NotchWindowController`, qui est elle-meme une propriete stockee de
+        // l'AppDelegate — donc AVANT que la methode de lancement ne s'execute.
+        // La garantie appartient a la dependance, pas a l'ordre d'appel.
+        // L'operation est idempotente : elle ne coute rien aux appels suivants.
+        AppContainer.migrateFromSandboxContainer()
+
         let schema = Schema([ClipboardEntry.self])
-        let configuration = ModelConfiguration(
-            schema: schema,
-            isStoredInMemoryOnly: false,
-            cloudKitDatabase: .none
-        )
+        // Emplacement EXPLICITE. Par defaut SwiftData ecrit un `default.store`
+        // dans `applicationSupportDirectory` — soit, hors bac a sable, la
+        // racine du dossier partage de l'utilisateur, sous un nom que n'importe
+        // quelle autre app peut revendiquer.
+        let configuration: ModelConfiguration
+        if let url = AppContainer.supportDirectory?
+            .appending(path: "default.store", directoryHint: .notDirectory) {
+            configuration = ModelConfiguration(
+                schema: schema, url: url, cloudKitDatabase: .none
+            )
+        } else {
+            configuration = ModelConfiguration(
+                schema: schema,
+                isStoredInMemoryOnly: false,
+                cloudKitDatabase: .none
+            )
+        }
         do {
             return try ModelContainer(for: schema, configurations: [configuration])
         } catch {

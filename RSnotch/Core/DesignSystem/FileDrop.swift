@@ -106,20 +106,10 @@ enum DropInbox {
 
     private static let directoryName = "DropInbox"
 
+    /// Passe par `AppContainer` : hors bac a sable,
+    /// `applicationSupportDirectory` rend le dossier PARTAGE de l'utilisateur.
     static var directory: URL? {
-        let manager = FileManager.default
-        guard let support = try? manager.url(
-            for: .applicationSupportDirectory,
-            in: .userDomainMask,
-            appropriateFor: nil,
-            create: true
-        ) else { return nil }
-
-        let inbox = support.appending(path: directoryName, directoryHint: .isDirectory)
-        if !manager.fileExists(atPath: inbox.path) {
-            try? manager.createDirectory(at: inbox, withIntermediateDirectories: true)
-        }
-        return inbox
+        AppContainer.directory(named: directoryName)
     }
 
     /// Copie `source` dans le sas et renvoie l'URL de la copie.

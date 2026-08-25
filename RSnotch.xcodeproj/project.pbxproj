@@ -11,6 +11,7 @@
 		0457FAE6887A84150A735689 /* TimerService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 558D836EDD3B4999F737FA59 /* TimerService.swift */; };
 		04AC289C9D4E4E0FF5524D41 /* CompactIslandView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B4FFD24EE8561FEDB0845B9 /* CompactIslandView.swift */; };
 		07C554108AA4F81F5FC5003C /* WeatherService.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAB92890F5C6FB13DBEB7A41 /* WeatherService.swift */; };
+		0FD153A4C34567F9CCB62248 /* QuickSettingsTabView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57B6F2C5A51DBC32D22ACC4E /* QuickSettingsTabView.swift */; };
 		0FF3B38D571D663E0B542988 /* ClipboardTabView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD5191862789570C6E085E71 /* ClipboardTabView.swift */; };
 		12ED1BB8D4AEA75770394E51 /* SettingsWindowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 501812FC42F5EE85C04D52E2 /* SettingsWindowController.swift */; };
 		148103134BFC36FCDEB3D46E /* SystemAudioService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A04E9F66A01014DA4B0F1D1 /* SystemAudioService.swift */; };
@@ -41,6 +42,7 @@
 		930931AEB7E02812D95AE0D6 /* NowPlaying.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A68188087CF9C95C467E4BB /* NowPlaying.swift */; };
 		950D2EABD9AB728DBED5BC0E /* TickRuler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04C697C4B0A11BD36ABA43A0 /* TickRuler.swift */; };
 		9D063BF582815C70F00CF405 /* ClipboardStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF1346AF57451E71CBBFCF6D /* ClipboardStore.swift */; };
+		9D2AD5C0D6BEB6F2861D0574 /* AppContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = A18ECBB8C744DAC1DA6A4496 /* AppContainer.swift */; };
 		A09681DCA293079659568BB7 /* MediaKeyInterceptor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F5F8AF9959067D640614772 /* MediaKeyInterceptor.swift */; };
 		A7DC3EAE3C15542D3E85F2A1 /* NotchPanel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 934F9423CE1DFA1DCE9F7999 /* NotchPanel.swift */; };
 		ABC73152670009553BA65CD3 /* BluetoothService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38BAE5F146A043F95E138D3C /* BluetoothService.swift */; };
@@ -113,6 +115,7 @@
 		524931059CBF3FA5A3C9B101 /* LoginItemService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginItemService.swift; sourceTree = "<group>"; };
 		54A6CF4445C5C01B6F861E61 /* RSnotchApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RSnotchApp.swift; sourceTree = "<group>"; };
 		558D836EDD3B4999F737FA59 /* TimerService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimerService.swift; sourceTree = "<group>"; };
+		57B6F2C5A51DBC32D22ACC4E /* QuickSettingsTabView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuickSettingsTabView.swift; sourceTree = "<group>"; };
 		601BB1000F7F85F84B106980 /* ClipboardEntry.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClipboardEntry.swift; sourceTree = "<group>"; };
 		60CCFE3811153BE91C1A7E97 /* NotchWindowController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotchWindowController.swift; sourceTree = "<group>"; };
 		6A45A996780A41313384F189 /* ClipboardActions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClipboardActions.swift; sourceTree = "<group>"; };
@@ -131,6 +134,7 @@
 		9683D31B056253D8AEDCFACF /* WeatherWidgetView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherWidgetView.swift; sourceTree = "<group>"; };
 		9D1D1A4007FFDA3D578505F8 /* UpcomingWidgetView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpcomingWidgetView.swift; sourceTree = "<group>"; };
 		9E0173C5BF19D9B27B1FCA98 /* LaunchItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LaunchItem.swift; sourceTree = "<group>"; };
+		A18ECBB8C744DAC1DA6A4496 /* AppContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppContainer.swift; sourceTree = "<group>"; };
 		A242C0C09AFDE9ACCCA2450F /* GlassSegmentedRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GlassSegmentedRow.swift; sourceTree = "<group>"; };
 		A2624C22E81F574D97963342 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		AEB54BB95EFB2BAA1D33C1F0 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
@@ -216,6 +220,14 @@
 			path = Notifications;
 			sourceTree = "<group>";
 		};
+		3D66B16ABEBE51D34AB23D6B /* Settings */ = {
+			isa = PBXGroup;
+			children = (
+				57B6F2C5A51DBC32D22ACC4E /* QuickSettingsTabView.swift */,
+			);
+			path = Settings;
+			sourceTree = "<group>";
+		};
 		4C3F5A464EF6FE81CFF71E94 /* DragDrop */ = {
 			isa = PBXGroup;
 			children = (
@@ -298,6 +310,7 @@
 		CAB9029F0AF18823897DF5A1 /* Persistence */ = {
 			isa = PBXGroup;
 			children = (
+				A18ECBB8C744DAC1DA6A4496 /* AppContainer.swift */,
 				6F070EB160E2573D26C1E128 /* AppSettings.swift */,
 				448752EC329859FB2743F874 /* BookmarkStore.swift */,
 				DF1346AF57451E71CBBFCF6D /* ClipboardStore.swift */,
@@ -380,6 +393,7 @@
 				FC1D52AC8802EA60345BD25D /* Media */,
 				D4D71468067C84243063B78A /* Notch */,
 				3BC4BFBD63DF55468FB228B3 /* Notifications */,
+				3D66B16ABEBE51D34AB23D6B /* Settings */,
 				365D7260D2B400218665DEE0 /* Spaces */,
 				F37A75B44E9427BA67017489 /* Timer */,
 				DC25DD46EAACD0F9C8651FB4 /* Widgets */,
@@ -479,6 +493,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				5CA8EDF99AFDDBF4A4614E02 /* AlarmSound.swift in Sources */,
+				9D2AD5C0D6BEB6F2861D0574 /* AppContainer.swift in Sources */,
 				8FB3708626B81048E9B4AFAC /* AppDelegate.swift in Sources */,
 				E3A4F0E29F0248B202E0245F /* AppIconLoader.swift in Sources */,
 				F943D2A151E6A8BEEBBCD521 /* AppLauncher.swift in Sources */,
@@ -528,6 +543,7 @@
 				B75620D5C117EE62529CE816 /* PocketStorageService.swift in Sources */,
 				B049898E9A2A3593D0FFB833 /* PocketTabView.swift in Sources */,
 				83282859E6BF871360B51097 /* PowerService.swift in Sources */,
+				0FD153A4C34567F9CCB62248 /* QuickSettingsTabView.swift in Sources */,
 				E1E629E92E882636706373BA /* QuoteWidgetView.swift in Sources */,
 				5B20763EEF45DE6F62900E25 /* RSnotchApp.swift in Sources */,
 				CE86842F95EA33E6F468F8F3 /* SettingsView.swift in Sources */,

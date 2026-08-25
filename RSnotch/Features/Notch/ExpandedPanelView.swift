@@ -97,7 +97,7 @@ struct ExpandedPanelView: View {
         case .pocket:
             PocketTabView(pocket: pocket)
         case .settings:
-            UpcomingTabPlaceholder(tab: model.selectedTab)
+            QuickSettingsTabView()
         }
     }
 }
