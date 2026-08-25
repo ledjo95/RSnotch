@@ -194,13 +194,40 @@ enum Theme {
     }
 
     // MARK: Mouvement
+    //
+    // Toutes les animations du panneau passent par ces trois courbes. C'est ce
+    // qui rend « Reduire les animations » applicable en UN SEUL endroit : quand
+    // la preference systeme est active, chaque courbe se replie sur un fondu
+    // quasi instantane, et les 47 appels a `Theme.Motion.*` s'y conforment sans
+    // qu'aucun ait a connaitre la preference. Les proprietes sont donc
+    // CALCULEES, pas constantes : elles relisent la preference a chaque
+    // animation, et un changement dans les Reglages Systeme prend effet a la
+    // suivante, sans redemarrage.
     enum Motion {
+
+        /// Preference « Reduire les animations » (Reglages Systeme >
+        /// Accessibilite > Affichage). API publique, lue a la volee.
+        @MainActor static var reduceMotion: Bool {
+            NSWorkspace.shared.accessibilityDisplayShouldReduceMotion
+        }
+
+        /// Substitut sans mouvement : un fondu si court qu'il ne se lit pas
+        /// comme un deplacement, mais assez present pour ne pas faire clignoter
+        /// le contenu d'un cran a l'autre.
+        private static let reduced = Animation.easeOut(duration: 0.12)
+
         /// Morph pilule → panneau. Ressort court, sans rebond visible :
         /// le verre doit paraitre dense, pas elastique.
-        static let morph = Animation.spring(response: 0.34, dampingFraction: 0.82)
+        @MainActor static var morph: Animation {
+            reduceMotion ? reduced : .spring(response: 0.34, dampingFraction: 0.82)
+        }
         /// Retour au repli : legerement plus lent, le regard suit la fermeture.
-        static let collapse = Animation.spring(response: 0.40, dampingFraction: 0.90)
+        @MainActor static var collapse: Animation {
+            reduceMotion ? reduced : .spring(response: 0.40, dampingFraction: 0.90)
+        }
         /// Apparition/disparition d'une notification compacte.
-        static let island = Animation.spring(response: 0.30, dampingFraction: 0.78)
+        @MainActor static var island: Animation {
+            reduceMotion ? reduced : .spring(response: 0.30, dampingFraction: 0.78)
+        }
     }
 }

@@ -183,6 +183,9 @@ private struct ArtworkBackground: View {
     let isBreathing: Bool
 
     @State private var isInhaled = false
+    /// La respiration est un mouvement continu : « Reduire les animations »
+    /// l'eteint. La pochette reste alors posee a son facteur de repos.
+    @Environment(\.accessibilityReduceMotion) private var reduceMotion
 
     var body: some View {
         Group {
@@ -193,9 +196,9 @@ private struct ArtworkBackground: View {
                     .aspectRatio(contentMode: .fill)
                     // La respiration ne doit jamais decouvrir un bord : le
                     // facteur de repos est deja legerement superieur a 1.
-                    .scaleEffect(isInhaled ? 1.06 : 1.02)
+                    .scaleEffect(reduceMotion ? 1.02 : (isInhaled ? 1.06 : 1.02))
                     .animation(
-                        isBreathing
+                        isBreathing && !reduceMotion
                             ? .easeInOut(duration: 3.2).repeatForever(autoreverses: true)
                             : .default,
                         value: isInhaled
