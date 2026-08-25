@@ -29,7 +29,10 @@ final class WidgetsViewModel {
         if let data = defaults.data(forKey: Self.storageKey),
            let stored = try? JSONDecoder().decode([PanelWidget].self, from: data),
            !stored.isEmpty {
-            self.widgets = stored
+            // Une disposition enregistree avant qu'un type devienne indisponible
+            // (ex. meteo sans WeatherKit) en garde une carte : on la retire au
+            // chargement, sinon l'ancien layout continue d'afficher du faux.
+            self.widgets = stored.filter { $0.kind.isAvailable }
         } else {
             self.widgets = PanelWidget.defaultLayout
         }
@@ -123,7 +126,7 @@ final class WidgetsViewModel {
     /// Types absents de la rangee : alimente le menu d'ajout.
     var availableKinds: [WidgetKind] {
         let present = Set(widgets.map(\.kind))
-        return WidgetKind.allCases.filter { !present.contains($0) }
+        return WidgetKind.allCases.filter { !present.contains($0) && $0.isAvailable }
     }
 
     // MARK: Persistance

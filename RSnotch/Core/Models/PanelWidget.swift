@@ -14,6 +14,19 @@ enum WidgetKind: String, Codable, CaseIterable, Identifiable, Sendable {
 
     var id: String { rawValue }
 
+    /// Types indisponibles pour l'instant, retires partout : menu d'ajout,
+    /// disposition par defaut, et dispositions deja enregistrees.
+    ///
+    /// La meteo n'a pas de source reelle — le widget afficherait le
+    /// `MockWeatherProvider` (27 °C, Paris, en dur). Mieux vaut l'absence qu'une
+    /// donnee fausse promise a l'utilisateur. Reactiver = cabler un
+    /// `WeatherKitProvider` (capability `com.apple.developer.weatherkit` +
+    /// localisation) PUIS retirer `.weather` de cet ensemble. C'est le seul
+    /// point a toucher : le filtre s'applique aux trois entrees ci-dessous.
+    static let unavailable: Set<WidgetKind> = [.weather]
+
+    var isAvailable: Bool { !Self.unavailable.contains(self) }
+
     var title: String {
         switch self {
         case .date: "Date"
@@ -125,15 +138,19 @@ extension PanelWidget {
     /// Disposition livree a la premiere ouverture : ce qu'on peut afficher sans
     /// demander la moindre autorisation a l'utilisateur.
     ///
-    /// Ordre : minuteur, lecture en cours, applications, date,
-    /// meteo. La largeur du panneau se cale sur ses cartes ; une rangee de
-    /// trois widgets donnait une bande courte, sans rapport avec le bandeau
-    /// pleine largeur attendu. Cinq cartes remplissent la dalle.
-    static let defaultLayout: [PanelWidget] = [
-        PanelWidget(kind: .timer),
-        PanelWidget(kind: .music, size: .large),
-        PanelWidget(kind: .apps, size: .medium),
-        PanelWidget(kind: .date),
-        PanelWidget(kind: .weather, size: .medium)
-    ]
+    /// Ordre : minuteur, lecture en cours, applications, date, meteo. La largeur
+    /// du panneau se cale sur ses cartes ; une rangee de trois widgets donnait
+    /// une bande courte, sans rapport avec le bandeau pleine largeur attendu.
+    ///
+    /// Le filtre `isAvailable` retire les types sans source reelle (voir
+    /// `WidgetKind.unavailable`) : la meteo mock ne s'affiche donc pas d'office.
+    static var defaultLayout: [PanelWidget] {
+        [
+            PanelWidget(kind: .timer),
+            PanelWidget(kind: .music, size: .large),
+            PanelWidget(kind: .apps, size: .medium),
+            PanelWidget(kind: .date),
+            PanelWidget(kind: .weather, size: .medium)
+        ].filter { $0.kind.isAvailable }
+    }
 }
