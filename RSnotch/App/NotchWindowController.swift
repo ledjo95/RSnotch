@@ -88,6 +88,8 @@ final class NotchWindowController {
         // Le sas de reception ne doit rien conserver d'une session a l'autre.
         DropInbox.empty()
         observeSettings()
+        observePanelState()
+        applyPowerState()
 
         // Toutes les annonces passent par le coordinateur : lui seul decide de
         // ce qui merite d'interrompre, et a quelle cadence.
@@ -319,6 +321,35 @@ final class NotchWindowController {
     /// d'historique, coupe l'encoche ou change d'ecran doit le voir tout de
     /// suite. `withObservationTracking` ne notifie qu'une fois — d'ou le
     /// reabonnement dans le `onChange`.
+    // MARK: Cadence de repos (§ coût batterie)
+    //
+    // Panneau replie — l'etat 99 % du temps —, les sondages qui n'alimentent
+    // que du contenu invisible n'ont pas besoin de leur cadence pleine. On les
+    // RALENTIT, sans les suspendre : une copie faite panneau replie doit
+    // toujours etre captee, une luminosite reglee au Centre de controle
+    // toujours suivie, simplement avec un peu de retard que personne ne voit.
+    // Reobserve a chaque changement d'etat, comme les reglages.
+
+    private func observePanelState() {
+        guard let model else { return }
+        withObservationTracking {
+            _ = model.state
+        } onChange: {
+            Task { @MainActor [weak self] in
+                self?.applyPowerState()
+                self?.observePanelState()
+            }
+        }
+    }
+
+    private func applyPowerState() {
+        // `island` compte comme actif : une notification s'affiche, autant
+        // garder les jauges reactives le temps qu'elle vit.
+        let collapsed = model?.state == .collapsed
+        clipboard.isLowPower = collapsed
+        brightness.isLowPower = collapsed
+    }
+
     private func observeSettings() {
         withObservationTracking {
             let settings = AppSettings.shared

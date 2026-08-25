@@ -22,9 +22,22 @@ import SwiftData
 @Observable
 final class ClipboardService {
 
-    /// Intervalle de sondage. 500 ms : sous ce seuil on brule du CPU pour rien,
-    /// au-dessus une copie suivie d'une seconde copie rapide serait manquee.
-    private let interval: Duration = .milliseconds(500)
+    /// Intervalle de sondage, panneau ouvert. 500 ms : sous ce seuil on brule du
+    /// CPU pour rien, au-dessus une copie suivie d'une seconde copie rapide
+    /// serait manquee — et l'onglet presse-papiers, sous les yeux, doit rester
+    /// a jour.
+    private static let activeInterval: Duration = .milliseconds(500)
+    /// Cadence au repos. Panneau replie, l'onglet n'est pas visible : une copie
+    /// est simplement enregistree jusqu'a 1,5 s plus tard, ce qui ne change rien
+    /// puisqu'elle reste sur le presse-papiers. On ne SUSPEND pas — une copie
+    /// faite panneau replie doit toujours etre captee — on ralentit.
+    private static let idleInterval: Duration = .milliseconds(1_500)
+
+    /// Passe la boucle en cadence de repos. Pilote par le controleur.
+    var isLowPower = false
+    private var currentInterval: Duration {
+        isLowPower ? Self.idleInterval : Self.activeInterval
+    }
 
     private let pasteboard: NSPasteboard
     private let context: ModelContext
@@ -53,7 +66,7 @@ final class ClipboardService {
         pollTask = Task { [weak self] in
             while !Task.isCancelled {
                 self?.pollOnce()
-                guard let interval = self?.interval else { return }
+                guard let interval = self?.currentInterval else { return }
                 try? await Task.sleep(for: interval)
             }
         }

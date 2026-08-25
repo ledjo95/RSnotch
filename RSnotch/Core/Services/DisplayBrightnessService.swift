@@ -34,12 +34,25 @@ final class DisplayBrightnessService {
 
     var onChange: (@MainActor (Double) -> Void)?
 
-    /// Cadence de sondage. Assez rapide pour suivre un glissement au Centre de
-    /// controle sans peser.
-    private static let interval: Duration = .milliseconds(150)
+    /// Cadence de sondage, panneau ouvert. Assez rapide pour suivre un
+    /// glissement au Centre de controle sous les yeux de l'utilisateur.
+    private static let activeInterval: Duration = .milliseconds(150)
+    /// Cadence au repos. Panneau replie, le sondage ne sert plus qu'a rattraper
+    /// un reglage fait ailleurs (Centre de controle) — evenement rare. Une
+    /// touche de luminosite, elle, passe par l'interception et met l'etat a
+    /// jour SANS attendre le sondage : ralentir ici ne retarde donc rien de ce
+    /// que l'utilisateur declenche directement.
+    private static let idleInterval: Duration = .milliseconds(700)
     /// Seuil de variation, en fraction de course. Sous ce seuil, on ne
     /// derange pas : la valeur peut osciller d'un iota sans intention.
     private static let threshold = 0.004
+
+    /// Passe la boucle en cadence de repos. Pilote par le controleur selon
+    /// l'etat du panneau.
+    var isLowPower = false
+    private var currentInterval: Duration {
+        isLowPower ? Self.idleInterval : Self.activeInterval
+    }
 
     private var pollTask: Task<Void, Never>?
 
@@ -58,8 +71,9 @@ final class DisplayBrightnessService {
 
         pollTask = Task { [weak self] in
             while !Task.isCancelled {
-                try? await Task.sleep(for: Self.interval)
                 guard let self else { return }
+                try? await Task.sleep(for: self.currentInterval)
+                guard !Task.isCancelled else { return }
                 self.poll()
             }
         }
