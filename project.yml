@@ -55,7 +55,8 @@ targets:
     # dans xcuserdata et chaque `xcodegen generate` peut le faire disparaitre
     # de Xcode — le projet se rouvre alors sans cible a construire.
     scheme:
-      testTargets: []
+      testTargets:
+        - RSnotchTests
     settings:
       base:
         PRODUCT_BUNDLE_IDENTIFIER: com.varicube.RSnotch
@@ -67,3 +68,21 @@ targets:
         ASSETCATALOG_COMPILER_APPICON_NAME: AppIcon
         COMBINE_HIDPI_IMAGES: YES
         LD_RUNPATH_SEARCH_PATHS: "$(inherited) @executable_path/../Frameworks"
+
+  RSnotchTests:
+    type: bundle.unit-test
+    platform: macOS
+    sources:
+      - path: Tests
+    dependencies:
+      - target: RSnotch
+    settings:
+      base:
+        PRODUCT_BUNDLE_IDENTIFIER: com.varicube.RSnotchTests
+        # Signature de developpement : les tests ne sont jamais diffuses.
+        CODE_SIGN_IDENTITY: "Apple Development"
+        CODE_SIGN_STYLE: Automatic
+        # Pas d'app hote : les tests portent sur de la logique pure, `@testable
+        # import RSnotch` suffit. Un hote imposerait de lancer l'interface a
+        # chaque passage.
+        GENERATE_INFOPLIST_FILE: YES

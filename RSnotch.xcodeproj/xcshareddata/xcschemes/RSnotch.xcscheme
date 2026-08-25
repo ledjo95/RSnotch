@@ -39,6 +39,17 @@
          </BuildableReference>
       </MacroExpansion>
       <Testables>
+         <TestableReference
+            skipped = "NO"
+            parallelizable = "NO">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "4E6A10A1D94F3B4624F7193E"
+               BuildableName = "RSnotchTests.xctest"
+               BlueprintName = "RSnotchTests"
+               ReferencedContainer = "container:RSnotch.xcodeproj">
+            </BuildableReference>
+         </TestableReference>
       </Testables>
       <CommandLineArguments>
       </CommandLineArguments>

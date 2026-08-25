@@ -137,14 +137,23 @@ final class SpaceHeuristicService {
     private func match(_ fingerprint: Set<pid_t>) -> Int? {
         var best: (index: Int, score: Double)?
         for (index, known) in fingerprints.enumerated() {
-            let union = known.union(fingerprint).count
-            guard union > 0 else { continue }
-            let score = Double(known.intersection(fingerprint).count) / Double(union)
+            let score = Self.jaccard(known, fingerprint)
             if score >= similarityThreshold, score > (best?.score ?? 0) {
                 best = (index, score)
             }
         }
         return best?.index
+    }
+
+    /// Similarite de Jaccard : taille de l'intersection sur taille de l'union.
+    /// Deux ensembles vides sont dissemblables (0) — un bureau sans fenetre ne
+    /// « ressemble » a rien, il ne faut pas le confondre avec un autre vide.
+    /// Fonction pure, extraite pour etre eprouvee sans dependre de l'ordre des
+    /// bureaux rencontres ni de l'etat des fenetres.
+    nonisolated static func jaccard(_ lhs: Set<pid_t>, _ rhs: Set<pid_t>) -> Double {
+        let union = lhs.union(rhs).count
+        guard union > 0 else { return 0 }
+        return Double(lhs.intersection(rhs).count) / Double(union)
     }
 
     /// PID des applications possedant une fenetre visible sur le bureau courant.

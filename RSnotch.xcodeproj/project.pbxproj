@@ -30,6 +30,7 @@
 		5C585C8BD4924068C5AEA5AC /* LaunchItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E0173C5BF19D9B27B1FCA98 /* LaunchItem.swift */; };
 		5C8C11865314309B70609AFA /* IconTile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 255C81DC43921DD067D885B6 /* IconTile.swift */; };
 		5CA8EDF99AFDDBF4A4614E02 /* AlarmSound.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCA0EBFF09DAFE615F20D441 /* AlarmSound.swift */; };
+		601D2D95D49A9627AF0C186A /* FormattingTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 113FF1F64562E9E93D1F5E2E /* FormattingTests.swift */; };
 		6135F71FBE9F1B54E9FC896E /* PermissionPrimerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7A9599D9631DB154B363889 /* PermissionPrimerView.swift */; };
 		66057B7D0EBE9AFFDD44FDD5 /* PermissionPrimerController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1431EE93B1C799D150D88DB /* PermissionPrimerController.swift */; };
 		6A70A6FDDD39C8B8B2219388 /* DisplayBrightnessService.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC5218F217BC658EF378C9B7 /* DisplayBrightnessService.swift */; };
@@ -58,6 +59,7 @@
 		BCF7E7672C0A88D23BC5ECB9 /* NotchViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00A4EE92CE6C8FBB1E7A6239 /* NotchViewModel.swift */; };
 		BE4440D5E2414A83D3584E49 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 817CC3F6D7E896C3BDA4A440 /* Assets.xcassets */; };
 		BE69670288259AE13381B7B3 /* AppsWidgetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87DED436E9916C7FFEB82CD0 /* AppsWidgetView.swift */; };
+		C0E49BA3F0521CF7F4974AFE /* SpaceHeuristicTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5196768203335BC0DFEE67C6 /* SpaceHeuristicTests.swift */; };
 		C685AB5BAD038D1BBA803325 /* GlassSegmentedRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = A242C0C09AFDE9ACCCA2450F /* GlassSegmentedRow.swift */; };
 		CAD153EA95A3C81E00469786 /* ClipboardService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 134AFBA45FF47F6342CF6A94 /* ClipboardService.swift */; };
 		CC4D6F876EE0B793661A6AAF /* DateWidgetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3865D49EE854C193D66778C2 /* DateWidgetView.swift */; };
@@ -67,6 +69,7 @@
 		D60473F318C1809AF0C664DF /* TimerTabView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47D87653E944C8DF22BF1E2A /* TimerTabView.swift */; };
 		DC84AA6F1B48C6BE95597245 /* ClipboardActions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A45A996780A41313384F189 /* ClipboardActions.swift */; };
 		DCB193063F1D7CE9443A1F89 /* PanelWidget.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EB11E766211A6DF2158D2FA /* PanelWidget.swift */; };
+		DCBA264B73D97CCF478F31AB /* MediaParsingTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAC9B46ABF50305B76B5B0CE /* MediaParsingTests.swift */; };
 		DDD8F4712979D648D177A6A2 /* AppSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F070EB160E2573D26C1E128 /* AppSettings.swift */; };
 		E1E629E92E882636706373BA /* QuoteWidgetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEF76B2D35C1CA90BEBE9CCE /* QuoteWidgetView.swift */; };
 		E3620A01EE2B53BF7C406A06 /* WeatherWidgetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9683D31B056253D8AEDCFACF /* WeatherWidgetView.swift */; };
@@ -84,6 +87,16 @@
 		FDB99F02B115FC876084BA9D /* LaunchItemsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82B7E812F4D2D6D38CDBEDC0 /* LaunchItemsViewModel.swift */; };
 /* End PBXBuildFile section */
 
+/* Begin PBXContainerItemProxy section */
+		D881B3785B6F3739D4787683 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 9DBCF91F90C757D47D38C48D /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 35C385979AD0F480A2530F71;
+			remoteInfo = RSnotch;
+		};
+/* End PBXContainerItemProxy section */
+
 /* Begin PBXFileReference section */
 		00A4EE92CE6C8FBB1E7A6239 /* NotchViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotchViewModel.swift; sourceTree = "<group>"; };
 		043FE67B46DAC8F3B519C763 /* NotchRootView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotchRootView.swift; sourceTree = "<group>"; };
@@ -95,6 +108,7 @@
 		0D99897310E99C65A54F50EA /* TrayTabView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrayTabView.swift; sourceTree = "<group>"; };
 		0F1D21488F650DD47CB0DE65 /* WidgetRowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WidgetRowView.swift; sourceTree = "<group>"; };
 		0F5F8AF9959067D640614772 /* MediaKeyInterceptor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MediaKeyInterceptor.swift; sourceTree = "<group>"; };
+		113FF1F64562E9E93D1F5E2E /* FormattingTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FormattingTests.swift; sourceTree = "<group>"; };
 		134AFBA45FF47F6342CF6A94 /* ClipboardService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClipboardService.swift; sourceTree = "<group>"; };
 		13500BBC2CF15257FB22B0BA /* PrivacyInfo.xcprivacy */ = {isa = PBXFileReference; path = PrivacyInfo.xcprivacy; sourceTree = "<group>"; };
 		1A04E9F66A01014DA4B0F1D1 /* SystemAudioService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SystemAudioService.swift; sourceTree = "<group>"; };
@@ -114,6 +128,7 @@
 		4B4FFD24EE8561FEDB0845B9 /* CompactIslandView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompactIslandView.swift; sourceTree = "<group>"; };
 		4B5888782E8E7101B06DEDAC /* NotchState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotchState.swift; sourceTree = "<group>"; };
 		501812FC42F5EE85C04D52E2 /* SettingsWindowController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsWindowController.swift; sourceTree = "<group>"; };
+		5196768203335BC0DFEE67C6 /* SpaceHeuristicTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpaceHeuristicTests.swift; sourceTree = "<group>"; };
 		524931059CBF3FA5A3C9B101 /* LoginItemService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginItemService.swift; sourceTree = "<group>"; };
 		54A6CF4445C5C01B6F861E61 /* RSnotchApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RSnotchApp.swift; sourceTree = "<group>"; };
 		558D836EDD3B4999F737FA59 /* TimerService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimerService.swift; sourceTree = "<group>"; };
@@ -139,9 +154,11 @@
 		A18ECBB8C744DAC1DA6A4496 /* AppContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppContainer.swift; sourceTree = "<group>"; };
 		A242C0C09AFDE9ACCCA2450F /* GlassSegmentedRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GlassSegmentedRow.swift; sourceTree = "<group>"; };
 		A2624C22E81F574D97963342 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		AAC9B46ABF50305B76B5B0CE /* MediaParsingTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MediaParsingTests.swift; sourceTree = "<group>"; };
 		AEB54BB95EFB2BAA1D33C1F0 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		AEF76B2D35C1CA90BEBE9CCE /* QuoteWidgetView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuoteWidgetView.swift; sourceTree = "<group>"; };
 		AF5E68524EF72B6107798D17 /* FileDragHandle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileDragHandle.swift; sourceTree = "<group>"; };
+		B560E82FEA7BCD70A6A924A1 /* RSnotchTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = RSnotchTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		B64EE4ADFDCF26265B590D6A /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
 		BC5218F217BC658EF378C9B7 /* DisplayBrightnessService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DisplayBrightnessService.swift; sourceTree = "<group>"; };
 		BD5191862789570C6E085E71 /* ClipboardTabView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClipboardTabView.swift; sourceTree = "<group>"; };
@@ -293,10 +310,21 @@
 			path = Clipboard;
 			sourceTree = "<group>";
 		};
+		970ABF7DE2F97A22AC0E3705 /* Tests */ = {
+			isa = PBXGroup;
+			children = (
+				113FF1F64562E9E93D1F5E2E /* FormattingTests.swift */,
+				AAC9B46ABF50305B76B5B0CE /* MediaParsingTests.swift */,
+				5196768203335BC0DFEE67C6 /* SpaceHeuristicTests.swift */,
+			);
+			path = Tests;
+			sourceTree = "<group>";
+		};
 		97B4E0773756A110C561FFAC = {
 			isa = PBXGroup;
 			children = (
 				636E2171495F6CDAC97EA1A6 /* RSnotch */,
+				970ABF7DE2F97A22AC0E3705 /* Tests */,
 				A8D4599BF8E0A54E4B452ECC /* Products */,
 			);
 			sourceTree = "<group>";
@@ -305,6 +333,7 @@
 			isa = PBXGroup;
 			children = (
 				FBBDDAE0418DE9CB633DCADA /* RSnotch.app */,
+				B560E82FEA7BCD70A6A924A1 /* RSnotchTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -455,6 +484,24 @@
 			productReference = FBBDDAE0418DE9CB633DCADA /* RSnotch.app */;
 			productType = "com.apple.product-type.application";
 		};
+		4E6A10A1D94F3B4624F7193E /* RSnotchTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 477C87BE6BD6008C68AC6BBC /* Build configuration list for PBXNativeTarget "RSnotchTests" */;
+			buildPhases = (
+				42A023BE2ED9555EB64C11F6 /* Sources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				DC786D6483D92521559192C4 /* PBXTargetDependency */,
+			);
+			name = RSnotchTests;
+			packageProductDependencies = (
+			);
+			productName = RSnotchTests;
+			productReference = B560E82FEA7BCD70A6A924A1 /* RSnotchTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -467,6 +514,10 @@
 					35C385979AD0F480A2530F71 = {
 						DevelopmentTeam = AKAGL7C22D;
 						ProvisioningStyle = Manual;
+					};
+					4E6A10A1D94F3B4624F7193E = {
+						DevelopmentTeam = AKAGL7C22D;
+						ProvisioningStyle = Automatic;
 					};
 				};
 			};
@@ -485,6 +536,7 @@
 			projectRoot = "";
 			targets = (
 				35C385979AD0F480A2530F71 /* RSnotch */,
+				4E6A10A1D94F3B4624F7193E /* RSnotchTests */,
 			);
 		};
 /* End PBXProject section */
@@ -582,7 +634,25 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		42A023BE2ED9555EB64C11F6 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				601D2D95D49A9627AF0C186A /* FormattingTests.swift in Sources */,
+				DCBA264B73D97CCF478F31AB /* MediaParsingTests.swift in Sources */,
+				C0E49BA3F0521CF7F4974AFE /* SpaceHeuristicTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		DC786D6483D92521559192C4 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 35C385979AD0F480A2530F71 /* RSnotch */;
+			targetProxy = D881B3785B6F3739D4787683 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
 
 /* Begin XCBuildConfiguration section */
 		091AEA7773ED36F6020851DD /* Debug */ = {
@@ -682,6 +752,44 @@
 			};
 			name = Release;
 		};
+		4BD7E2B44E8C64246FADF37C /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_IDENTITY = "Apple Development";
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+					"@loader_path/../Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.varicube.RSnotchTests;
+				SDKROOT = macosx;
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/RSnotch.app/Contents/MacOS/RSnotch";
+			};
+			name = Release;
+		};
+		777671B7DC89CAB0468057BC /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_IDENTITY = "Apple Development";
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+					"@loader_path/../Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.varicube.RSnotchTests;
+				SDKROOT = macosx;
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/RSnotch.app/Contents/MacOS/RSnotch";
+			};
+			name = Debug;
+		};
 		ED47C2C2FD1F7E9157F519D0 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -758,6 +866,15 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		477C87BE6BD6008C68AC6BBC /* Build configuration list for PBXNativeTarget "RSnotchTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				777671B7DC89CAB0468057BC /* Debug */,
+				4BD7E2B44E8C64246FADF37C /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
 		8B3FB1DD71A6380C8AC908A6 /* Build configuration list for PBXProject "RSnotch" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (

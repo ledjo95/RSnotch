@@ -33,7 +33,7 @@ struct MusicScriptingService: Sendable {
     private let runner = AppleScriptRunner.shared
 
     /// Separateur de champs : unite ASCII 31, absent de tout titre reel.
-    private static let separator: Character = "\u{1F}"
+    static let separator: Character = "\u{1F}"
 
     // MARK: Detection du lecteur
 
@@ -51,9 +51,18 @@ struct MusicScriptingService: Sendable {
 
     func snapshot(for app: MediaApp) async throws -> NowPlayingSnapshot {
         let descriptor = try await runner.run(Self.stateScript(for: app))
-        let raw = descriptor.stringValue ?? ""
-        let capturedAt = Date()
+        return Self.parseSnapshot(from: descriptor.stringValue ?? "", app: app, capturedAt: Date())
+    }
 
+    /// Decode la sortie brute d'un script d'etat en instantane.
+    ///
+    /// Extrait de `snapshot(for:)` — et rendu pur — pour etre eprouve sans
+    /// lancer d'AppleScript : c'est la logique la plus fragile du pont (huit
+    /// champs, un separateur de controle, des entiers a relire), et celle ou
+    /// une derive du dictionnaire de scripting passerait inapercue.
+    static func parseSnapshot(
+        from raw: String, app: MediaApp, capturedAt: Date
+    ) -> NowPlayingSnapshot {
         let fields = raw.split(separator: Self.separator, omittingEmptySubsequences: false)
                         .map(String.init)
 
