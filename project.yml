@@ -1,0 +1,69 @@
+name: RSnotch
+options:
+  bundleIdPrefix: com.varicube
+  deploymentTarget:
+    macOS: "26.0"
+  createIntermediateGroups: true
+  developmentLanguage: fr
+
+settings:
+  base:
+    SWIFT_VERSION: "6.0"
+    SWIFT_STRICT_CONCURRENCY: complete
+    SWIFT_UPCOMING_FEATURE_EXISTENTIAL_ANY: YES
+    MARKETING_VERSION: "1.0.0"
+    CURRENT_PROJECT_VERSION: "1"
+    # Hardened Runtime : exige par la notarisation, obligatoire hors App Store.
+    ENABLE_HARDENED_RUNTIME: YES
+    # Signature MANUELLE avec « Developer ID Application ».
+    #
+    # DISTRIBUTION HORS MAC APP STORE — decision du 25 aout 2026. Le brief
+    # d'origine imposait l'App Store ; il a ete leve pour une raison precise :
+    # masquer le HUD de volume/luminosite de macOS demande d'intercepter les
+    # touches avant le systeme (CGEventTap), et un processus du BAC A SABLE ne
+    # peut pas creer d'event tap. Le service qui dessine ce HUD, OSDUIHelper,
+    # est protege par SIP : il n'y a pas de demi-mesure.
+    #
+    # Consequences assumees, toutes verifiees plus bas dans ce fichier et dans
+    # les entitlements : plus de sandbox, signature Developer ID, notarisation
+    # obligatoire avant diffusion.
+    CODE_SIGN_STYLE: Manual
+    DEVELOPMENT_TEAM: AKAGL7C22D
+    CODE_SIGN_IDENTITY: "Developer ID Application"
+    PROVISIONING_PROFILE_SPECIFIER: ""
+    # Le cdhash reste STABLE d'une compilation a l'autre grace a l'identite
+    # nommee. En ad-hoc il changeait a chaque build, et TCC reposait sa question
+    # d'autorisation a chaque lancement — Accessibilite comprise, ce qui rend le
+    # developpement de l'interception impraticable.
+    DEAD_CODE_STRIPPING: YES
+  configs:
+    Release:
+      # Xcode injecte `com.apple.security.get-task-allow` dans les entitlements
+      # signes, pour permettre l'attachement du debogueur. La NOTARISATION LE
+      # REFUSE : une build qui le porte est rejetee. Il n'apparait pas dans le
+      # fichier .entitlements, seulement dans la signature — verifie avec
+      # `codesign -d --entitlements`, et c'est pourquoi il passe inapercu.
+      CODE_SIGN_INJECT_BASE_ENTITLEMENTS: NO
+
+targets:
+  RSnotch:
+    type: application
+    platform: macOS
+    sources:
+      - path: RSnotch
+    # Schema PARTAGE, ecrit dans xcshareddata. Sans lui, le schema ne vit que
+    # dans xcuserdata et chaque `xcodegen generate` peut le faire disparaitre
+    # de Xcode — le projet se rouvre alors sans cible a construire.
+    scheme:
+      testTargets: []
+    settings:
+      base:
+        PRODUCT_BUNDLE_IDENTIFIER: com.varicube.RSnotch
+        PRODUCT_NAME: RSnotch
+        INFOPLIST_FILE: RSnotch/Resources/Info.plist
+        CODE_SIGN_ENTITLEMENTS: RSnotch/Resources/RSnotch.entitlements
+        # Bac a sable RETIRE : incompatible avec CGEventTap (voir ci-dessus).
+        ENABLE_APP_SANDBOX: NO
+        ASSETCATALOG_COMPILER_APPICON_NAME: AppIcon
+        COMBINE_HIDPI_IMAGES: YES
+        LD_RUNPATH_SEARCH_PATHS: "$(inherited) @executable_path/../Frameworks"

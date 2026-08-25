@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>CFBundleDevelopmentRegion</key>
+	<string>fr</string>
+	<key>CFBundleExecutable</key>
+	<string>$(EXECUTABLE_NAME)</string>
+	<key>CFBundleIdentifier</key>
+	<string>$(PRODUCT_BUNDLE_IDENTIFIER)</string>
+	<key>CFBundleInfoDictionaryVersion</key>
+	<string>6.0</string>
+	<key>CFBundleName</key>
+	<string>$(PRODUCT_NAME)</string>
+	<key>CFBundlePackageType</key>
+	<string>APPL</string>
+	<key>CFBundleShortVersionString</key>
+	<string>$(MARKETING_VERSION)</string>
+	<key>CFBundleVersion</key>
+	<string>$(CURRENT_PROJECT_VERSION)</string>
+	<!-- Categorie obligatoire pour le Mac App Store : elle classe la fiche et
+	     doit correspondre a celle choisie dans App Store Connect. RSnotch est un
+	     utilitaire de bureau, pas un outil de productivite documentaire. -->
+	<key>LSApplicationCategoryType</key>
+	<string>public.app-category.utilities</string>
+	<!-- Aucune cryptographie hors des exemptions : l'app n'implemente aucun
+	     algorithme et ne fait que des requetes HTTPS via les frameworks Apple
+	     (pochette Spotify, WeatherKit). Declare ici pour eviter le
+	     questionnaire d'export a chaque envoi de build. -->
+	<key>ITSAppUsesNonExemptEncryption</key>
+	<false/>
+	<key>LSMinimumSystemVersion</key>
+	<string>$(MACOSX_DEPLOYMENT_TARGET)</string>
+	<!-- Agent app: RSnotch vit dans le notch + la barre de menus, pas dans le Dock.
+	     Evite aussi qu'une fenetre principale soit exigee au lancement. -->
+	<key>LSUIElement</key>
+	<true/>
+	<!-- Texte affiche par le dialogue systeme d'autorisation d'automatisation
+	     (Phase 7, §3.7). Il doit dire ce que l'app fait, pas quelle permission
+	     elle veut : c'est ce que l'utilisateur lit au moment de decider. -->
+	<key>NSAppleEventsUsageDescription</key>
+	<string>RSnotch affiche le morceau en cours et ses commandes de lecture dans l’encoche. Pour cela, il interroge Musique ou Spotify.</string>
+	<!-- Texte du dialogue systeme d'autorisation Bluetooth (Phase 8, §3.8). -->
+	<key>NSBluetoothAlwaysUsageDescription</key>
+	<string>RSnotch signale dans l’encoche la connexion et la déconnexion de vos accessoires Bluetooth. Il lit la liste des appareils appairés, sans jamais s’y connecter.</string>
+	<key>NSHumanReadableCopyright</key>
+	<string>Copyright © 2026 Joffrey Stastoli. Tous droits réservés.</string>
+	<key>NSSupportsAutomaticTermination</key>
+	<false/>
+	<key>NSSupportsSuddenTermination</key>
+	<false/>
+</dict>
+</plist>

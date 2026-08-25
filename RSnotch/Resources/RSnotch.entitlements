@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<!-- DISTRIBUTION HORS MAC APP STORE (Developer ID + notarisation).
+	     Decision du 25 aout 2026, motivee par une seule fonction : masquer le
+	     HUD de volume et de luminosite de macOS. Elle exige d'intercepter les
+	     touches avant le systeme via CGEventTap, ce qu'un processus du bac a
+	     sable ne peut pas faire — et OSDUIHelper, qui dessine ce HUD, est
+	     protege par SIP (verifie : plist « restricted », SIP « enabled »).
+
+	     LE BAC A SABLE EST DONC RETIRE. Les entitlements qui n'existaient que
+	     pour lui ont disparu de ce fichier :
+	       files.user-selected.read-only   — l'acces fichier n'est plus filtre ;
+	       files.bookmarks.app-scope       — plus de bookmarks a portee d'app ;
+	       scripting-targets               — specifique au sandbox (QA1888) ;
+	       network.client                  — le reseau n'est plus restreint ;
+	       device.bluetooth                — IOBluetooth n'est plus filtre.
+	     Ce n'est PAS un elargissement de privileges demande : c'est la
+	     disparition du mecanisme qui les exigeait.
+
+	     CE QUI REMPLACE LE SANDBOX comme garde-fou :
+	       - Hardened Runtime actif (exige par la notarisation) ;
+	       - l'interception clavier est soumise a l'autorisation ACCESSIBILITE,
+	         accordee explicitement par l'utilisateur et revocable a tout moment
+	         dans Reglages Systeme ;
+	       - aucune donnee ne quitte la machine, inchange depuis le depart. -->
+
+	<!-- Pilotage de Music.app et Spotify.app (§3.7).
+	     Toujours requis SOUS HARDENED RUNTIME, independamment du bac a sable :
+	     sans lui, tout Apple Event sortant est refuse. La cle Info.plist
+	     NSAppleEventsUsageDescription porte le texte du dialogue systeme. -->
+	<key>com.apple.security.automation.apple-events</key>
+	<true/>
+</dict>
+</plist>

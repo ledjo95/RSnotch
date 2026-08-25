@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<!-- Distribution hors Mac App Store : Developer ID + notarisation.
+	     Voir docs/Distribution.md pour la raison de ce choix. -->
+	<key>method</key>
+	<string>developer-id</string>
+	<key>teamID</key>
+	<string>AKAGL7C22D</string>
+	<key>signingStyle</key>
+	<string>manual</string>
+</dict>
+</plist>

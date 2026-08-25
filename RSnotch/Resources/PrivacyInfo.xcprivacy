@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<!-- Manifeste de confidentialite (Phase 11).
+	     Obligatoire des lors que l'app utilise une « required reason API ».
+	     Son absence fait echouer la validation a l'envoi sur App Store Connect. -->
+
+	<!-- Aucune donnee n'est collectee : rien ne quitte le conteneur de l'app.
+	     Presse-papiers, Pocket, applications epinglees, disposition des widgets
+	     et reglages sont ecrits en local et jamais transmis. -->
+	<key>NSPrivacyCollectedDataTypes</key>
+	<array/>
+
+	<!-- Aucun domaine de suivi : l'app n'emet aucune requete publicitaire ni
+	     analytique. Les seules requetes reseau possibles sont la pochette
+	     Spotify (URL fournie par Spotify.app) et WeatherKit. -->
+	<key>NSPrivacyTrackingDomains</key>
+	<array/>
+	<key>NSPrivacyTracking</key>
+	<false/>
+
+	<key>NSPrivacyAccessedAPITypes</key>
+	<array>
+		<!-- UserDefaults : reglages de l'app, disposition des widgets, texte du
+		     widget Citation. Lecture et ecriture dans le seul domaine de l'app. -->
+		<dict>
+			<key>NSPrivacyAccessedAPIType</key>
+			<string>NSPrivacyAccessedAPICategoryUserDefaults</string>
+			<key>NSPrivacyAccessedAPITypeReasons</key>
+			<array>
+				<string>CA92.1</string>
+			</array>
+		</dict>
+		<!-- Date de modification de fichier : la Pocket affiche « il y a 3 min »
+		     a cote de chaque fichier depose. La date est lue sur des fichiers
+		     situes dans le conteneur de l'app, et sert uniquement a cet
+		     affichage. -->
+		<dict>
+			<key>NSPrivacyAccessedAPIType</key>
+			<string>NSPrivacyAccessedAPICategoryFileTimestamp</string>
+			<key>NSPrivacyAccessedAPITypeReasons</key>
+			<array>
+				<string>C617.1</string>
+			</array>
+		</dict>
+	</array>
+</dict>
+</plist>
