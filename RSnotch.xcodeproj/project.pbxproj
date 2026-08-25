@@ -30,6 +30,8 @@
 		5C585C8BD4924068C5AEA5AC /* LaunchItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E0173C5BF19D9B27B1FCA98 /* LaunchItem.swift */; };
 		5C8C11865314309B70609AFA /* IconTile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 255C81DC43921DD067D885B6 /* IconTile.swift */; };
 		5CA8EDF99AFDDBF4A4614E02 /* AlarmSound.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCA0EBFF09DAFE615F20D441 /* AlarmSound.swift */; };
+		6135F71FBE9F1B54E9FC896E /* PermissionPrimerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7A9599D9631DB154B363889 /* PermissionPrimerView.swift */; };
+		66057B7D0EBE9AFFDD44FDD5 /* PermissionPrimerController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1431EE93B1C799D150D88DB /* PermissionPrimerController.swift */; };
 		6A70A6FDDD39C8B8B2219388 /* DisplayBrightnessService.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC5218F217BC658EF378C9B7 /* DisplayBrightnessService.swift */; };
 		6AA4E750C84151F438F18E0F /* ClipboardEntry.swift in Sources */ = {isa = PBXBuildFile; fileRef = 601BB1000F7F85F84B106980 /* ClipboardEntry.swift */; };
 		6DE305BF300F1CD80B9E0438 /* LevelIslandView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29D4986C39DA0B7A55A6B8CE /* LevelIslandView.swift */; };
@@ -144,6 +146,7 @@
 		BC5218F217BC658EF378C9B7 /* DisplayBrightnessService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DisplayBrightnessService.swift; sourceTree = "<group>"; };
 		BD5191862789570C6E085E71 /* ClipboardTabView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClipboardTabView.swift; sourceTree = "<group>"; };
 		BEC94DDF955C61D96D447C04 /* RSnotch.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = RSnotch.entitlements; sourceTree = "<group>"; };
+		C1431EE93B1C799D150D88DB /* PermissionPrimerController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PermissionPrimerController.swift; sourceTree = "<group>"; };
 		C40057B8E0022D44E543A363 /* GlassStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GlassStyle.swift; sourceTree = "<group>"; };
 		CCA0EBFF09DAFE615F20D441 /* AlarmSound.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlarmSound.swift; sourceTree = "<group>"; };
 		CECB4627E7B7265046B99898 /* MusicScriptingService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MusicScriptingService.swift; sourceTree = "<group>"; };
@@ -154,6 +157,7 @@
 		DFB9732434A718CA1FF3EAEB /* GlassComponents.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GlassComponents.swift; sourceTree = "<group>"; };
 		E023C731B6CB7A47986B629E /* NotchGeometry.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotchGeometry.swift; sourceTree = "<group>"; };
 		E43DADCB2A819CEA309F34E3 /* WidgetsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WidgetsViewModel.swift; sourceTree = "<group>"; };
+		E7A9599D9631DB154B363889 /* PermissionPrimerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PermissionPrimerView.swift; sourceTree = "<group>"; };
 		EAABAE587446EEF26BE0A92E /* AppLauncher.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppLauncher.swift; sourceTree = "<group>"; };
 		EAB92890F5C6FB13DBEB7A41 /* WeatherService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherService.swift; sourceTree = "<group>"; };
 		F8E916AE3BE9C3CA6036E951 /* NotchShape.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotchShape.swift; sourceTree = "<group>"; };
@@ -260,6 +264,15 @@
 				81B141A18383E1184D1033FD /* Settings */,
 			);
 			path = RSnotch;
+			sourceTree = "<group>";
+		};
+		79FD771828A1C0BB5C6FE7D4 /* Onboarding */ = {
+			isa = PBXGroup;
+			children = (
+				C1431EE93B1C799D150D88DB /* PermissionPrimerController.swift */,
+				E7A9599D9631DB154B363889 /* PermissionPrimerView.swift */,
+			);
+			path = Onboarding;
 			sourceTree = "<group>";
 		};
 		81B141A18383E1184D1033FD /* Settings */ = {
@@ -393,6 +406,7 @@
 				FC1D52AC8802EA60345BD25D /* Media */,
 				D4D71468067C84243063B78A /* Notch */,
 				3BC4BFBD63DF55468FB228B3 /* Notifications */,
+				79FD771828A1C0BB5C6FE7D4 /* Onboarding */,
 				3D66B16ABEBE51D34AB23D6B /* Settings */,
 				365D7260D2B400218665DEE0 /* Spaces */,
 				F37A75B44E9427BA67017489 /* Timer */,
@@ -540,6 +554,8 @@
 				930931AEB7E02812D95AE0D6 /* NowPlaying.swift in Sources */,
 				CC5E0EDB8AA2D0275A2F86D2 /* NowPlayingViewModel.swift in Sources */,
 				DCB193063F1D7CE9443A1F89 /* PanelWidget.swift in Sources */,
+				66057B7D0EBE9AFFDD44FDD5 /* PermissionPrimerController.swift in Sources */,
+				6135F71FBE9F1B54E9FC896E /* PermissionPrimerView.swift in Sources */,
 				B75620D5C117EE62529CE816 /* PocketStorageService.swift in Sources */,
 				B049898E9A2A3593D0FFB833 /* PocketTabView.swift in Sources */,
 				83282859E6BF871360B51097 /* PowerService.swift in Sources */,

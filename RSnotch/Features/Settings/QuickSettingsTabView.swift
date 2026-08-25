@@ -22,7 +22,7 @@ import SwiftUI
 struct QuickSettingsTabView: View {
 
     @State private var settings = AppSettings.shared
-    @State private var interceptor = MediaKeyInterceptor()
+    @State private var interceptor = MediaKeyInterceptor.shared
 
     var body: some View {
         HStack(alignment: .top, spacing: Theme.Metrics.contentSpacing) {

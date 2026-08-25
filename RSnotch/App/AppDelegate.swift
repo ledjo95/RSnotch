@@ -12,6 +12,7 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
 
     private let notchController = NotchWindowController()
     private let settingsWindow = SettingsWindowController.shared
+    private let permissionPrimer = PermissionPrimerController()
     private var statusItem: NSStatusItem?
     #if DEBUG
     private var galleryWindow: NSWindow?
@@ -29,6 +30,11 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
         notchController.start()
         installStatusItem()
         installDebugHooks()
+
+        // APRES `notchController.start()` : celui-ci arme l'interception, ce qui
+        // met a jour l'etat d'autorisation de l'instance partagee. L'invite peut
+        // alors decider en connaissance de cause si elle a lieu d'etre.
+        permissionPrimer.presentIfNeeded()
     }
 
     func applicationWillTerminate(_ notification: Notification) {
@@ -158,6 +164,12 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
                 try? await Task.sleep(for: .seconds(1))
                 self.openSettings()
             }
+        }
+
+        // Force l'invite de priming, autorisation deja accordee ou non :
+        // RSNOTCH_DEBUG_PRIMER=1
+        if ProcessInfo.processInfo.environment["RSNOTCH_DEBUG_PRIMER"] == "1" {
+            permissionPrimer.presentForDebug()
         }
 
         if let raw = ProcessInfo.processInfo.environment["RSNOTCH_DEBUG_TAB"],

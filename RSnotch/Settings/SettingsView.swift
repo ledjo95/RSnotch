@@ -85,7 +85,7 @@ private struct PanelSettingsView: View {
 
     @State private var settings = AppSettings.shared
 
-    @State private var interceptor = MediaKeyInterceptor()
+    @State private var interceptor = MediaKeyInterceptor.shared
 
     /// Le texte suit l'etat reel plutot que l'intention : promettre le
     /// remplacement alors que l'autorisation manque laisserait l'utilisateur

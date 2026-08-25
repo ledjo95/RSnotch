@@ -42,6 +42,19 @@ enum MediaKey: Int32 {
 @Observable
 final class MediaKeyInterceptor {
 
+    /// Instance unique.
+    ///
+    /// L'interception, l'affichage de l'etat d'autorisation dans les deux UI de
+    /// reglages (fenetre et onglet du notch) et le bouton « Autoriser » doivent
+    /// tous parler AU MEME objet. Avec une instance par vue — l'etat de depart —
+    /// accorder l'Accessibilite depuis un bouton mettait a jour un interceptor
+    /// qui ne possedait aucun tap, pendant que celui du controleur, seul a en
+    /// tenir un, n'en savait rien : la permission etait donnee, le HUD systeme
+    /// restait. Un seul objet supprime la question.
+    static let shared = MediaKeyInterceptor()
+
+    private init() {}
+
     /// Vrai quand le tap tourne et avale effectivement les touches.
     private(set) var isIntercepting = false
     /// Vrai quand l'autorisation Accessibilite est accordee.
@@ -55,6 +68,8 @@ final class MediaKeyInterceptor {
     private var runLoopSource: CFRunLoopSource?
     /// Boite partagee avec le callback C, qui s'execute hors de tout acteur.
     private var box: CallbackBox?
+    /// Sondage qui attend l'octroi de l'Accessibilite pour armer le tap.
+    private var trustWatch: Task<Void, Never>?
 
     // MARK: Autorisation
 
@@ -87,8 +102,15 @@ final class MediaKeyInterceptor {
         guard tap == nil else { return }
         guard refreshTrust() else {
             keyLog.notice("accessibilité refusée : interception inactive, HUD système conservé")
+            // macOS accorde l'Accessibilite A CHAUD, sans redemarrage. On
+            // attend donc l'octroi plutot que d'abandonner : sans ce guet,
+            // l'utilisateur autorisait la permission et le HUD systeme
+            // continuait de s'afficher jusqu'au lancement suivant.
+            watchForTrust()
             return
         }
+        trustWatch?.cancel()
+        trustWatch = nil
 
         let box = CallbackBox { [weak self] key, isRepeat in
             // Le callback arrive sur le run loop principal (le tap y est
@@ -152,6 +174,8 @@ final class MediaKeyInterceptor {
     }
 
     func stop() {
+        trustWatch?.cancel()
+        trustWatch = nil
         if let tap { CGEvent.tapEnable(tap: tap, enable: false) }
         if let runLoopSource {
             CFRunLoopRemoveSource(CFRunLoopGetMain(), runLoopSource, .commonModes)
@@ -160,6 +184,27 @@ final class MediaKeyInterceptor {
         runLoopSource = nil
         box = nil
         isIntercepting = false
+    }
+
+    /// Sonde l'autorisation jusqu'a ce qu'elle arrive, puis arme le tap.
+    ///
+    /// Deux secondes de cadence : accorder l'Accessibilite passe par les
+    /// Reglages Systeme, c'est une action de plusieurs secondes cote
+    /// utilisateur — inutile de sonder plus vite. Le guet s'auto-annule des que
+    /// le tap est arme (`start()` remet `trustWatch` a nil).
+    private func watchForTrust() {
+        guard trustWatch == nil else { return }
+        trustWatch = Task { [weak self] in
+            while !Task.isCancelled {
+                try? await Task.sleep(for: .seconds(2))
+                guard let self else { return }
+                if self.refreshTrust() {
+                    keyLog.notice("accessibilité accordée à chaud : armement du tap")
+                    self.start()
+                    return
+                }
+            }
+        }
     }
 }
 

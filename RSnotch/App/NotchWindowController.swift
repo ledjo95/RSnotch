@@ -29,7 +29,7 @@ final class NotchWindowController {
     private let bluetooth = BluetoothService()
     private let audio = SystemAudioService()
     private let brightness = DisplayBrightnessService()
-    private let mediaKeys = MediaKeyInterceptor()
+    private let mediaKeys = MediaKeyInterceptor.shared
     private let spaces = SpaceHeuristicService()
     private var island: CompactIslandCoordinator?
     private let pocket = PocketStorageService()
