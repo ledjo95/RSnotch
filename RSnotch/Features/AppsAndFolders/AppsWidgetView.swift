@@ -52,6 +52,7 @@ struct AppsWidgetView: View {
     @State private var targetedID: UUID?
     @State private var isTargetedByFinder = false
     @State private var openFolder: LaunchItem?
+    @Bindable private var settings = AppSettings.shared
     /// Annule le repli du panneau tant qu'un fichier survole la grappe.
     @Environment(\.notchDragActivity) private var keepOpen
     /// Empeche le repli tant que le sous-panneau d'un dossier est ouvert.
@@ -151,6 +152,7 @@ struct AppsWidgetView: View {
                 .strokeBorder(Theme.Palette.ember, lineWidth: 2)
             }
         }
+        .overlay(alignment: .bottom) { labelBadge(for: item) }
         .help(item.name)
         .draggable(item.id.uuidString) {
             IconTile(content: tileContent(for: item), side: AppsGridMetrics.tileSide)
@@ -167,6 +169,30 @@ struct AppsWidgetView: View {
             }
         } isTargeted: { targetedID = $0 ? item.id : nil }
         .contextMenu { itemMenu(for: item) }
+    }
+
+    /// Bandeau de nom, superpose au bas de la tuile plutot qu'ajoute sous elle :
+    /// la grille est calee sur `tileSide` (grille de lignes fixes), lui ajouter
+    /// une ligne de texte aurait force a la recalculer partout ou elle est
+    /// utilisee (largeur du widget, echelle de la rangee). Un bandeau en
+    /// surimpression tient dans le meme gabarit, quel que soit le reglage.
+    @ViewBuilder
+    private func labelBadge(for item: LaunchItem) -> some View {
+        if settings.showLauncherLabels {
+            Text(item.name)
+                .font(Theme.Typography.body(8, weight: .medium))
+                .foregroundStyle(.white)
+                .lineLimit(1)
+                .truncationMode(.middle)
+                .padding(.horizontal, 3)
+                .frame(width: AppsGridMetrics.tileSide - 2)
+                .background(
+                    RoundedRectangle(cornerRadius: 3, style: .continuous)
+                        .fill(Theme.Palette.ink.opacity(0.72))
+                )
+                .padding(.bottom, 2)
+                .allowsHitTesting(false)
+        }
     }
 
     private func tileContent(for item: LaunchItem) -> IconTile.Content {

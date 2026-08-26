@@ -34,6 +34,7 @@ final class AppSettings {
         static let volumeHUD = "hud.volume"
         static let brightnessHUD = "hud.brightness"
         static let replaceSystemHUD = "hud.replaceSystem"
+        static let showLauncherLabels = "launcher.showLabels"
     }
 
     static let defaultQuote = "Continue, tu fais du bon travail"
@@ -152,6 +153,16 @@ final class AppSettings {
         didSet { defaults.set(replaceSystemHUD, forKey: Key.replaceSystemHUD) }
     }
 
+    // MARK: Apps & dossiers
+
+    /// Nom sous chaque tuile de la grappe. Desactive par defaut : la grappe
+    /// vise une rangee compacte, et l'icone seule suffit une fois les apps
+    /// reconnues — un survol donne deja le nom (`.help`). Certains preferent
+    /// le voir en permanence, notamment avec beaucoup d'icones similaires.
+    var showLauncherLabels: Bool {
+        didSet { defaults.set(showLauncherLabels, forKey: Key.showLauncherLabels) }
+    }
+
     // MARK: Init
 
     init(defaults: UserDefaults = .standard) {
@@ -180,6 +191,7 @@ final class AppSettings {
         self.volumeHUDEnabled = defaults.object(forKey: Key.volumeHUD) as? Bool ?? true
         self.brightnessHUDEnabled = defaults.object(forKey: Key.brightnessHUD) as? Bool ?? true
         self.replaceSystemHUD = defaults.object(forKey: Key.replaceSystemHUD) as? Bool ?? true
+        self.showLauncherLabels = defaults.object(forKey: Key.showLauncherLabels) as? Bool ?? false
     }
 
     static let clipboardLimitChoices = [50, 100, 200, 500]

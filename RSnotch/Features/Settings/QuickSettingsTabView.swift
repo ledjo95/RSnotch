@@ -97,6 +97,7 @@ struct QuickSettingsTabView: View {
             VStack(alignment: .leading, spacing: 7) {
                 SettingsToggle(label: "Ouvrir au survol", isOn: $settings.openOnHover)
                 SettingsToggle(label: "Teinte par bureau", isOn: $settings.spaceTintEnabled)
+                SettingsToggle(label: "Noms des apps et dossiers", isOn: $settings.showLauncherLabels)
 
                 Spacer(minLength: 0)
 
