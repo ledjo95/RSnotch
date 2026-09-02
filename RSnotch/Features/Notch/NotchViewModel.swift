@@ -228,6 +228,21 @@ final class NotchViewModel {
         islandTask?.cancel()
         islandTask = nil
         guard state != .expanded else { return }
+
+        // La page d'accueil est la page par defaut a l'ouverture — sinon le
+        // panneau rouvre sur le dernier onglet consulte, ce qui surprend plus
+        // qu'il n'aide.
+        //
+        // SAUF pendant un glisser-depose : `dragEntered()` choisit deja
+        // l'onglet correct (la page courante si elle accepte les fichiers,
+        // sinon `.tray`) AVANT d'appeler `expand()`. Ecraser ce choix ici
+        // renverrait la grappe d'applications ou les zones de depot sur
+        // l'accueil au moment precis ou l'utilisateur vise une cible avec un
+        // fichier en main.
+        if !isReceivingDrag {
+            selectedTab = .home
+        }
+
         withAnimation(Theme.Motion.morph) { state = .expanded }
     }
 
