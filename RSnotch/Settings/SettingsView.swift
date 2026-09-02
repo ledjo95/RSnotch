@@ -33,9 +33,31 @@ private struct GeneralSettingsView: View {
 
     @State private var settings = AppSettings.shared
     @State private var loginItem = LoginItemService()
+    @State private var updater = AutoUpdater.shared
 
     var body: some View {
         Form {
+            Section("Mises à jour") {
+                Toggle("Rechercher automatiquement", isOn: Binding(
+                    get: { updater.automaticallyChecksForUpdates },
+                    set: { updater.automaticallyChecksForUpdates = $0 }
+                ))
+
+                LabeledContent("Dernière vérification") {
+                    Text(lastCheckLabel)
+                        .foregroundStyle(.secondary)
+                }
+
+                Button("Rechercher une mise à jour…") {
+                    updater.checkForUpdates()
+                }
+                .disabled(!updater.canCheckForUpdates)
+
+                Text("Chaque mise à jour est signée et vérifiée avant d’être proposée. Rien ne s’installe sans votre confirmation.")
+                    .font(.caption)
+                    .foregroundStyle(.secondary)
+            }
+
             Section("Démarrage") {
                 Toggle("Lancer RSnotch à l’ouverture de session", isOn: Binding(
                     get: { loginItem.isEnabled },
@@ -76,6 +98,11 @@ private struct GeneralSettingsView: View {
         }
         .formStyle(.grouped)
         .onAppear { loginItem.refresh() }
+    }
+
+    private var lastCheckLabel: String {
+        guard let date = updater.lastUpdateCheckDate else { return "Jamais" }
+        return date.formatted(date: .abbreviated, time: .shortened)
     }
 }
 

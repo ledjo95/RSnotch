@@ -13,6 +13,7 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
     private let notchController = NotchWindowController()
     private let settingsWindow = SettingsWindowController.shared
     private let permissionPrimer = PermissionPrimerController()
+    private let updater = AutoUpdater.shared
     private var statusItem: NSStatusItem?
     #if DEBUG
     private var galleryWindow: NSWindow?
@@ -60,6 +61,12 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
         menu.addItem(
             withTitle: "Tester une notification",
             action: #selector(testIsland),
+            keyEquivalent: ""
+        ).target = self
+        menu.addItem(.separator())
+        menu.addItem(
+            withTitle: "Rechercher les mises à jour…",
+            action: #selector(checkForUpdates),
             keyEquivalent: ""
         ).target = self
         #if DEBUG
@@ -252,5 +259,9 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
 
     @objc private func openSettings() {
         settingsWindow.show()
+    }
+
+    @objc private func checkForUpdates() {
+        updater.checkForUpdates()
     }
 }

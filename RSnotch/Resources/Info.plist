@@ -49,5 +49,15 @@
 	<false/>
 	<key>NSSupportsSuddenTermination</key>
 	<false/>
+	<!-- Mises a jour (Sparkle). L'appcast vit sur la branche main du depot :
+	     une URL stable, independante des tags de release. La cle publique
+	     verifie la signature EdDSA de chaque mise a jour AVANT installation —
+	     voir Tools/sign_release.sh et docs/Distribution.md. -->
+	<key>SUFeedURL</key>
+	<string>https://raw.githubusercontent.com/ledjo95/RSnotch/main/appcast.xml</string>
+	<key>SUPublicEDKey</key>
+	<string>arsRCFkuvSXcPeOYGfgtnfc+0sxJnDlsDSOstLGtYdk=</string>
+	<key>SUScheduledCheckInterval</key>
+	<integer>86400</integer>
 </dict>
 </plist>

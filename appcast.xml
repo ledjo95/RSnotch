@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<rss version="2.0" xmlns:sparkle="http://www.andymatuschak.org/xml-namespaces/sparkle">
+  <channel>
+    <title>RSnotch</title>
+    <link>https://raw.githubusercontent.com/ledjo95/RSnotch/main/appcast.xml</link>
+    <description>Mises à jour de RSnotch.</description>
+    <language>fr</language>
+    <item>
+      <title>Version 2.0.1</title>
+      <pubDate>Wed, 02 Sep 2026 19:28:15 +0000</pubDate>
+      <sparkle:version>3</sparkle:version>
+      <sparkle:shortVersionString>2.0.1</sparkle:shortVersionString>
+      <sparkle:minimumSystemVersion>26.0</sparkle:minimumSystemVersion>
+      <description><![CDATA[
+        <ul>
+          <li>Ajout du système de mise à jour automatique (Sparkle) — RSnotch peut désormais détecter et proposer ses propres mises à jour.</li>
+        </ul>
+      ]]></description>
+      <enclosure
+        url="https://github.com/ledjo95/RSnotch/releases/download/v2.0.1/RSnotch.dmg"
+        sparkle:version="3"
+        sparkle:shortVersionString="2.0.1"
+        length="2949279"
+        type="application/octet-stream"
+        sparkle:edSignature="DzUJNN//I0DIzW3wOu/RD4LxTlpMm8t++I21zVdwc4awJFryIMxh/apTbgoY19WdKCPMXw1tXKb3liY+nEZwBg=="
+      />
+    </item>
+  </channel>
+</rss>

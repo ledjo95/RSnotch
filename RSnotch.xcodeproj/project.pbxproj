@@ -18,11 +18,13 @@
 		158D086A9EA6071F49058E25 /* NotchWindowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60CCFE3811153BE91C1A7E97 /* NotchWindowController.swift */; };
 		20E1C7B6CF50BBA02D180560 /* WidgetRowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F1D21488F650DD47CB0DE65 /* WidgetRowView.swift */; };
 		2583F46CC6A63B45C5A2A89A /* BrightnessControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8863A5DA5E83D40C0C69A238 /* BrightnessControl.swift */; };
+		25B61946F95A4349667FAF09 /* AutoUpdater.swift in Sources */ = {isa = PBXBuildFile; fileRef = D95EC15E8CA677911C17A174 /* AutoUpdater.swift */; };
 		321F40938188AA48E60B91CE /* WidgetsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E43DADCB2A819CEA309F34E3 /* WidgetsViewModel.swift */; };
 		3295BBFABFFD8F10DE86B1A2 /* TextPrompt.swift in Sources */ = {isa = PBXBuildFile; fileRef = 745210FEB19E054C1854CFF5 /* TextPrompt.swift */; };
 		33E2A3D831A71D772A536D2F /* SpaceHeuristicService.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCD91CBCB6F8132BC9F11193 /* SpaceHeuristicService.swift */; };
 		359916AA078395D855B56E0D /* MusicScriptingService.swift in Sources */ = {isa = PBXBuildFile; fileRef = CECB4627E7B7265046B99898 /* MusicScriptingService.swift */; };
 		37827A76527E29EE8336F6D9 /* BookmarkStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 448752EC329859FB2743F874 /* BookmarkStore.swift */; };
+		3B40D0EA875ADFC2A1FE76F5 /* Sparkle in Frameworks */ = {isa = PBXBuildFile; productRef = 4A2C3A4049F5AB183EF32B3A /* Sparkle */; };
 		4273E190CD2B6032F2A99C47 /* SpaceAccent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94BF49777B4AE94B7193CE68 /* SpaceAccent.swift */; };
 		56A73FDDE5939DABC87A1B12 /* TimerWidgetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B599CBF1A9CC1F668C45455 /* TimerWidgetView.swift */; };
 		5B0E302AFB44372B7CC44044 /* NotchRootView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 043FE67B46DAC8F3B519C763 /* NotchRootView.swift */; };
@@ -167,6 +169,7 @@
 		C40057B8E0022D44E543A363 /* GlassStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GlassStyle.swift; sourceTree = "<group>"; };
 		CCA0EBFF09DAFE615F20D441 /* AlarmSound.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlarmSound.swift; sourceTree = "<group>"; };
 		CECB4627E7B7265046B99898 /* MusicScriptingService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MusicScriptingService.swift; sourceTree = "<group>"; };
+		D95EC15E8CA677911C17A174 /* AutoUpdater.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AutoUpdater.swift; sourceTree = "<group>"; };
 		DA49D87B07862E1CC4D7911E /* PowerService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PowerService.swift; sourceTree = "<group>"; };
 		DD386473D2D5E7A06869E320 /* PocketTabView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PocketTabView.swift; sourceTree = "<group>"; };
 		DF1346AF57451E71CBBFCF6D /* ClipboardStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClipboardStore.swift; sourceTree = "<group>"; };
@@ -182,6 +185,17 @@
 		FCD91CBCB6F8132BC9F11193 /* SpaceHeuristicService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpaceHeuristicService.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
+/* Begin PBXFrameworksBuildPhase section */
+		CD8D9F021E98FE0DA267C244 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				3B40D0EA875ADFC2A1FE76F5 /* Sparkle in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
 /* Begin PBXGroup section */
 		024FD069498DC5711B88D6A8 /* Services */ = {
 			isa = PBXGroup;
@@ -190,6 +204,7 @@
 				055E0E2047A77773CDF17E28 /* AppIconLoader.swift */,
 				EAABAE587446EEF26BE0A92E /* AppLauncher.swift */,
 				868DD124233F0342B224750F /* AppleScriptRunner.swift */,
+				D95EC15E8CA677911C17A174 /* AutoUpdater.swift */,
 				38BAE5F146A043F95E138D3C /* BluetoothService.swift */,
 				8863A5DA5E83D40C0C69A238 /* BrightnessControl.swift */,
 				134AFBA45FF47F6342CF6A94 /* ClipboardService.swift */,
@@ -472,6 +487,7 @@
 			buildPhases = (
 				167477C244391A015792DB2D /* Sources */,
 				4CAF6AF58AD46F4077710D30 /* Resources */,
+				CD8D9F021E98FE0DA267C244 /* Frameworks */,
 			);
 			buildRules = (
 			);
@@ -479,6 +495,7 @@
 			);
 			name = RSnotch;
 			packageProductDependencies = (
+				4A2C3A4049F5AB183EF32B3A /* Sparkle */,
 			);
 			productName = RSnotch;
 			productReference = FBBDDAE0418DE9CB633DCADA /* RSnotch.app */;
@@ -530,6 +547,9 @@
 			);
 			mainGroup = 97B4E0773756A110C561FFAC;
 			minimizedProjectReferenceProxies = 1;
+			packageReferences = (
+				7C5DFD317528FDBBD559E234 /* XCRemoteSwiftPackageReference "Sparkle" */,
+			);
 			preferredProjectObjectVersion = 77;
 			productRefGroup = A8D4599BF8E0A54E4B452ECC /* Products */;
 			projectDirPath = "";
@@ -566,6 +586,7 @@
 				DDD8F4712979D648D177A6A2 /* AppSettings.swift in Sources */,
 				B868EF73F1340C6B1B5C6EB5 /* AppleScriptRunner.swift in Sources */,
 				BE69670288259AE13381B7B3 /* AppsWidgetView.swift in Sources */,
+				25B61946F95A4349667FAF09 /* AutoUpdater.swift in Sources */,
 				ABC73152670009553BA65CD3 /* BluetoothService.swift in Sources */,
 				37827A76527E29EE8336F6D9 /* BookmarkStore.swift in Sources */,
 				2583F46CC6A63B45C5A2A89A /* BrightnessControl.swift in Sources */,
@@ -722,7 +743,7 @@
 				CODE_SIGN_INJECT_BASE_ENTITLEMENTS = NO;
 				CODE_SIGN_STYLE = Manual;
 				COPY_PHASE_STRIP = NO;
-				CURRENT_PROJECT_VERSION = 1;
+				CURRENT_PROJECT_VERSION = 3;
 				DEAD_CODE_STRIPPING = YES;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				DEVELOPMENT_TEAM = AKAGL7C22D;
@@ -738,7 +759,7 @@
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				MACOSX_DEPLOYMENT_TARGET = 26.0;
-				MARKETING_VERSION = 1.0.0;
+				MARKETING_VERSION = 2.0.1;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -826,7 +847,7 @@
 				CODE_SIGN_IDENTITY = "Developer ID Application";
 				CODE_SIGN_STYLE = Manual;
 				COPY_PHASE_STRIP = NO;
-				CURRENT_PROJECT_VERSION = 1;
+				CURRENT_PROJECT_VERSION = 3;
 				DEAD_CODE_STRIPPING = YES;
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				DEVELOPMENT_TEAM = AKAGL7C22D;
@@ -848,7 +869,7 @@
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				MACOSX_DEPLOYMENT_TARGET = 26.0;
-				MARKETING_VERSION = 1.0.0;
+				MARKETING_VERSION = 2.0.1;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
@@ -894,6 +915,25 @@
 			defaultConfigurationName = Debug;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		7C5DFD317528FDBBD559E234 /* XCRemoteSwiftPackageReference "Sparkle" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/sparkle-project/Sparkle";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 2.9.6;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		4A2C3A4049F5AB183EF32B3A /* Sparkle */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 7C5DFD317528FDBBD559E234 /* XCRemoteSwiftPackageReference "Sparkle" */;
+			productName = Sparkle;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 9DBCF91F90C757D47D38C48D /* Project object */;
 }
