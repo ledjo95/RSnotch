@@ -26,9 +26,13 @@ struct LevelIslandView: View {
     let notchWidth: CGFloat
 
     @Namespace private var glassNamespace
+    /// Ambre par defaut, mais reglable (Reglages rapides > Apparence) : rien
+    /// d'autre dans l'app n'utilise cette teinte, elle vit donc ici et non
+    /// dans `Theme.Palette`.
+    @Bindable private var settings = AppSettings.shared
 
     private var tint: Color {
-        level.isMuted ? Theme.Palette.mist : Theme.Palette.ember
+        level.isMuted ? Theme.Palette.mist : settings.gaugeTint.color
     }
 
     var body: some View {

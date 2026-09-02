@@ -68,6 +68,10 @@ struct QuickSettingsTabView: View {
                     isOn: $settings.replaceSystemHUD
                 )
 
+                SettingsField(label: "Couleur") {
+                    GaugeTintRow(selection: $settings.gaugeTint)
+                }
+
                 // L'etat de l'autorisation ne s'affiche QUE s'il fait
                 // obstacle : rappeler « accordée » a chaque ouverture du
                 // panneau serait du bruit permanent pour une bonne nouvelle.
@@ -154,6 +158,45 @@ private struct SettingsField<Content: View>: View {
                 .font(Theme.Typography.body(10))
                 .foregroundStyle(Theme.Palette.mist)
             content
+        }
+    }
+}
+
+// MARK: - GaugeTintRow
+//
+// Une pastille par teinte plutot qu'un `GlassSegmentedRow` : le choix se voit
+// et se reconnait a la couleur elle-meme, un libelle texte n'ajouterait rien.
+
+private struct GaugeTintRow: View {
+    @Binding var selection: GaugeTint
+
+    private let side: CGFloat = 20
+
+    var body: some View {
+        HStack(spacing: 10) {
+            ForEach(GaugeTint.allCases) { tint in
+                Button {
+                    withAnimation(Theme.Motion.morph) { selection = tint }
+                } label: {
+                    Circle()
+                        .fill(tint.color)
+                        .frame(width: side, height: side)
+                        .overlay {
+                            Circle().strokeBorder(Theme.Palette.innerRim, lineWidth: 0.75)
+                        }
+                        .overlay {
+                            if selection == tint {
+                                Circle()
+                                    .strokeBorder(Theme.Palette.frost, lineWidth: 1.5)
+                                    .padding(-3)
+                            }
+                        }
+                }
+                .buttonStyle(.plain)
+                .accessibilityLabel(tint.label)
+                .accessibilityAddTraits(selection == tint ? [.isSelected] : [])
+            }
+            Spacer(minLength: 0)
         }
     }
 }

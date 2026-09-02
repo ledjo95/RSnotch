@@ -35,6 +35,7 @@ final class AppSettings {
         static let brightnessHUD = "hud.brightness"
         static let replaceSystemHUD = "hud.replaceSystem"
         static let showLauncherLabels = "launcher.showLabels"
+        static let gaugeTint = "hud.gaugeTint"
     }
 
     static let defaultQuote = "Continue, tu fais du bon travail"
@@ -163,6 +164,14 @@ final class AppSettings {
         didSet { defaults.set(showLauncherLabels, forKey: Key.showLauncherLabels) }
     }
 
+    // MARK: Jauges — apparence
+
+    /// Couleur des jauges de volume et de luminosite. Ambre par defaut, pour
+    /// ne rien changer a l'apparence existante tant que personne n'y touche.
+    var gaugeTint: GaugeTint {
+        didSet { defaults.set(gaugeTint.rawValue, forKey: Key.gaugeTint) }
+    }
+
     // MARK: Init
 
     init(defaults: UserDefaults = .standard) {
@@ -192,6 +201,8 @@ final class AppSettings {
         self.brightnessHUDEnabled = defaults.object(forKey: Key.brightnessHUD) as? Bool ?? true
         self.replaceSystemHUD = defaults.object(forKey: Key.replaceSystemHUD) as? Bool ?? true
         self.showLauncherLabels = defaults.object(forKey: Key.showLauncherLabels) as? Bool ?? false
+        self.gaugeTint = defaults.string(forKey: Key.gaugeTint)
+            .flatMap(GaugeTint.init(rawValue:)) ?? .ember
     }
 
     static let clipboardLimitChoices = [50, 100, 200, 500]

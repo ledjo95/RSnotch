@@ -231,3 +231,39 @@ enum Theme {
         }
     }
 }
+
+// MARK: - GaugeTint
+//
+// Couleur des jauges de volume et de luminosite (lentille, badge, valeur).
+// Reglable — voir QuickSettingsTabView — car l'ambre par defaut ne convient
+// pas a tous les fonds de bureau ni a tous les gouts, et rien d'autre dans
+// l'app n'a besoin de cette teinte.
+enum GaugeTint: String, CaseIterable, Identifiable, Codable, Sendable {
+    case ember
+    case green
+    case blue
+    case purple
+    case white
+
+    var id: String { rawValue }
+
+    var color: Color {
+        switch self {
+        case .ember: Theme.Palette.ember
+        case .green: Color(red: 0.30, green: 0.85, blue: 0.45)
+        case .blue: Color(red: 0.35, green: 0.60, blue: 1.0)
+        case .purple: Color(red: 0.68, green: 0.45, blue: 1.0)
+        case .white: .white
+        }
+    }
+
+    var label: String {
+        switch self {
+        case .ember: "Orange"
+        case .green: "Vert"
+        case .blue: "Bleu"
+        case .purple: "Violet"
+        case .white: "Blanc"
+        }
+    }
+}
