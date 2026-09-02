@@ -404,6 +404,18 @@ struct FolderPopoverView: View {
                 .truncationMode(.middle)
                 .frame(width: 56)
         }
+        // Glisser une tuile hors du popover, jusqu'a la rangee principale,
+        // la ressort du dossier : le meme identifiant que la grappe racine
+        // sait deja lire, et `move` (LaunchItemsViewModel) sait desormais le
+        // retrouver qu'il soit au premier niveau ou dans un dossier.
+        .draggable(child.id.uuidString) {
+            IconTile(
+                content: AppIconLoader.shared.icon(for: child).map {
+                    IconTile.Content.app($0)
+                } ?? .empty(symbolName: "questionmark.app.dashed"),
+                side: AppsGridMetrics.tileSide
+            )
+        }
         .contextMenu {
             Button("Sortir du dossier", systemImage: "arrow.up.left") {
                 model.extract(child, from: current)

@@ -137,38 +137,57 @@ final class LaunchItemsViewModel {
 
     @discardableResult
     func move(id: UUID, before target: LaunchItem) -> Bool {
-        guard id != target.id,
-              let from = items.firstIndex(where: { $0.id == id }),
-              let to = items.firstIndex(where: { $0.id == target.id })
-        else { return false }
-        let moved = items.remove(at: from)
+        guard id != target.id, let moved = removeItem(id: id) else { return false }
+        guard let to = items.firstIndex(where: { $0.id == target.id }) else {
+            // La cible a disparu (retrait concurrent) : l'element retire ne
+            // doit pas se perdre, on le repose en fin de rangee.
+            items.append(moved)
+            persist()
+            return false
+        }
         items.insert(moved, at: to)
         persist()
         return true
     }
 
-    /// Depose une application dans un dossier.
+    /// Depose une application dans un dossier — que l'application vienne de
+    /// la rangee principale ou d'un AUTRE dossier (glisser d'un groupe a
+    /// l'autre directement, sans repasser par la rangee).
     @discardableResult
     func move(id: UUID, into folder: LaunchItem) -> Bool {
         // Un groupe ne contient QUE des applications : y ranger un dossier du
         // Finder ou un autre groupe produirait une imbrication que le
         // sous-panneau ne sait pas afficher.
-        guard folder.isFolder,
-              let from = items.firstIndex(where: { $0.id == id }),
-              items[from].appPath != nil,
-              let folderIndex = items.firstIndex(where: { $0.id == folder.id })
+        guard folder.isFolder, id != folder.id,
+              let moved = removeItem(id: id), moved.appPath != nil
         else { return false }
 
-        let moved = items.remove(at: from)
-        // L'index du dossier a pu glisser d'un cran apres le retrait.
         guard let target = items.firstIndex(where: { $0.id == folder.id }) else {
-            items.insert(moved, at: min(from, items.count))
+            items.append(moved)
+            persist()
             return false
         }
-        _ = folderIndex
         items[target].payload = .folder(children: items[target].children + [moved])
         persist()
         return true
+    }
+
+    /// Retire un element de la liste, qu'il soit au premier niveau ou niche
+    /// dans un dossier, et le rend. Point d'entree commun pour le glisser-
+    /// deposer : la vue ne sait pas — et n'a pas a savoir — d'ou vient l'ID
+    /// qu'on lui depose dessus.
+    private func removeItem(id: UUID) -> LaunchItem? {
+        if let index = items.firstIndex(where: { $0.id == id }) {
+            return items.remove(at: index)
+        }
+        for index in items.indices where items[index].isFolder {
+            var children = items[index].children
+            guard let childIndex = children.firstIndex(where: { $0.id == id }) else { continue }
+            let child = children.remove(at: childIndex)
+            items[index].payload = .folder(children: children)
+            return child
+        }
+        return nil
     }
 
     /// Ressort une application d'un dossier vers la rangee principale.
