@@ -125,6 +125,13 @@ struct MusicWidgetView: View {
                 scrim
             }
         }
+        // Toute la carte ouvre le lecteur — pas seulement le titre. Les
+        // boutons (coeur, lecture, barre de progression) captent leur propre
+        // tap en priorite : seule la pochette et les zones vides retombent
+        // ici. `contentShape` est necessaire car les `Spacer` ne dessinent
+        // rien et ne repondraient sinon a aucun geste.
+        .contentShape(Rectangle())
+        .onTapGesture { model.openPlayer() }
         .accessibilityElement(children: .contain)
     }
 
