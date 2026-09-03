@@ -6,6 +6,26 @@
     <description>Mises à jour de RSnotch.</description>
     <language>fr</language>
     <item>
+      <title>Version 2.2.0</title>
+      <pubDate>Thu, 03 Sep 2026 18:47:27 +0000</pubDate>
+      <sparkle:version>6</sparkle:version>
+      <sparkle:shortVersionString>2.2.0</sparkle:shortVersionString>
+      <sparkle:minimumSystemVersion>26.0</sparkle:minimumSystemVersion>
+      <description><![CDATA[
+        <ul>
+          <li>Nouveau widget Statistiques sur la page d'accueil : CPU et mémoire en un coup d'œil, avec le stockage en plus en taille moyenne. Un tap ouvre l'onglet Statistiques complet.</li>
+        </ul>
+      ]]></description>
+      <enclosure
+        url="https://github.com/ledjo95/RSnotch/releases/download/v2.2.0/RSnotch.dmg"
+        sparkle:version="6"
+        sparkle:shortVersionString="2.2.0"
+        length="3459005"
+        type="application/octet-stream"
+        sparkle:edSignature="ttLYPKCwcWVHfrFudakz6dnUJe5F9DZeGFLmeYVYt+FGtvM4tQd/MnE6el0tC+uANSXBBs8atxbGmlry2HWPAw=="
+      />
+    </item>
+    <item>
       <title>Version 2.1.1</title>
       <pubDate>Thu, 03 Sep 2026 16:09:53 +0000</pubDate>
       <sparkle:version>5</sparkle:version>
