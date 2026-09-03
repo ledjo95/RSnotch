@@ -24,12 +24,6 @@ struct ExpandedPanelView: View {
     /// sa propre visibilite (§ SystemStatsTabView.onAppear/onDisappear).
     @State private var stats = SystemStatsService()
 
-    /// Largeur reelle du panneau, mesuree plutot que recalculee depuis
-    /// `NotchRootView` — deux calculs paralleles d'une meme grandeur finissent
-    /// toujours par diverger d'un cran (§ tabBar, exactement le bug qui a
-    /// motive cette mesure directe).
-    @State private var panelWidth: CGFloat = 0
-
     var body: some View {
         VStack(spacing: Theme.Metrics.contentSpacing) {
             tabBar
@@ -38,7 +32,6 @@ struct ExpandedPanelView: View {
         }
         .padding(.vertical, Theme.Metrics.panelPadding)
         .padding(.horizontal, Theme.Metrics.panelHorizontalPadding)
-        .onGeometryChange(for: CGFloat.self) { $0.size.width } action: { panelWidth = $0 }
     }
 
     // MARK: Barre d'onglets
@@ -48,80 +41,42 @@ struct ExpandedPanelView: View {
     // fusionner avec elle — ils perdraient alors leur etat selectionne. Le
     // morph est reserve aux formes qui apparaissent et disparaissent.
     //
-    // Positionnement en TROIS ZONES ANCREES (leading a gauche, trailing a
-    // droite, chacune a sa largeur intrinseque) plutot qu'un HStack a un seul
-    // `Spacer` : dans un HStack normal ce Spacer s'etire correctement pour
-    // pousser `trailing` jusqu'au bord, mais un ScrollView autour (tente une
-    // premiere fois, voir l'historique git) casse cet etirement — le Spacer
-    // n'a plus que la largeur intrinseque du contenu a occuper, jamais celle,
-    // plus grande, du panneau reel, et `trailing` reste colle au centre au
-    // lieu d'atteindre le bord droit visible sur la coquille.
-    //
-    // Chaque zone est alignee independamment sur toute la largeur du ZStack
-    // (`.frame(maxWidth: .infinity, alignment:)`) : leading colle a gauche,
-    // trailing colle a droite, quelle que soit la largeur reelle du panneau.
-    // Le trou pour
-    // l'encoche n'a donc plus besoin d'etre "reserve" par un Spacer — il
-    // existe de facto entre les deux zones ancrees, sauf si elles se
-    // recouvrent (panneau plus etroit que leur besoin combine), auquel cas la
-    // zone concernee defile plutot que de passer sous le capot.
+    // HStack simple avec un unique Spacer — le comportement natif SwiftUI le
+    // plus previsible pour pousser un groupe a gauche et l'autre a droite.
+    // Aucun ScrollView autour tant qu'il n'est pas necessaire : les deux
+    // tentatives precedentes (Spacer(minLength:) dans un ScrollView, puis
+    // ZStack de deux ScrollView) cassaient chacune l'etirement naturel du
+    // Spacer d'une facon differente et non reproduite en local (voir
+    // l'historique git) — la cause exacte n'a jamais ete confirmee avec
+    // certitude sur la machine ou le bug se voit, donc on revient a la forme
+    // la plus simple possible, celle dont le comportement est garanti par
+    // SwiftUI lui-meme plutot que reconstruit a la main.
     private var tabBar: some View {
-        ZStack {
-            leadingTabGroup
-                .frame(maxWidth: .infinity, alignment: .leading)
-            trailingTabGroup
-                .frame(maxWidth: .infinity, alignment: .trailing)
+        HStack(spacing: 6) {
+            ForEach(NotchTab.leading) { tab in
+                GlassIconButton(tab: tab, isActive: model.selectedTab == tab) {
+                    select(tab)
+                }
+            }
+
+            // L'ENCOCHE PHYSIQUE PASSE ICI (§ NotchGeometry.tabBarNotchGap).
+            // La barre occupe la premiere ligne du panneau, exactement la
+            // bande que le capot occulte : sans ce minimum, une icone qui
+            // tombe au centre disparaitrait derriere lui.
+            Spacer(minLength: model.geometry.tabBarNotchGap)
+
+            ForEach(NotchTab.trailing) { tab in
+                GlassIconButton(tab: tab, isActive: model.selectedTab == tab) {
+                    select(tab)
+                }
+            }
         }
+        .frame(maxWidth: .infinity)
         // 26 pt et non 22 : dans un panneau qui frole les 1400 pt de large, une
         // rangee de pastilles de 22 pt se lisait comme un detail oublie en haut
         // a gauche. La barre d'onglets est la seule navigation du panneau, elle
         // doit peser son poids.
         .frame(height: 26)
-    }
-
-    private var leadingTabGroup: some View {
-        ScrollView(.horizontal, showsIndicators: false) {
-            HStack(spacing: 6) {
-                ForEach(NotchTab.leading) { tab in
-                    GlassIconButton(tab: tab, isActive: model.selectedTab == tab) {
-                        select(tab)
-                    }
-                }
-            }
-        }
-        // Plafonne le groupe avant l'encoche : au-dela, il faudrait qu'il
-        // chevauche le creux plutot que de defiler. Sans encoche physique
-        // (barre simulee), rien ne le contraint.
-        .frame(maxWidth: leadingMaxWidth)
-        .scrollBounceBehavior(.basedOnSize, axes: .horizontal)
-    }
-
-    private var trailingTabGroup: some View {
-        ScrollView(.horizontal, showsIndicators: false) {
-            HStack(spacing: 6) {
-                ForEach(NotchTab.trailing) { tab in
-                    GlassIconButton(tab: tab, isActive: model.selectedTab == tab) {
-                        select(tab)
-                    }
-                }
-            }
-        }
-        .frame(maxWidth: trailingMaxWidth)
-        .scrollBounceBehavior(.basedOnSize, axes: .horizontal)
-    }
-
-    /// Largeur maximale du groupe de gauche avant qu'il n'atteigne l'encoche :
-    /// la moitie du panneau MESURE (§ panelWidth), moins la moitie de
-    /// l'encoche. `nil` (donc illimite) tant que rien n'a encore ete mesure,
-    /// ou des qu'il n'y a pas d'encoche physique a eviter — le premier layout
-    /// affiche alors la barre normalement le temps que la mesure arrive.
-    private var leadingMaxWidth: CGFloat? {
-        guard model.geometry.hasPhysicalNotch, panelWidth > 0 else { return nil }
-        return max(panelWidth / 2 - model.geometry.notchSize.width / 2 - 8, 0)
-    }
-
-    private var trailingMaxWidth: CGFloat? {
-        leadingMaxWidth
     }
 
     private func select(_ tab: NotchTab) {
