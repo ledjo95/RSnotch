@@ -105,6 +105,20 @@ struct NotchGeometry: Equatable, Sendable {
     /// Marge horizontale entre le bord de l'ecran et l'encoche.
     var horizontalInset: CGFloat { notchRect.minX - screenFrame.minX }
 
+    /// Largeur a laisser LIBRE au centre de la premiere ligne du panneau.
+    ///
+    /// La barre d'onglets occupe cette ligne, c'est-a-dire exactement la bande
+    /// que le capot occulte : sans reservation, l'icone qui tombe au centre
+    /// disparait derriere l'encoche, sans rien pour le signaler.
+    ///
+    /// Les 16 pt de marge couvrent les flancs arrondis de l'encoche : une icone
+    /// qui la frole est rognee sur son bord, pas seulement masquee au centre.
+    /// Zero sans encoche physique — la barre simulee est dessinee PAR l'app et
+    /// ne masque donc rien.
+    var tabBarNotchGap: CGFloat {
+        hasPhysicalNotch ? notchSize.width + 16 : 0
+    }
+
     /// Rect que doit couvrir la fenetre hote : toute la largeur de l'ecran, sur
     /// une bande assez haute pour accueillir le panneau etendu. La fenetre ne
     /// change jamais de taille — c'est le contenu SwiftUI qui grandit, ce qui

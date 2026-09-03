@@ -48,7 +48,16 @@ struct ExpandedPanelView: View {
                 }
             }
 
-            Spacer(minLength: 0)
+            // L'ENCOCHE PHYSIQUE PASSE ICI. La barre occupe la premiere ligne du
+            // panneau, c'est-a-dire exactement la bande ou la dalle est occultee :
+            // une icone qui tombe au centre disparait derriere le capot, sans
+            // rien pour le signaler. Le creux est donc reserve au milieu, comme
+            // la barre de menus de macOS le fait pour ses propres elements.
+            //
+            // `minLength` et non une largeur fixe : sur un ecran sans encoche le
+            // creux vaut zero et les deux groupes se repoussent normalement, et
+            // sur un panneau large le Spacer s'etire au-dela sans rien casser.
+            Spacer(minLength: model.geometry.tabBarNotchGap)
 
             ForEach(NotchTab.trailing) { tab in
                 GlassIconButton(tab: tab, isActive: model.selectedTab == tab) {

@@ -170,15 +170,19 @@ enum Theme {
         /// ajoute (Agenda, Statistiques…) l'agrandit tout seul. Sans ce calcul,
         /// `minimumPanelWidth` peut rester inferieur au besoin reel de la barre
         /// et la derniere icone se retrouve tronquee au bord du panneau.
-        static var tabBarMinimumWidth: CGFloat {
+        ///
+        /// `notchGap` est la largeur laissee libre au centre pour l'encoche
+        /// physique (§ ExpandedPanelView.notchGap) : elle s'ajoute au besoin,
+        /// sinon le panneau se cale sur les seules icones et la reservation
+        /// centrale repousse les dernieres hors du cadre.
+        static func tabBarMinimumWidth(notchGap: CGFloat) -> CGFloat {
             let iconWidth: CGFloat = 26
             let iconSpacing: CGFloat = 6
             let count = CGFloat(NotchTab.allCases.count)
-            // Un espace supplementaire separe les groupes leading/trailing
-            // (§ ExpandedPanelView.tabBar, le Spacer entre les deux ForEach) —
-            // sans lui la barre entiere semblerait pouvoir se tasser jusqu'a
-            // coller les deux groupes, ce qu'elle ne fait jamais en pratique.
-            let groupGap: CGFloat = 24
+            // Sur un ecran sans encoche il reste un ecart minimal entre les deux
+            // groupes : colles l'un a l'autre, ils ne se liraient plus comme
+            // deux familles distinctes.
+            let groupGap = max(notchGap, 24)
             return count * iconWidth + max(count - 1, 0) * iconSpacing + groupGap
                 + panelHorizontalPadding * 2
         }

@@ -68,7 +68,9 @@ struct NotchRootView: View {
                 max(
                     content + Theme.Metrics.panelHorizontalPadding * 2,
                     Theme.Metrics.minimumPanelWidth * scale,
-                    Theme.Metrics.tabBarMinimumWidth
+                    Theme.Metrics.tabBarMinimumWidth(
+                        notchGap: model.geometry.tabBarNotchGap
+                    )
                 ),
                 Theme.Metrics.expandedMaxWidth,
                 screenWidth * Theme.Metrics.maxScreenFraction
