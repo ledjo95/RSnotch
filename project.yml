@@ -22,8 +22,8 @@ settings:
     SWIFT_VERSION: "6.0"
     SWIFT_STRICT_CONCURRENCY: complete
     SWIFT_UPCOMING_FEATURE_EXISTENTIAL_ANY: YES
-    MARKETING_VERSION: "2.1.1"
-    CURRENT_PROJECT_VERSION: "5"
+    MARKETING_VERSION: "2.2.0"
+    CURRENT_PROJECT_VERSION: "6"
     # Hardened Runtime : exige par la notarisation, obligatoire hors App Store.
     ENABLE_HARDENED_RUNTIME: YES
     # Signature MANUELLE avec « Developer ID Application ».
