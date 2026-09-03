@@ -114,13 +114,15 @@ enum AppContainer {
     /// retrait du bac a sable et cette migration, l'utilisateur a pu regler
     /// quelque chose dans la version neuve, et son choix le plus recent doit
     /// gagner. L'exception est le bloc couple ci-dessus.
-    private static func migratePreferences(from container: URL) {
+    ///
+    /// `defaults` injectable : point de testabilite, la valeur par defaut
+    /// preserve le comportement de production sans toucher `migrateFromSandboxContainer()`.
+    static func migratePreferences(from container: URL, defaults: UserDefaults = .standard) {
         let plist = container.appending(
             path: "Library/Preferences/\(bundleID).plist", directoryHint: .notDirectory
         )
         guard let stored = NSDictionary(contentsOf: plist) as? [String: Any] else { return }
 
-        let defaults = UserDefaults.standard
         var restored = 0
         for (key, value) in stored where defaults.object(forKey: key) == nil {
             defaults.set(value, forKey: key)

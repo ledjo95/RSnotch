@@ -13,6 +13,7 @@
 		07C554108AA4F81F5FC5003C /* WeatherService.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAB92890F5C6FB13DBEB7A41 /* WeatherService.swift */; };
 		0FD153A4C34567F9CCB62248 /* QuickSettingsTabView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57B6F2C5A51DBC32D22ACC4E /* QuickSettingsTabView.swift */; };
 		0FF3B38D571D663E0B542988 /* ClipboardTabView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD5191862789570C6E085E71 /* ClipboardTabView.swift */; };
+		1111457B4E344BE679BA3D92 /* AppContainerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D582E83E8940FC395B1F478 /* AppContainerTests.swift */; };
 		12ED1BB8D4AEA75770394E51 /* SettingsWindowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 501812FC42F5EE85C04D52E2 /* SettingsWindowController.swift */; };
 		148103134BFC36FCDEB3D46E /* SystemAudioService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A04E9F66A01014DA4B0F1D1 /* SystemAudioService.swift */; };
 		158D086A9EA6071F49058E25 /* NotchWindowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60CCFE3811153BE91C1A7E97 /* NotchWindowController.swift */; };
@@ -121,6 +122,7 @@
 		255C81DC43921DD067D885B6 /* IconTile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IconTile.swift; sourceTree = "<group>"; };
 		29D4986C39DA0B7A55A6B8CE /* LevelIslandView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LevelIslandView.swift; sourceTree = "<group>"; };
 		2AA1C711E6B1AD9432ED53D7 /* NowPlayingViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NowPlayingViewModel.swift; sourceTree = "<group>"; };
+		2D582E83E8940FC395B1F478 /* AppContainerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppContainerTests.swift; sourceTree = "<group>"; };
 		2EB11E766211A6DF2158D2FA /* PanelWidget.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PanelWidget.swift; sourceTree = "<group>"; };
 		312B1C5DA004D86932FF3E89 /* ClipboardEntryCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClipboardEntryCard.swift; sourceTree = "<group>"; };
 		38BAE5F146A043F95E138D3C /* BluetoothService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BluetoothService.swift; sourceTree = "<group>"; };
@@ -332,6 +334,7 @@
 		970ABF7DE2F97A22AC0E3705 /* Tests */ = {
 			isa = PBXGroup;
 			children = (
+				2D582E83E8940FC395B1F478 /* AppContainerTests.swift */,
 				113FF1F64562E9E93D1F5E2E /* FormattingTests.swift */,
 				AAC9B46ABF50305B76B5B0CE /* MediaParsingTests.swift */,
 				5196768203335BC0DFEE67C6 /* SpaceHeuristicTests.swift */,
@@ -663,6 +666,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1111457B4E344BE679BA3D92 /* AppContainerTests.swift in Sources */,
 				601D2D95D49A9627AF0C186A /* FormattingTests.swift in Sources */,
 				DCBA264B73D97CCF478F31AB /* MediaParsingTests.swift in Sources */,
 				C0E49BA3F0521CF7F4974AFE /* SpaceHeuristicTests.swift in Sources */,
