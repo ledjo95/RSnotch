@@ -26,6 +26,7 @@
 		33E2A3D831A71D772A536D2F /* SpaceHeuristicService.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCD91CBCB6F8132BC9F11193 /* SpaceHeuristicService.swift */; };
 		359916AA078395D855B56E0D /* MusicScriptingService.swift in Sources */ = {isa = PBXBuildFile; fileRef = CECB4627E7B7265046B99898 /* MusicScriptingService.swift */; };
 		37827A76527E29EE8336F6D9 /* BookmarkStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 448752EC329859FB2743F874 /* BookmarkStore.swift */; };
+		3A9EC42D59E324B8F9F12D9E /* SystemStatsWidgetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D84AD0036CC2CED3ECEF758 /* SystemStatsWidgetView.swift */; };
 		3B40D0EA875ADFC2A1FE76F5 /* Sparkle in Frameworks */ = {isa = PBXBuildFile; productRef = 4A2C3A4049F5AB183EF32B3A /* Sparkle */; };
 		4273E190CD2B6032F2A99C47 /* SpaceAccent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94BF49777B4AE94B7193CE68 /* SpaceAccent.swift */; };
 		4B3B54C86F6736062423462A /* CalendarTabView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8351C1F4604D425A6757E53 /* CalendarTabView.swift */; };
@@ -141,6 +142,7 @@
 		54A6CF4445C5C01B6F861E61 /* RSnotchApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RSnotchApp.swift; sourceTree = "<group>"; };
 		558D836EDD3B4999F737FA59 /* TimerService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimerService.swift; sourceTree = "<group>"; };
 		57B6F2C5A51DBC32D22ACC4E /* QuickSettingsTabView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuickSettingsTabView.swift; sourceTree = "<group>"; };
+		5D84AD0036CC2CED3ECEF758 /* SystemStatsWidgetView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SystemStatsWidgetView.swift; sourceTree = "<group>"; };
 		601BB1000F7F85F84B106980 /* ClipboardEntry.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClipboardEntry.swift; sourceTree = "<group>"; };
 		60CCFE3811153BE91C1A7E97 /* NotchWindowController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotchWindowController.swift; sourceTree = "<group>"; };
 		6A45A996780A41313384F189 /* ClipboardActions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClipboardActions.swift; sourceTree = "<group>"; };
@@ -423,6 +425,7 @@
 		DC25DD46EAACD0F9C8651FB4 /* Widgets */ = {
 			isa = PBXGroup;
 			children = (
+				5D84AD0036CC2CED3ECEF758 /* SystemStatsWidgetView.swift */,
 				0F1D21488F650DD47CB0DE65 /* WidgetRowView.swift */,
 				E43DADCB2A819CEA309F34E3 /* WidgetsViewModel.swift */,
 				DAA5C1BA81DE025F4A4E4B7A /* Views */,
@@ -653,6 +656,7 @@
 				148103134BFC36FCDEB3D46E /* SystemAudioService.swift in Sources */,
 				16BF12388AE90D42EF87A66D /* SystemStatsService.swift in Sources */,
 				8A46EEF3C1F2271F5CD4C822 /* SystemStatsTabView.swift in Sources */,
+				3A9EC42D59E324B8F9F12D9E /* SystemStatsWidgetView.swift in Sources */,
 				3295BBFABFFD8F10DE86B1A2 /* TextPrompt.swift in Sources */,
 				7B44B133FA81F9775467CE56 /* Theme.swift in Sources */,
 				950D2EABD9AB728DBED5BC0E /* TickRuler.swift in Sources */,

@@ -120,17 +120,35 @@ struct SystemStatsTabView: View {
     // MARK: Formatage
 
     private func percentLabel(_ fraction: Double) -> String {
-        "\(Int((fraction * 100).rounded()))%"
+        SystemStatsFormatting.percentLabel(fraction)
     }
 
     private func bytesLabel(_ bytes: UInt64) -> String {
+        SystemStatsFormatting.bytesLabel(bytes)
+    }
+
+    private func rateLabel(_ bytesPerSecond: Double) -> String {
+        SystemStatsFormatting.rateLabel(bytesPerSecond)
+    }
+}
+
+// MARK: - SystemStatsFormatting
+/// Formatage partage entre l'onglet complet et le widget compact de la
+/// page d'accueil (§ SystemStatsWidgetView), pour ne jamais faire diverger
+/// la lecture d'un pourcentage ou d'un debit entre les deux vues.
+enum SystemStatsFormatting {
+    static func percentLabel(_ fraction: Double) -> String {
+        "\(Int((fraction * 100).rounded()))%"
+    }
+
+    static func bytesLabel(_ bytes: UInt64) -> String {
         ByteCountFormatter.string(fromByteCount: Int64(bytes), countStyle: .binary)
     }
 
     /// `ByteCountFormatter` rend "Zéro ko" pour 0 octet — correct au sens
     /// strict mais premier relevé quasi garanti (pas encore de delta entre
     /// deux échantillons), donc un "0 Ko/s" plus sobre lui est préféré ici.
-    private func rateLabel(_ bytesPerSecond: Double) -> String {
+    static func rateLabel(_ bytesPerSecond: Double) -> String {
         guard bytesPerSecond > 0 else { return "0 Ko/s" }
         return ByteCountFormatter.string(fromByteCount: Int64(bytesPerSecond), countStyle: .binary) + "/s"
     }
@@ -139,8 +157,9 @@ struct SystemStatsTabView: View {
 // MARK: - CircularGauge
 /// Anneau de progression seul, sans texte au centre à l'exception d'un
 /// symbole SF — le pourcentage vit déjà à côté dans la carte (§ gauge(...)),
-/// le répéter au centre serait redondant à cette taille.
-private struct CircularGauge: View {
+/// le répéter au centre serait redondant à cette taille. Partagé avec le
+/// widget compact de la page d'accueil (§ SystemStatsWidgetView).
+struct CircularGauge: View {
     /// `nil` pour une jauge sans notion de remplissage (le débit réseau n'a
     /// pas de plafond naturel) : l'anneau tourne alors en continu au lieu de
     /// se figer sur une fraction arbitraire.

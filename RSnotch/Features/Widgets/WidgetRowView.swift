@@ -20,6 +20,7 @@ struct WidgetRowView: View {
     /// Echelle issue du reglage de largeur du panneau.
     var widthScale: CGFloat = 1
     let openTimerTab: () -> Void
+    let openStatsTab: () -> Void
 
     @State private var targetedID: UUID?
 
@@ -113,6 +114,8 @@ struct WidgetRowView: View {
             MusicWidgetView(model: nowPlaying, size: widget.size)
         case .timer:
             TimerWidgetView(timer: countdown, openTimerTab: openTimerTab)
+        case .stats:
+            SystemStatsWidgetView(size: widget.size, openStatsTab: openStatsTab)
         }
     }
 

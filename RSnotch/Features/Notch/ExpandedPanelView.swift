@@ -175,7 +175,8 @@ struct ExpandedPanelView: View {
                     appItemCount: launcher.items.count,
                     screenWidth: model.geometry.screenFrame.width
                 ),
-                openTimerTab: { select(.timer) }
+                openTimerTab: { select(.timer) },
+                openStatsTab: { select(.stats) }
             )
         case .clipboard:
             ClipboardTabView()

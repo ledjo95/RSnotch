@@ -8,6 +8,7 @@ enum WidgetKind: String, Codable, CaseIterable, Identifiable, Sendable {
     case music
     case timer
     case apps
+    case stats
 
     var id: String { rawValue }
 
@@ -30,6 +31,7 @@ enum WidgetKind: String, Codable, CaseIterable, Identifiable, Sendable {
         case .music: "Musique"
         case .timer: "Minuteur"
         case .apps: "Applications"
+        case .stats: "Statistiques"
         }
     }
 
@@ -39,17 +41,22 @@ enum WidgetKind: String, Codable, CaseIterable, Identifiable, Sendable {
         case .music: "music.note"
         case .timer: "timer"
         case .apps: "square.grid.2x2.fill"
+        case .stats: "gauge.with.dots.needle.50percent"
         }
     }
 
     /// Tailles autorisees. Un widget Minuteur n'a rien a gagner a s'etaler ;
     /// un widget Musique a besoin de place pour la pochette et les controles.
+    /// Statistiques : compact affiche CPU + memoire, moyen ajoute le disque —
+    /// meme logique de progression que Meteo, sans jamais aller a `.large`
+    /// (trois jauges tiennent deja en largeur moyenne).
     var allowedSizes: [WidgetSize] {
         switch self {
         case .timer: [.small]
         case .weather: [.small, .medium]
         case .music: [.medium, .large]
         case .apps: [.small, .medium, .large]
+        case .stats: [.small, .medium]
         }
     }
 
