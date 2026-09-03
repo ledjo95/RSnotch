@@ -6,6 +6,28 @@
     <description>Mises à jour de RSnotch.</description>
     <language>fr</language>
     <item>
+      <title>Version 2.3.0</title>
+      <pubDate>Thu, 03 Sep 2026 19:44:05 +0000</pubDate>
+      <sparkle:version>7</sparkle:version>
+      <sparkle:shortVersionString>2.3.0</sparkle:shortVersionString>
+      <sparkle:minimumSystemVersion>26.0</sparkle:minimumSystemVersion>
+      <description><![CDATA[
+        <ul>
+          <li>Profils de disposition de widgets : enregistrez plusieurs configurations nommées (ex. « Travail »/« Perso ») et basculez d'un clic depuis les réglages.</li>
+          <li>Mode Pomodoro sur le minuteur : cycles travail/pause courte/pause longue enchaînés automatiquement, durées réglables, bouton pour écourter une pause.</li>
+          <li>Export et import des réglages (widgets, profils, préférences) vers un fichier — pratique pour reprendre sa configuration sur un nouveau Mac.</li>
+        </ul>
+      ]]></description>
+      <enclosure
+        url="https://github.com/ledjo95/RSnotch/releases/download/v2.3.0/RSnotch.dmg"
+        sparkle:version="7"
+        sparkle:shortVersionString="2.3.0"
+        length="3577693"
+        type="application/octet-stream"
+        sparkle:edSignature="NNeuooJtFAsiAllihTKNvgoJaA0xbJBSEzVnDfk8FIhBc4X7U1Y2pTUUII2/7duTxXUlCMjoahxC25msvkIADw=="
+      />
+    </item>
+    <item>
       <title>Version 2.2.0</title>
       <pubDate>Thu, 03 Sep 2026 18:47:27 +0000</pubDate>
       <sparkle:version>6</sparkle:version>
