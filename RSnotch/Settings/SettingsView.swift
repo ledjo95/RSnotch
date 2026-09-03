@@ -199,18 +199,6 @@ private struct PanelSettingsView: View {
                     .font(.caption)
                     .foregroundStyle(.secondary)
             }
-
-            Section("Largeur du panneau déployé") {
-                Picker("Largeur", selection: $settings.panelWidth) {
-                    ForEach(PanelWidth.allCases) { width in
-                        Text(width.label).tag(width)
-                    }
-                }
-                .pickerStyle(.segmented)
-                Text("Le panneau se cale sur ses cartes. Si la rangée ne tient pas dans l’écran, l’échelle est abaissée automatiquement pour éviter qu’une carte soit rognée.")
-                    .font(.caption)
-                    .foregroundStyle(.secondary)
-            }
         }
         .formStyle(.grouped)
         .onAppear { interceptor.refreshTrust() }

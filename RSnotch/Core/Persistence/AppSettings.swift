@@ -184,8 +184,11 @@ final class AppSettings {
         self.quoteText = defaults.string(forKey: Key.quoteText) ?? Self.defaultQuote
         let storedLimit = defaults.integer(forKey: Key.clipboardLimit)
         self.clipboardLimit = storedLimit > 0 ? storedLimit : 200
-        self.panelWidth = defaults.string(forKey: Key.panelWidth)
-            .flatMap(PanelWidth.init(rawValue:)) ?? .standard
+        // Reglage retire (§ ExpandedPanelView.tabBar) : Compact/Standard
+        // reduisaient le panneau au point de repousser la barre d'onglets
+        // sous l'encoche physique sur certains Mac. Large est desormais la
+        // seule valeur — la barre elle-meme defile en filet de securite.
+        self.panelWidth = .large
         self.emptyPocketOnLaunch = defaults.object(forKey: Key.emptyPocketOnLaunch) as? Bool ?? true
         self.panelEnabled = defaults.object(forKey: Key.panelEnabled) as? Bool ?? true
         self.openOnHover = defaults.object(forKey: Key.openOnHover) as? Bool ?? true

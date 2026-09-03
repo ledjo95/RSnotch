@@ -45,13 +45,6 @@ struct QuickSettingsTabView: View {
                         selection: $settings.glassIntensity
                     ) { $0.label }
                 }
-
-                SettingsField(label: "Largeur") {
-                    GlassSegmentedRow(
-                        items: PanelWidth.allCases,
-                        selection: $settings.panelWidth
-                    ) { $0.label }
-                }
             }
         }
     }
