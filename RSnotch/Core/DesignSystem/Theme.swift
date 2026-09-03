@@ -131,6 +131,9 @@ enum Theme {
             // Le minuteur tient en une regle et une ligne de commandes :
             // l'etirer a la hauteur des widgets laisserait un grand vide.
             case .timer: 118
+            // Plafond impose par `NotchWindowController.hostBandHeight` : au
+            // dela, la fenetre hote tronquerait le panneau au lieu de grandir.
+            case .calendar: 206
             default: expandedContentHeight
             }
         }
@@ -144,6 +147,7 @@ enum Theme {
             case .tray: 900
             case .pocket: 900
             case .settings: 900
+            case .calendar: 920
             default: defaultContentWidth
             }
             return base * scale

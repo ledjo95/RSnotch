@@ -90,6 +90,7 @@ enum NotchTab: String, CaseIterable, Identifiable, Sendable {
     case tray
     case clipboard
     case timer
+    case calendar
     case pocket
     case settings
 
@@ -101,6 +102,7 @@ enum NotchTab: String, CaseIterable, Identifiable, Sendable {
         case .tray: "tray.fill"
         case .clipboard: "doc.on.doc.fill"
         case .timer: "timer"
+        case .calendar: "calendar"
         case .pocket: "square.and.arrow.down.on.square.fill"
         case .settings: "gearshape.fill"
         }
@@ -113,6 +115,7 @@ enum NotchTab: String, CaseIterable, Identifiable, Sendable {
         case .tray: "Partage et fichiers"
         case .clipboard: "Presse-papiers"
         case .timer: "Minuteur"
+        case .calendar: "Agenda"
         case .pocket: "Pocket"
         case .settings: "Reglages"
         }
@@ -125,10 +128,10 @@ enum NotchTab: String, CaseIterable, Identifiable, Sendable {
     var acceptsFileDrop: Bool {
         switch self {
         case .home, .tray: true
-        case .clipboard, .timer, .pocket, .settings: false
+        case .clipboard, .timer, .calendar, .pocket, .settings: false
         }
     }
 
-    static let leading: [NotchTab] = [.home, .tray, .clipboard, .timer]
+    static let leading: [NotchTab] = [.home, .tray, .clipboard, .timer, .calendar]
     static let trailing: [NotchTab] = [.pocket, .settings]
 }

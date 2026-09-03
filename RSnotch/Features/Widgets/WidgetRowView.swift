@@ -22,6 +22,7 @@ struct WidgetRowView: View {
     /// Echelle issue du reglage de largeur du panneau.
     var widthScale: CGFloat = 1
     let openTimerTab: () -> Void
+    let openCalendarTab: () -> Void
 
     @State private var targetedID: UUID?
 
@@ -122,7 +123,7 @@ struct WidgetRowView: View {
         case .timer:
             TimerWidgetView(timer: countdown, openTimerTab: openTimerTab)
         case .calendar:
-            CalendarWidgetView(availability: calendar)
+            CalendarWidgetView(availability: calendar, openCalendarTab: openCalendarTab)
         }
     }
 

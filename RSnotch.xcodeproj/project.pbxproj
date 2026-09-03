@@ -27,6 +27,7 @@
 		37827A76527E29EE8336F6D9 /* BookmarkStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 448752EC329859FB2743F874 /* BookmarkStore.swift */; };
 		3B40D0EA875ADFC2A1FE76F5 /* Sparkle in Frameworks */ = {isa = PBXBuildFile; productRef = 4A2C3A4049F5AB183EF32B3A /* Sparkle */; };
 		4273E190CD2B6032F2A99C47 /* SpaceAccent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94BF49777B4AE94B7193CE68 /* SpaceAccent.swift */; };
+		4B3B54C86F6736062423462A /* CalendarTabView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8351C1F4604D425A6757E53 /* CalendarTabView.swift */; };
 		56A73FDDE5939DABC87A1B12 /* TimerWidgetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B599CBF1A9CC1F668C45455 /* TimerWidgetView.swift */; };
 		5B0E302AFB44372B7CC44044 /* NotchRootView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 043FE67B46DAC8F3B519C763 /* NotchRootView.swift */; };
 		5B20763EEF45DE6F62900E25 /* RSnotchApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54A6CF4445C5C01B6F861E61 /* RSnotchApp.swift */; };
@@ -182,6 +183,7 @@
 		E023C731B6CB7A47986B629E /* NotchGeometry.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotchGeometry.swift; sourceTree = "<group>"; };
 		E43DADCB2A819CEA309F34E3 /* WidgetsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WidgetsViewModel.swift; sourceTree = "<group>"; };
 		E7A9599D9631DB154B363889 /* PermissionPrimerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PermissionPrimerView.swift; sourceTree = "<group>"; };
+		E8351C1F4604D425A6757E53 /* CalendarTabView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarTabView.swift; sourceTree = "<group>"; };
 		EAABAE587446EEF26BE0A92E /* AppLauncher.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppLauncher.swift; sourceTree = "<group>"; };
 		EAB92890F5C6FB13DBEB7A41 /* WeatherService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherService.swift; sourceTree = "<group>"; };
 		F8E916AE3BE9C3CA6036E951 /* NotchShape.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotchShape.swift; sourceTree = "<group>"; };
@@ -395,6 +397,7 @@
 		DAA5C1BA81DE025F4A4E4B7A /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				E8351C1F4604D425A6757E53 /* CalendarTabView.swift */,
 				35B7CFA4057F3E01EB17AF0B /* CalendarWidgetView.swift */,
 				3865D49EE854C193D66778C2 /* DateWidgetView.swift */,
 				8339BA0F4C209A36FD84CA2D /* ImageWidgetView.swift */,
@@ -597,6 +600,7 @@
 				37827A76527E29EE8336F6D9 /* BookmarkStore.swift in Sources */,
 				2583F46CC6A63B45C5A2A89A /* BrightnessControl.swift in Sources */,
 				B91518B015783A850066D657 /* CalendarService.swift in Sources */,
+				4B3B54C86F6736062423462A /* CalendarTabView.swift in Sources */,
 				2069FDD7D6C057B21E614ECE /* CalendarWidgetView.swift in Sources */,
 				DC84AA6F1B48C6BE95597245 /* ClipboardActions.swift in Sources */,
 				6AA4E750C84151F438F18E0F /* ClipboardEntry.swift in Sources */,

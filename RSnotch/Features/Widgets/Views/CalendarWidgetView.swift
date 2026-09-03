@@ -4,19 +4,21 @@ import SwiftUI
 //
 // Prochains evenements du jour, un par ligne : pastille de la couleur du
 // calendrier, heure, titre. Meme grammaire que WeatherWidgetView — etats
-// idle/loading/ready/unavailable, carte entierement cliquable vers
-// Calendrier.app.
+// idle/loading/ready/unavailable, carte entierement cliquable vers l'onglet
+// Agenda (vue mensuelle complete), et non Calendrier.app : la grille
+// mensuelle vit desormais dans l'app elle-meme.
 
 struct CalendarWidgetView: View {
 
     let availability: CalendarAvailability
+    let openCalendarTab: () -> Void
 
     var body: some View {
-        Button { AppLauncher.open(.calendar) } label: {
+        Button(action: openCalendarTab) {
             content
         }
         .buttonStyle(.plain)
-        .help("Ouvrir Calendrier")
+        .help("Ouvrir l’agenda")
     }
 
     private var content: some View {

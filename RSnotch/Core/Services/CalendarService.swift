@@ -31,14 +31,17 @@ enum CalendarAvailability: Equatable, Sendable {
 }
 
 // MARK: - CalendarService
-/// Prochains evenements du jour, lus depuis les calendriers deja configures
-/// dans Reglages Systeme -> Internet Accounts (iCloud compris). EventKit est
-/// l'unique API, publique, contrairement a la luminosite (§3) — aucune
-/// abstraction de source n'est donc necessaire ici.
+/// Evenements lus depuis les calendriers deja configures dans Reglages
+/// Systeme -> Internet Accounts (iCloud compris). EventKit est l'unique API,
+/// publique, contrairement a la luminosite (§3) — aucune abstraction de
+/// source n'est donc necessaire ici.
 @MainActor
 @Observable
 final class CalendarService {
 
+    /// Evenements du jour courant : alimente le widget compact de la page
+    /// d'accueil. Rafraichi en tache de fond, independamment de l'onglet
+    /// Agenda qui interroge le magasin a la demande (§ `events(from:to:)`).
     private(set) var availability: CalendarAvailability = .idle
 
     private let store = EKEventStore()
@@ -80,8 +83,18 @@ final class CalendarService {
             return
         }
 
+        availability = .ready(events(from: start, to: end))
+    }
+
+    /// Evenements sur une plage arbitraire, tries par debut. Utilise par
+    /// l'onglet Agenda pour peupler un mois entier — EventKit limite chaque
+    /// requete a quatre ans, largement suffisant pour une grille mensuelle.
+    /// N'attend pas l'autorisation : appele uniquement une fois `.fullAccess`
+    /// deja confirme (§ CalendarTabView, qui affiche son propre etat refuse).
+    func events(from start: Date, to end: Date) -> [CalendarEventSnapshot] {
+        guard EKEventStore.authorizationStatus(for: .event) == .fullAccess else { return [] }
         let predicate = store.predicateForEvents(withStart: start, end: end, calendars: nil)
-        let events = store.events(matching: predicate)
+        return store.events(matching: predicate)
             .sorted { $0.startDate < $1.startDate }
             .map { event in
                 let color = event.calendar.cgColor.flatMap { $0.components } ?? [0.6, 0.6, 0.6, 1]
@@ -96,7 +109,13 @@ final class CalendarService {
                     )
                 )
             }
-        availability = .ready(events)
+    }
+
+    /// Etat d'autorisation courant, expose pour que l'onglet Agenda affiche
+    /// directement son propre message plutot que d'attendre le prochain
+    /// `refresh()` du widget compact.
+    var isAuthorized: Bool {
+        EKEventStore.authorizationStatus(for: .event) == .fullAccess
     }
 
     /// `requestFullAccessToEvents` declenche le dialogue TCC au premier appel.

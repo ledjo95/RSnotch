@@ -82,7 +82,8 @@ struct ExpandedPanelView: View {
                     appItemCount: launcher.items.count,
                     screenWidth: model.geometry.screenFrame.width
                 ),
-                openTimerTab: { select(.timer) }
+                openTimerTab: { select(.timer) },
+                openCalendarTab: { select(.calendar) }
             )
         case .clipboard:
             ClipboardTabView()
@@ -96,51 +97,12 @@ struct ExpandedPanelView: View {
                 holdOpen: { model.holdOpen() },
                 keepOpen: { model.dragActivity() }
             )
+        case .calendar:
+            CalendarTabView(service: calendar)
         case .pocket:
             PocketTabView(pocket: pocket)
         case .settings:
             QuickSettingsTabView()
         }
-    }
-}
-
-// MARK: - UpcomingTabPlaceholder
-/// Onglet dont le contenu arrive dans une phase ulterieure. Il nomme ce qui
-/// manque plutot que d'afficher un vide, pour que l'onglet reste comprehensible
-/// pendant tout le developpement.
-struct UpcomingTabPlaceholder: View {
-    let tab: NotchTab
-
-    private var note: String {
-        switch tab {
-        case .tray: "Glisser vers AirDrop — phase 6."
-        case .clipboard: "Presse-papiers — phase 4."
-        case .timer: "Minuteur — phase 5."
-        case .pocket: "Pocket — phase 6."
-        case .settings: "Réglages rapides — phase 10."
-        case .home: ""
-        }
-    }
-
-    var body: some View {
-        GlassCard {
-            VStack(alignment: .leading, spacing: 6) {
-                Image(systemName: tab.symbolName)
-                    .font(.system(size: 18, weight: .medium))
-                    .foregroundStyle(Theme.Palette.mist)
-                Spacer(minLength: 0)
-                Text(tab.accessibilityLabel)
-                    .font(Theme.Typography.body(13, weight: .semibold))
-                    .foregroundStyle(Theme.Palette.frost)
-                Text(note)
-                    .font(Theme.Typography.body(11))
-                    .foregroundStyle(Theme.Palette.mist)
-            }
-            .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .leading)
-            .padding(14)
-        }
-        .frame(maxWidth: 260, alignment: .leading)
-        .frame(maxWidth: .infinity, alignment: .leading)
-        .accessibilityElement(children: .combine)
     }
 }
