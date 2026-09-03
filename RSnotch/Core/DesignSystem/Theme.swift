@@ -161,8 +161,27 @@ enum Theme {
         static let expandedMaxWidth: CGFloat = 1600
         /// Part maximale de la largeur d'ecran occupee par le panneau.
         static let maxScreenFraction: CGFloat = 0.94
-        /// Largeur minimale : la barre d'onglets doit tenir sans se tasser.
+        /// Largeur minimale « de confort » : sert de plancher aux onglets dont
+        /// le contenu est plus etroit que la barre elle-meme (Minuteur, Reglages…).
         static let minimumPanelWidth: CGFloat = 600
+
+        /// Largeur EXACTE requise par la barre d'onglets, calculee a partir du
+        /// nombre d'onglets plutot qu'une constante a main levee : un onglet
+        /// ajoute (Agenda, Statistiques…) l'agrandit tout seul. Sans ce calcul,
+        /// `minimumPanelWidth` peut rester inferieur au besoin reel de la barre
+        /// et la derniere icone se retrouve tronquee au bord du panneau.
+        static var tabBarMinimumWidth: CGFloat {
+            let iconWidth: CGFloat = 26
+            let iconSpacing: CGFloat = 6
+            let count = CGFloat(NotchTab.allCases.count)
+            // Un espace supplementaire separe les groupes leading/trailing
+            // (§ ExpandedPanelView.tabBar, le Spacer entre les deux ForEach) —
+            // sans lui la barre entiere semblerait pouvoir se tasser jusqu'a
+            // coller les deux groupes, ce qu'elle ne fait jamais en pratique.
+            let groupGap: CGFloat = 24
+            return count * iconWidth + max(count - 1, 0) * iconSpacing + groupGap
+                + panelHorizontalPadding * 2
+        }
         /// Largeur de repli pour les onglets qui n'ont pas encore de contenu.
         static let defaultContentWidth: CGFloat = 680
     }
