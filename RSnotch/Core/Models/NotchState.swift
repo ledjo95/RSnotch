@@ -134,7 +134,4 @@ enum NotchTab: String, CaseIterable, Identifiable, Sendable {
         case .clipboard, .timer, .calendar, .stats, .pocket, .settings: false
         }
     }
-
-    static let leading: [NotchTab] = [.home, .tray, .clipboard, .timer, .calendar, .stats]
-    static let trailing: [NotchTab] = [.pocket, .settings]
 }

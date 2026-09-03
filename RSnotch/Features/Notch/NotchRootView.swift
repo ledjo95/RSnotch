@@ -60,17 +60,15 @@ struct NotchRootView: View {
                   )
                 : Theme.Metrics.contentWidth(for: model.selectedTab, scale: scale)
             let screenWidth = model.geometry.screenFrame.width
-            // La barre d'onglets ne suit PAS `scale` (§ ExpandedPanelView.tabBar,
-            // icones a taille fixe) : son plancher ne doit donc jamais etre mis
-            // a l'echelle non plus, sinon un panneau Compact la retasse quand
-            // meme sous son besoin reel.
+            // La barre d'onglets ne compte plus dans ce plancher : reduite a
+            // Accueil + bouton Plus (§ ExpandedPanelView.tabBar), elle ne
+            // peut plus jamais avoir besoin de plus de largeur que le plus
+            // etroit des panneaux — l'ancien calcul degageant une place pour
+            // l'encoche n'a donc plus d'utilite.
             let width = min(
                 max(
                     content + Theme.Metrics.panelHorizontalPadding * 2,
-                    Theme.Metrics.minimumPanelWidth * scale,
-                    Theme.Metrics.tabBarMinimumWidth(
-                        notchGap: model.geometry.tabBarNotchGap
-                    )
+                    Theme.Metrics.minimumPanelWidth * scale
                 ),
                 Theme.Metrics.expandedMaxWidth,
                 screenWidth * Theme.Metrics.maxScreenFraction
