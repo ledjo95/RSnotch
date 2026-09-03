@@ -103,6 +103,11 @@ final class CalendarService {
     /// Comme le Bluetooth (§ NotchWindowController), ce dialogue bloque
     /// jusqu'a la reponse — appele uniquement depuis `refresh()`, jamais au
     /// demarrage direct, pour ne pas geler le reste de l'initialisation.
+    ///
+    /// Sous Hardened Runtime, l'entitlement
+    /// `com.apple.security.personal-information.calendars` (RSnotch.entitlements)
+    /// est requis pour que tccd accepte meme d'AFFICHER ce dialogue — sans lui,
+    /// `requestFullAccessToEvents` renvoie silencieusement `false`.
     private func requestAccessIfNeeded() async -> Bool {
         switch EKEventStore.authorizationStatus(for: .event) {
         case .fullAccess:

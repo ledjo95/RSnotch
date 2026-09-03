@@ -32,5 +32,14 @@
 	     NSAppleEventsUsageDescription porte le texte du dialogue systeme. -->
 	<key>com.apple.security.automation.apple-events</key>
 	<true/>
+	<!-- Widget Agenda (§ CalendarService). Sous Hardened Runtime, tccd refuse
+	     meme d'AFFICHER le dialogue d'autorisation Calendrier sans cet
+	     entitlement explicite — la cle Info.plist NSCalendarsFullAccessUsageDescription
+	     seule ne suffit pas ("Policy disallows prompt", verifie via les logs
+	     tccd). Constat identique a l'automatisation Apple Events ci-dessus :
+	     le sandbox ne filtrait plus rien depuis son retrait, mais chaque acces
+	     a une donnee personnelle reste soumis a son propre entitlement. -->
+	<key>com.apple.security.personal-information.calendars</key>
+	<true/>
 </dict>
 </plist>
