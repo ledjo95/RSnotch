@@ -19,6 +19,11 @@ struct ExpandedPanelView: View {
     /// (Phase 5 : minuteur replie ↔ deplie).
     let glassNamespace: Namespace.ID
 
+    /// Proprietaire du service : ne vit et ne sonde le CPU que tant que ce
+    /// panneau existe, et SystemStatsTabView le demarre/arrete lui-meme selon
+    /// sa propre visibilite (§ SystemStatsTabView.onAppear/onDisappear).
+    @State private var stats = SystemStatsService()
+
     var body: some View {
         VStack(spacing: Theme.Metrics.contentSpacing) {
             tabBar
@@ -99,6 +104,8 @@ struct ExpandedPanelView: View {
             )
         case .calendar:
             CalendarTabView(service: calendar)
+        case .stats:
+            SystemStatsTabView(service: stats)
         case .pocket:
             PocketTabView(pocket: pocket)
         case .settings:

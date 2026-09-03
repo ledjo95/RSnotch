@@ -134,6 +134,7 @@ enum Theme {
             // Plafond impose par `NotchWindowController.hostBandHeight` : au
             // dela, la fenetre hote tronquerait le panneau au lieu de grandir.
             case .calendar: 206
+            case .stats: 206
             default: expandedContentHeight
             }
         }
@@ -148,6 +149,7 @@ enum Theme {
             case .pocket: 900
             case .settings: 900
             case .calendar: 920
+            case .stats: 780
             default: defaultContentWidth
             }
             return base * scale

@@ -16,6 +16,7 @@
 		12ED1BB8D4AEA75770394E51 /* SettingsWindowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 501812FC42F5EE85C04D52E2 /* SettingsWindowController.swift */; };
 		148103134BFC36FCDEB3D46E /* SystemAudioService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A04E9F66A01014DA4B0F1D1 /* SystemAudioService.swift */; };
 		158D086A9EA6071F49058E25 /* NotchWindowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60CCFE3811153BE91C1A7E97 /* NotchWindowController.swift */; };
+		16BF12388AE90D42EF87A66D /* SystemStatsService.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAD88705A2C53C227AE173D9 /* SystemStatsService.swift */; };
 		2069FDD7D6C057B21E614ECE /* CalendarWidgetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35B7CFA4057F3E01EB17AF0B /* CalendarWidgetView.swift */; };
 		20E1C7B6CF50BBA02D180560 /* WidgetRowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F1D21488F650DD47CB0DE65 /* WidgetRowView.swift */; };
 		2583F46CC6A63B45C5A2A89A /* BrightnessControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8863A5DA5E83D40C0C69A238 /* BrightnessControl.swift */; };
@@ -45,6 +46,7 @@
 		7ED98CD486B41AAE4BE5AB85 /* MusicWidgetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39EA430F4998404C4B0F1F29 /* MusicWidgetView.swift */; };
 		83282859E6BF871360B51097 /* PowerService.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA49D87B07862E1CC4D7911E /* PowerService.swift */; };
 		8582A55304D588A4FF3E555A /* FileDrop.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08597D408DE3B849D2308D63 /* FileDrop.swift */; };
+		8A46EEF3C1F2271F5CD4C822 /* SystemStatsTabView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C405DEA3310169A56D0165B /* SystemStatsTabView.swift */; };
 		8FB3708626B81048E9B4AFAC /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2624C22E81F574D97963342 /* AppDelegate.swift */; };
 		930931AEB7E02812D95AE0D6 /* NowPlaying.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A68188087CF9C95C467E4BB /* NowPlaying.swift */; };
 		950D2EABD9AB728DBED5BC0E /* TickRuler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04C697C4B0A11BD36ABA43A0 /* TickRuler.swift */; };
@@ -143,6 +145,7 @@
 		601BB1000F7F85F84B106980 /* ClipboardEntry.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClipboardEntry.swift; sourceTree = "<group>"; };
 		60CCFE3811153BE91C1A7E97 /* NotchWindowController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotchWindowController.swift; sourceTree = "<group>"; };
 		6A45A996780A41313384F189 /* ClipboardActions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClipboardActions.swift; sourceTree = "<group>"; };
+		6C405DEA3310169A56D0165B /* SystemStatsTabView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SystemStatsTabView.swift; sourceTree = "<group>"; };
 		6F070EB160E2573D26C1E128 /* AppSettings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppSettings.swift; sourceTree = "<group>"; };
 		745210FEB19E054C1854CFF5 /* TextPrompt.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextPrompt.swift; sourceTree = "<group>"; };
 		7A68188087CF9C95C467E4BB /* NowPlaying.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NowPlaying.swift; sourceTree = "<group>"; };
@@ -167,6 +170,7 @@
 		AF5E68524EF72B6107798D17 /* FileDragHandle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileDragHandle.swift; sourceTree = "<group>"; };
 		B560E82FEA7BCD70A6A924A1 /* RSnotchTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = RSnotchTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		B64EE4ADFDCF26265B590D6A /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
+		BAD88705A2C53C227AE173D9 /* SystemStatsService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SystemStatsService.swift; sourceTree = "<group>"; };
 		BC5218F217BC658EF378C9B7 /* DisplayBrightnessService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DisplayBrightnessService.swift; sourceTree = "<group>"; };
 		BD5191862789570C6E085E71 /* ClipboardTabView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClipboardTabView.swift; sourceTree = "<group>"; };
 		BEC94DDF955C61D96D447C04 /* RSnotch.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = RSnotch.entitlements; sourceTree = "<group>"; };
@@ -223,6 +227,7 @@
 				39BC77DFB9F5E229EC5A6790 /* PocketStorageService.swift */,
 				DA49D87B07862E1CC4D7911E /* PowerService.swift */,
 				1A04E9F66A01014DA4B0F1D1 /* SystemAudioService.swift */,
+				BAD88705A2C53C227AE173D9 /* SystemStatsService.swift */,
 				558D836EDD3B4999F737FA59 /* TimerService.swift */,
 				EAB92890F5C6FB13DBEB7A41 /* WeatherService.swift */,
 			);
@@ -402,6 +407,7 @@
 				3865D49EE854C193D66778C2 /* DateWidgetView.swift */,
 				8339BA0F4C209A36FD84CA2D /* ImageWidgetView.swift */,
 				AEF76B2D35C1CA90BEBE9CCE /* QuoteWidgetView.swift */,
+				6C405DEA3310169A56D0165B /* SystemStatsTabView.swift */,
 				9D1D1A4007FFDA3D578505F8 /* UpcomingWidgetView.swift */,
 				9683D31B056253D8AEDCFACF /* WeatherWidgetView.swift */,
 			);
@@ -652,6 +658,8 @@
 				4273E190CD2B6032F2A99C47 /* SpaceAccent.swift in Sources */,
 				33E2A3D831A71D772A536D2F /* SpaceHeuristicService.swift in Sources */,
 				148103134BFC36FCDEB3D46E /* SystemAudioService.swift in Sources */,
+				16BF12388AE90D42EF87A66D /* SystemStatsService.swift in Sources */,
+				8A46EEF3C1F2271F5CD4C822 /* SystemStatsTabView.swift in Sources */,
 				3295BBFABFFD8F10DE86B1A2 /* TextPrompt.swift in Sources */,
 				7B44B133FA81F9775467CE56 /* Theme.swift in Sources */,
 				950D2EABD9AB728DBED5BC0E /* TickRuler.swift in Sources */,
