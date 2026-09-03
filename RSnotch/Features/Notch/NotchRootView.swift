@@ -20,6 +20,7 @@ struct NotchRootView: View {
     var spaces: SpaceHeuristicService
     @Bindable var pocket: PocketStorageService
     let weather: WeatherService
+    let calendar: CalendarService
     var settings: AppSettings = .shared
     @Namespace private var glassNamespace
     /// Hauteur de la fenetre hote, relevee une fois au layout.
@@ -215,6 +216,7 @@ struct NotchRootView: View {
                 nowPlaying: nowPlaying,
                 pocket: pocket,
                 weather: weather,
+                calendar: calendar,
                 settings: settings,
                 glassNamespace: glassNamespace
             )

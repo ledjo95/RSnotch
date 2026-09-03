@@ -13,6 +13,7 @@ struct ExpandedPanelView: View {
     @Bindable var nowPlaying: NowPlayingViewModel
     @Bindable var pocket: PocketStorageService
     let weather: WeatherService
+    let calendar: CalendarService
     var settings: AppSettings = .shared
     /// Transmis aux vues d'onglet qui ont besoin de morpher avec la coquille
     /// (Phase 5 : minuteur replie ↔ deplie).
@@ -73,6 +74,7 @@ struct ExpandedPanelView: View {
                 countdown: countdown,
                 nowPlaying: nowPlaying,
                 weather: weather.availability,
+                calendar: calendar.availability,
                 quote: settings.quoteText,
                 widthScale: widgets.rowScale(
                     requested: settings.panelWidth.scale,

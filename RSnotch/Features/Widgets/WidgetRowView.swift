@@ -17,6 +17,7 @@ struct WidgetRowView: View {
     @Bindable var countdown: TimerService
     @Bindable var nowPlaying: NowPlayingViewModel
     let weather: WeatherAvailability
+    let calendar: CalendarAvailability
     let quote: String
     /// Echelle issue du reglage de largeur du panneau.
     var widthScale: CGFloat = 1
@@ -120,6 +121,8 @@ struct WidgetRowView: View {
             MusicWidgetView(model: nowPlaying, size: widget.size)
         case .timer:
             TimerWidgetView(timer: countdown, openTimerTab: openTimerTab)
+        case .calendar:
+            CalendarWidgetView(availability: calendar)
         }
     }
 

@@ -16,6 +16,7 @@
 		12ED1BB8D4AEA75770394E51 /* SettingsWindowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 501812FC42F5EE85C04D52E2 /* SettingsWindowController.swift */; };
 		148103134BFC36FCDEB3D46E /* SystemAudioService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A04E9F66A01014DA4B0F1D1 /* SystemAudioService.swift */; };
 		158D086A9EA6071F49058E25 /* NotchWindowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60CCFE3811153BE91C1A7E97 /* NotchWindowController.swift */; };
+		2069FDD7D6C057B21E614ECE /* CalendarWidgetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35B7CFA4057F3E01EB17AF0B /* CalendarWidgetView.swift */; };
 		20E1C7B6CF50BBA02D180560 /* WidgetRowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F1D21488F650DD47CB0DE65 /* WidgetRowView.swift */; };
 		2583F46CC6A63B45C5A2A89A /* BrightnessControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8863A5DA5E83D40C0C69A238 /* BrightnessControl.swift */; };
 		25B61946F95A4349667FAF09 /* AutoUpdater.swift in Sources */ = {isa = PBXBuildFile; fileRef = D95EC15E8CA677911C17A174 /* AutoUpdater.swift */; };
@@ -57,6 +58,7 @@
 		B688FD809011CCB6E9CA6B60 /* NotchState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B5888782E8E7101B06DEDAC /* NotchState.swift */; };
 		B75620D5C117EE62529CE816 /* PocketStorageService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39BC77DFB9F5E229EC5A6790 /* PocketStorageService.swift */; };
 		B868EF73F1340C6B1B5C6EB5 /* AppleScriptRunner.swift in Sources */ = {isa = PBXBuildFile; fileRef = 868DD124233F0342B224750F /* AppleScriptRunner.swift */; };
+		B91518B015783A850066D657 /* CalendarService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 169F18D7FAAE52CC849F641A /* CalendarService.swift */; };
 		BB2C420CFEE82E6DFC183B2F /* NotchGeometry.swift in Sources */ = {isa = PBXBuildFile; fileRef = E023C731B6CB7A47986B629E /* NotchGeometry.swift */; };
 		BCF7E7672C0A88D23BC5ECB9 /* NotchViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00A4EE92CE6C8FBB1E7A6239 /* NotchViewModel.swift */; };
 		BE4440D5E2414A83D3584E49 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 817CC3F6D7E896C3BDA4A440 /* Assets.xcassets */; };
@@ -113,6 +115,7 @@
 		113FF1F64562E9E93D1F5E2E /* FormattingTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FormattingTests.swift; sourceTree = "<group>"; };
 		134AFBA45FF47F6342CF6A94 /* ClipboardService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClipboardService.swift; sourceTree = "<group>"; };
 		13500BBC2CF15257FB22B0BA /* PrivacyInfo.xcprivacy */ = {isa = PBXFileReference; path = PrivacyInfo.xcprivacy; sourceTree = "<group>"; };
+		169F18D7FAAE52CC849F641A /* CalendarService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarService.swift; sourceTree = "<group>"; };
 		1A04E9F66A01014DA4B0F1D1 /* SystemAudioService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SystemAudioService.swift; sourceTree = "<group>"; };
 		1B599CBF1A9CC1F668C45455 /* TimerWidgetView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimerWidgetView.swift; sourceTree = "<group>"; };
 		2220747A37C807535D6B84BE /* CompactIslandCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompactIslandCoordinator.swift; sourceTree = "<group>"; };
@@ -121,6 +124,7 @@
 		2AA1C711E6B1AD9432ED53D7 /* NowPlayingViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NowPlayingViewModel.swift; sourceTree = "<group>"; };
 		2EB11E766211A6DF2158D2FA /* PanelWidget.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PanelWidget.swift; sourceTree = "<group>"; };
 		312B1C5DA004D86932FF3E89 /* ClipboardEntryCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClipboardEntryCard.swift; sourceTree = "<group>"; };
+		35B7CFA4057F3E01EB17AF0B /* CalendarWidgetView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarWidgetView.swift; sourceTree = "<group>"; };
 		3865D49EE854C193D66778C2 /* DateWidgetView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateWidgetView.swift; sourceTree = "<group>"; };
 		38BAE5F146A043F95E138D3C /* BluetoothService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BluetoothService.swift; sourceTree = "<group>"; };
 		39BC77DFB9F5E229EC5A6790 /* PocketStorageService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PocketStorageService.swift; sourceTree = "<group>"; };
@@ -207,6 +211,7 @@
 				D95EC15E8CA677911C17A174 /* AutoUpdater.swift */,
 				38BAE5F146A043F95E138D3C /* BluetoothService.swift */,
 				8863A5DA5E83D40C0C69A238 /* BrightnessControl.swift */,
+				169F18D7FAAE52CC849F641A /* CalendarService.swift */,
 				134AFBA45FF47F6342CF6A94 /* ClipboardService.swift */,
 				BC5218F217BC658EF378C9B7 /* DisplayBrightnessService.swift */,
 				524931059CBF3FA5A3C9B101 /* LoginItemService.swift */,
@@ -390,6 +395,7 @@
 		DAA5C1BA81DE025F4A4E4B7A /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				35B7CFA4057F3E01EB17AF0B /* CalendarWidgetView.swift */,
 				3865D49EE854C193D66778C2 /* DateWidgetView.swift */,
 				8339BA0F4C209A36FD84CA2D /* ImageWidgetView.swift */,
 				AEF76B2D35C1CA90BEBE9CCE /* QuoteWidgetView.swift */,
@@ -590,6 +596,8 @@
 				ABC73152670009553BA65CD3 /* BluetoothService.swift in Sources */,
 				37827A76527E29EE8336F6D9 /* BookmarkStore.swift in Sources */,
 				2583F46CC6A63B45C5A2A89A /* BrightnessControl.swift in Sources */,
+				B91518B015783A850066D657 /* CalendarService.swift in Sources */,
+				2069FDD7D6C057B21E614ECE /* CalendarWidgetView.swift in Sources */,
 				DC84AA6F1B48C6BE95597245 /* ClipboardActions.swift in Sources */,
 				6AA4E750C84151F438F18E0F /* ClipboardEntry.swift in Sources */,
 				EE3060BD6E268FE305F7E6F4 /* ClipboardEntryCard.swift in Sources */,

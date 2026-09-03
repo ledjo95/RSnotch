@@ -43,6 +43,10 @@
 	<!-- Texte du dialogue systeme d'autorisation Bluetooth (Phase 8, §3.8). -->
 	<key>NSBluetoothAlwaysUsageDescription</key>
 	<string>RSnotch signale dans l’encoche la connexion et la déconnexion de vos accessoires Bluetooth. Il lit la liste des appareils appairés, sans jamais s’y connecter.</string>
+	<!-- Texte du dialogue systeme d'autorisation Calendrier, demande uniquement
+	     quand le widget Agenda est ajoute (§ CalendarService). Lecture seule. -->
+	<key>NSCalendarsFullAccessUsageDescription</key>
+	<string>RSnotch affiche vos prochains évènements du jour dans l’encoche. Il lit vos calendriers, sans jamais les modifier.</string>
 	<key>NSHumanReadableCopyright</key>
 	<string>Copyright © 2026 Joffrey Stastoli. Tous droits réservés.</string>
 	<key>NSSupportsAutomaticTermination</key>

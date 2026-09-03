@@ -11,6 +11,7 @@ enum WidgetKind: String, Codable, CaseIterable, Identifiable, Sendable {
     case image
     case quote
     case apps
+    case calendar
 
     var id: String { rawValue }
 
@@ -36,6 +37,7 @@ enum WidgetKind: String, Codable, CaseIterable, Identifiable, Sendable {
         case .image: "Image"
         case .quote: "Citation"
         case .apps: "Applications"
+        case .calendar: "Agenda"
         }
     }
 
@@ -48,6 +50,7 @@ enum WidgetKind: String, Codable, CaseIterable, Identifiable, Sendable {
         case .image: "photo"
         case .quote: "text.quote"
         case .apps: "square.grid.2x2.fill"
+        case .calendar: "calendar.badge.clock"
         }
     }
 
@@ -59,6 +62,7 @@ enum WidgetKind: String, Codable, CaseIterable, Identifiable, Sendable {
         case .weather, .quote, .image: [.small, .medium]
         case .music: [.medium, .large]
         case .apps: [.small, .medium, .large]
+        case .calendar: [.medium, .large]
         }
     }
 
