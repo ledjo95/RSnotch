@@ -6,6 +6,27 @@
     <description>Mises à jour de RSnotch.</description>
     <language>fr</language>
     <item>
+      <title>Version 2.1.1</title>
+      <pubDate>Thu, 03 Sep 2026 16:09:53 +0000</pubDate>
+      <sparkle:version>5</sparkle:version>
+      <sparkle:shortVersionString>2.1.1</sparkle:shortVersionString>
+      <sparkle:minimumSystemVersion>26.0</sparkle:minimumSystemVersion>
+      <description><![CDATA[
+        <ul>
+          <li>La barre d'onglets ne montre plus que Accueil et un bouton "···" donnant accès aux autres fonctionnalités — elle pouvait auparavant être partiellement masquée par l'encoche physique sur certains Mac.</li>
+          <li>Correction du rendu de ce menu, qui affichait un fond plat au lieu du matériau verre du reste du panneau.</li>
+        </ul>
+      ]]></description>
+      <enclosure
+        url="https://github.com/ledjo95/RSnotch/releases/download/v2.1.1/RSnotch.dmg"
+        sparkle:version="5"
+        sparkle:shortVersionString="2.1.1"
+        length="3438130"
+        type="application/octet-stream"
+        sparkle:edSignature="j8FF7dOOtmrq5IBhAgx7/hW3b1GLCh9fAK53NppfkMriOX4P4YKc4Om/v1/OnV4hlUL2DAn0Ei5xJndak1P9BA=="
+      />
+    </item>
+    <item>
       <title>Version 2.1.0</title>
       <pubDate>Thu, 03 Sep 2026 11:13:32 +0000</pubDate>
       <sparkle:version>4</sparkle:version>
