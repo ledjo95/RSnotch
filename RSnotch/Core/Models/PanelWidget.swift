@@ -4,14 +4,10 @@ import Foundation
 /// Types de widgets disponibles dans le panneau. L'ordre de `allCases` fixe
 /// l'ordre du menu d'ajout.
 enum WidgetKind: String, Codable, CaseIterable, Identifiable, Sendable {
-    case date
     case weather
     case music
     case timer
-    case image
-    case quote
     case apps
-    case calendar
 
     var id: String { rawValue }
 
@@ -30,39 +26,30 @@ enum WidgetKind: String, Codable, CaseIterable, Identifiable, Sendable {
 
     var title: String {
         switch self {
-        case .date: "Date"
         case .weather: "Météo"
         case .music: "Musique"
         case .timer: "Minuteur"
-        case .image: "Image"
-        case .quote: "Citation"
         case .apps: "Applications"
-        case .calendar: "Agenda"
         }
     }
 
     var symbolName: String {
         switch self {
-        case .date: "calendar"
         case .weather: "cloud.sun.fill"
         case .music: "music.note"
         case .timer: "timer"
-        case .image: "photo"
-        case .quote: "text.quote"
         case .apps: "square.grid.2x2.fill"
-        case .calendar: "calendar.badge.clock"
         }
     }
 
-    /// Tailles autorisees. Un widget Date n'a rien a gagner a s'etaler ;
+    /// Tailles autorisees. Un widget Minuteur n'a rien a gagner a s'etaler ;
     /// un widget Musique a besoin de place pour la pochette et les controles.
     var allowedSizes: [WidgetSize] {
         switch self {
-        case .date, .timer: [.small]
-        case .weather, .quote, .image: [.small, .medium]
+        case .timer: [.small]
+        case .weather: [.small, .medium]
         case .music: [.medium, .large]
         case .apps: [.small, .medium, .large]
-        case .calendar: [.medium, .large]
         }
     }
 
@@ -142,7 +129,7 @@ extension PanelWidget {
     /// Disposition livree a la premiere ouverture : ce qu'on peut afficher sans
     /// demander la moindre autorisation a l'utilisateur.
     ///
-    /// Ordre : minuteur, lecture en cours, applications, date, meteo. La largeur
+    /// Ordre : minuteur, lecture en cours, applications, meteo. La largeur
     /// du panneau se cale sur ses cartes ; une rangee de trois widgets donnait
     /// une bande courte, sans rapport avec le bandeau pleine largeur attendu.
     ///
@@ -153,7 +140,6 @@ extension PanelWidget {
             PanelWidget(kind: .timer),
             PanelWidget(kind: .music, size: .large),
             PanelWidget(kind: .apps, size: .medium),
-            PanelWidget(kind: .date),
             PanelWidget(kind: .weather, size: .medium)
         ].filter { $0.kind.isAvailable }
     }

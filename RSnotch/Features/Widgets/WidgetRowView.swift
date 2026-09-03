@@ -17,12 +17,9 @@ struct WidgetRowView: View {
     @Bindable var countdown: TimerService
     @Bindable var nowPlaying: NowPlayingViewModel
     let weather: WeatherAvailability
-    let calendar: CalendarAvailability
-    let quote: String
     /// Echelle issue du reglage de largeur du panneau.
     var widthScale: CGFloat = 1
     let openTimerTab: () -> Void
-    let openCalendarTab: () -> Void
 
     @State private var targetedID: UUID?
 
@@ -64,9 +61,9 @@ struct WidgetRowView: View {
     // MARK: Carte
 
     private func card(for widget: PanelWidget) -> some View {
-        // La musique saigne aussi : sa pochette occupe tout le fond de la
-        // carte, et le widget peint lui-meme son repli quand il n'y en a pas.
-        GlassCard(imageBleed: widget.kind == .image || widget.kind == .music) {
+        // La pochette de musique occupe tout le fond de la carte, et le
+        // widget peint lui-meme son repli quand il n'y en a pas.
+        GlassCard(imageBleed: widget.kind == .music) {
             content(for: widget)
         }
         .frame(width: widget.displayWidth(appItemCount: launcher.items.count, scale: widthScale))
@@ -108,22 +105,14 @@ struct WidgetRowView: View {
     @ViewBuilder
     private func content(for widget: PanelWidget) -> some View {
         switch widget.kind {
-        case .date:
-            DateWidgetView()
         case .weather:
             WeatherWidgetView(availability: weather)
-        case .quote:
-            QuoteWidgetView(text: quote)
-        case .image:
-            ImageWidgetView(bookmarkKey: "widget.image.\(widget.id.uuidString)")
         case .apps:
             AppsWidgetView(model: launcher, size: widget.size)
         case .music:
             MusicWidgetView(model: nowPlaying, size: widget.size)
         case .timer:
             TimerWidgetView(timer: countdown, openTimerTab: openTimerTab)
-        case .calendar:
-            CalendarWidgetView(availability: calendar, openCalendarTab: openCalendarTab)
         }
     }
 

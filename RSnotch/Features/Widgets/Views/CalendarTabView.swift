@@ -8,10 +8,9 @@ import SwiftUI
 // Theme.Metrics.contentWidth) le permet, et ça évite d'empiler grille et
 // liste dans une hauteur déjà comptée (§ Theme.Metrics.contentHeight).
 //
-// Contrairement au widget compact de la page d'accueil (jour courant,
-// rafraîchi en tâche de fond), cette vue interroge `CalendarService` à la
-// demande pour le mois affiché : naviguer d'un mois à l'autre ne doit pas
-// dépendre du cycle de rafraîchissement du widget.
+// Interroge `CalendarService` à la demande pour le mois affiché : naviguer
+// d'un mois à l'autre déclenche directement une nouvelle requête EventKit,
+// sans dépendre d'un quelconque cycle de rafraîchissement en tâche de fond.
 
 struct CalendarTabView: View {
 
@@ -19,19 +18,31 @@ struct CalendarTabView: View {
 
     @State private var visibleMonth: Date = Calendar.current.startOfDay(for: .now)
     @State private var selectedDay: Date = Calendar.current.startOfDay(for: .now)
+    /// Reflet local de `service.isAuthorized` : ce dernier est un computed
+    /// property adossé à `EKEventStore.authorizationStatus`, qui ne déclenche
+    /// aucune notification d'observation SwiftUI de lui-même. Sans cet état,
+    /// la vue resterait figée sur "accès refusé" même après que l'utilisateur
+    /// ait accordé la permission dans le dialogue TCC.
+    @State private var isAuthorized = false
 
     private var calendar: Calendar { .current }
 
     var body: some View {
         Group {
-            if service.isAuthorized {
+            if isAuthorized {
                 content
             } else {
                 unavailable
             }
         }
         .frame(maxWidth: .infinity, maxHeight: .infinity)
-        .onAppear(perform: reloadMonth)
+        .task {
+            // Ne demande le dialogue TCC que si l'onglet est reellement
+            // ouvert — jamais au demarrage de l'app (§ CalendarService).
+            await service.requestAccessIfNeeded()
+            isAuthorized = service.isAuthorized
+            reloadMonth()
+        }
         .onChange(of: visibleMonth) { _, _ in reloadMonth() }
     }
 

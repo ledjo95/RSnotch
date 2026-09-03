@@ -95,16 +95,13 @@ struct ExpandedPanelView: View {
                 countdown: countdown,
                 nowPlaying: nowPlaying,
                 weather: weather.availability,
-                calendar: calendar.availability,
-                quote: settings.quoteText,
                 widthScale: widgets.rowScale(
                     requested: settings.panelWidth.scale,
                     spacing: Theme.Metrics.contentSpacing,
                     appItemCount: launcher.items.count,
                     screenWidth: model.geometry.screenFrame.width
                 ),
-                openTimerTab: { select(.timer) },
-                openCalendarTab: { select(.calendar) }
+                openTimerTab: { select(.timer) }
             )
         case .clipboard:
             ClipboardTabView()

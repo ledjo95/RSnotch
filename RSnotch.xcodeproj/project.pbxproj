@@ -17,7 +17,6 @@
 		148103134BFC36FCDEB3D46E /* SystemAudioService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A04E9F66A01014DA4B0F1D1 /* SystemAudioService.swift */; };
 		158D086A9EA6071F49058E25 /* NotchWindowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60CCFE3811153BE91C1A7E97 /* NotchWindowController.swift */; };
 		16BF12388AE90D42EF87A66D /* SystemStatsService.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAD88705A2C53C227AE173D9 /* SystemStatsService.swift */; };
-		2069FDD7D6C057B21E614ECE /* CalendarWidgetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35B7CFA4057F3E01EB17AF0B /* CalendarWidgetView.swift */; };
 		20E1C7B6CF50BBA02D180560 /* WidgetRowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F1D21488F650DD47CB0DE65 /* WidgetRowView.swift */; };
 		2583F46CC6A63B45C5A2A89A /* BrightnessControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8863A5DA5E83D40C0C69A238 /* BrightnessControl.swift */; };
 		25B61946F95A4349667FAF09 /* AutoUpdater.swift in Sources */ = {isa = PBXBuildFile; fileRef = D95EC15E8CA677911C17A174 /* AutoUpdater.swift */; };
@@ -69,7 +68,6 @@
 		C0E49BA3F0521CF7F4974AFE /* SpaceHeuristicTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5196768203335BC0DFEE67C6 /* SpaceHeuristicTests.swift */; };
 		C685AB5BAD038D1BBA803325 /* GlassSegmentedRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = A242C0C09AFDE9ACCCA2450F /* GlassSegmentedRow.swift */; };
 		CAD153EA95A3C81E00469786 /* ClipboardService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 134AFBA45FF47F6342CF6A94 /* ClipboardService.swift */; };
-		CC4D6F876EE0B793661A6AAF /* DateWidgetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3865D49EE854C193D66778C2 /* DateWidgetView.swift */; };
 		CC5E0EDB8AA2D0275A2F86D2 /* NowPlayingViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2AA1C711E6B1AD9432ED53D7 /* NowPlayingViewModel.swift */; };
 		CDA9F7DBCAB5E9EC31CAC4F1 /* GlassComponents.swift in Sources */ = {isa = PBXBuildFile; fileRef = DFB9732434A718CA1FF3EAEB /* GlassComponents.swift */; };
 		CE86842F95EA33E6F468F8F3 /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B64EE4ADFDCF26265B590D6A /* SettingsView.swift */; };
@@ -78,10 +76,8 @@
 		DCB193063F1D7CE9443A1F89 /* PanelWidget.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EB11E766211A6DF2158D2FA /* PanelWidget.swift */; };
 		DCBA264B73D97CCF478F31AB /* MediaParsingTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAC9B46ABF50305B76B5B0CE /* MediaParsingTests.swift */; };
 		DDD8F4712979D648D177A6A2 /* AppSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F070EB160E2573D26C1E128 /* AppSettings.swift */; };
-		E1E629E92E882636706373BA /* QuoteWidgetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEF76B2D35C1CA90BEBE9CCE /* QuoteWidgetView.swift */; };
 		E3620A01EE2B53BF7C406A06 /* WeatherWidgetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9683D31B056253D8AEDCFACF /* WeatherWidgetView.swift */; };
 		E3A4F0E29F0248B202E0245F /* AppIconLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 055E0E2047A77773CDF17E28 /* AppIconLoader.swift */; };
-		E408F3144FF2866F15FB54B4 /* ImageWidgetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8339BA0F4C209A36FD84CA2D /* ImageWidgetView.swift */; };
 		EE3060BD6E268FE305F7E6F4 /* ClipboardEntryCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 312B1C5DA004D86932FF3E89 /* ClipboardEntryCard.swift */; };
 		F37539B97734391C7B8A93CB /* NotchGlassSurface.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF261A210171E094A2323804 /* NotchGlassSurface.swift */; };
 		F3836EF9077B7F3206487F61 /* NotchShape.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8E916AE3BE9C3CA6036E951 /* NotchShape.swift */; };
@@ -127,8 +123,6 @@
 		2AA1C711E6B1AD9432ED53D7 /* NowPlayingViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NowPlayingViewModel.swift; sourceTree = "<group>"; };
 		2EB11E766211A6DF2158D2FA /* PanelWidget.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PanelWidget.swift; sourceTree = "<group>"; };
 		312B1C5DA004D86932FF3E89 /* ClipboardEntryCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClipboardEntryCard.swift; sourceTree = "<group>"; };
-		35B7CFA4057F3E01EB17AF0B /* CalendarWidgetView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarWidgetView.swift; sourceTree = "<group>"; };
-		3865D49EE854C193D66778C2 /* DateWidgetView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateWidgetView.swift; sourceTree = "<group>"; };
 		38BAE5F146A043F95E138D3C /* BluetoothService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BluetoothService.swift; sourceTree = "<group>"; };
 		39BC77DFB9F5E229EC5A6790 /* PocketStorageService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PocketStorageService.swift; sourceTree = "<group>"; };
 		39EA430F4998404C4B0F1F29 /* MusicWidgetView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MusicWidgetView.swift; sourceTree = "<group>"; };
@@ -152,7 +146,6 @@
 		7F7DBFB5CD307D724AAE5DC6 /* DesignSystemGallery.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DesignSystemGallery.swift; sourceTree = "<group>"; };
 		817CC3F6D7E896C3BDA4A440 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		82B7E812F4D2D6D38CDBEDC0 /* LaunchItemsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LaunchItemsViewModel.swift; sourceTree = "<group>"; };
-		8339BA0F4C209A36FD84CA2D /* ImageWidgetView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageWidgetView.swift; sourceTree = "<group>"; };
 		868DD124233F0342B224750F /* AppleScriptRunner.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppleScriptRunner.swift; sourceTree = "<group>"; };
 		87DED436E9916C7FFEB82CD0 /* AppsWidgetView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppsWidgetView.swift; sourceTree = "<group>"; };
 		8863A5DA5E83D40C0C69A238 /* BrightnessControl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BrightnessControl.swift; sourceTree = "<group>"; };
@@ -166,7 +159,6 @@
 		A2624C22E81F574D97963342 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		AAC9B46ABF50305B76B5B0CE /* MediaParsingTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MediaParsingTests.swift; sourceTree = "<group>"; };
 		AEB54BB95EFB2BAA1D33C1F0 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
-		AEF76B2D35C1CA90BEBE9CCE /* QuoteWidgetView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuoteWidgetView.swift; sourceTree = "<group>"; };
 		AF5E68524EF72B6107798D17 /* FileDragHandle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileDragHandle.swift; sourceTree = "<group>"; };
 		B560E82FEA7BCD70A6A924A1 /* RSnotchTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = RSnotchTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		B64EE4ADFDCF26265B590D6A /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
@@ -403,10 +395,6 @@
 			isa = PBXGroup;
 			children = (
 				E8351C1F4604D425A6757E53 /* CalendarTabView.swift */,
-				35B7CFA4057F3E01EB17AF0B /* CalendarWidgetView.swift */,
-				3865D49EE854C193D66778C2 /* DateWidgetView.swift */,
-				8339BA0F4C209A36FD84CA2D /* ImageWidgetView.swift */,
-				AEF76B2D35C1CA90BEBE9CCE /* QuoteWidgetView.swift */,
 				6C405DEA3310169A56D0165B /* SystemStatsTabView.swift */,
 				9D1D1A4007FFDA3D578505F8 /* UpcomingWidgetView.swift */,
 				9683D31B056253D8AEDCFACF /* WeatherWidgetView.swift */,
@@ -607,7 +595,6 @@
 				2583F46CC6A63B45C5A2A89A /* BrightnessControl.swift in Sources */,
 				B91518B015783A850066D657 /* CalendarService.swift in Sources */,
 				4B3B54C86F6736062423462A /* CalendarTabView.swift in Sources */,
-				2069FDD7D6C057B21E614ECE /* CalendarWidgetView.swift in Sources */,
 				DC84AA6F1B48C6BE95597245 /* ClipboardActions.swift in Sources */,
 				6AA4E750C84151F438F18E0F /* ClipboardEntry.swift in Sources */,
 				EE3060BD6E268FE305F7E6F4 /* ClipboardEntryCard.swift in Sources */,
@@ -616,7 +603,6 @@
 				0FF3B38D571D663E0B542988 /* ClipboardTabView.swift in Sources */,
 				73BA901B601BD7E0C22EFBCB /* CompactIslandCoordinator.swift in Sources */,
 				04AC289C9D4E4E0FF5524D41 /* CompactIslandView.swift in Sources */,
-				CC4D6F876EE0B793661A6AAF /* DateWidgetView.swift in Sources */,
 				F5247943D023830F2FA25884 /* DesignSystemGallery.swift in Sources */,
 				6A70A6FDDD39C8B8B2219388 /* DisplayBrightnessService.swift in Sources */,
 				00C78927959AE4920A4F262F /* ExpandedPanelView.swift in Sources */,
@@ -626,7 +612,6 @@
 				C685AB5BAD038D1BBA803325 /* GlassSegmentedRow.swift in Sources */,
 				B3B0753A4569EF19A27BCC91 /* GlassStyle.swift in Sources */,
 				5C8C11865314309B70609AFA /* IconTile.swift in Sources */,
-				E408F3144FF2866F15FB54B4 /* ImageWidgetView.swift in Sources */,
 				5C585C8BD4924068C5AEA5AC /* LaunchItem.swift in Sources */,
 				FDB99F02B115FC876084BA9D /* LaunchItemsViewModel.swift in Sources */,
 				6DE305BF300F1CD80B9E0438 /* LevelIslandView.swift in Sources */,
@@ -651,7 +636,6 @@
 				B049898E9A2A3593D0FFB833 /* PocketTabView.swift in Sources */,
 				83282859E6BF871360B51097 /* PowerService.swift in Sources */,
 				0FD153A4C34567F9CCB62248 /* QuickSettingsTabView.swift in Sources */,
-				E1E629E92E882636706373BA /* QuoteWidgetView.swift in Sources */,
 				5B20763EEF45DE6F62900E25 /* RSnotchApp.swift in Sources */,
 				CE86842F95EA33E6F468F8F3 /* SettingsView.swift in Sources */,
 				12ED1BB8D4AEA75770394E51 /* SettingsWindowController.swift in Sources */,

@@ -19,7 +19,6 @@ final class AppSettings {
 
     private enum Key {
         static let glassIntensity = "panel.glassIntensity"
-        static let quoteText = "widget.quote.text"
         static let spaceTint = "panel.space.tint"
         static let clipboardLimit = "clipboard.historyLimit"
         static let panelWidth = "panel.width"
@@ -37,9 +36,6 @@ final class AppSettings {
         static let showLauncherLabels = "launcher.showLabels"
         static let gaugeTint = "hud.gaugeTint"
     }
-
-    static let defaultQuote = "Continue, tu fais du bon travail"
-
 
     private let defaults: UserDefaults
 
@@ -75,10 +71,6 @@ final class AppSettings {
     /// preferent une apparence stable.
     var spaceTintEnabled: Bool {
         didSet { defaults.set(spaceTintEnabled, forKey: Key.spaceTint) }
-    }
-
-    var quoteText: String {
-        didSet { defaults.set(quoteText, forKey: Key.quoteText) }
     }
 
     // MARK: Encoche active (§3.9)
@@ -181,7 +173,6 @@ final class AppSettings {
         // l'encoche noire, pas se signaler.
         self.glassIntensity = stored.flatMap(GlassIntensity.init(rawValue:)) ?? .dense
         self.spaceTintEnabled = defaults.object(forKey: Key.spaceTint) as? Bool ?? true
-        self.quoteText = defaults.string(forKey: Key.quoteText) ?? Self.defaultQuote
         let storedLimit = defaults.integer(forKey: Key.clipboardLimit)
         self.clipboardLimit = storedLimit > 0 ? storedLimit : 200
         // Reglage retire (§ ExpandedPanelView.tabBar) : Compact/Standard

@@ -274,14 +274,6 @@ private struct ContentSettingsView: View {
                     .foregroundStyle(.secondary)
             }
 
-            Section("Widget Citation") {
-                TextField("Texte", text: $settings.quoteText, axis: .vertical)
-                    .lineLimit(2...4)
-                Text("Affiché en capitales dans le panneau.")
-                    .font(.caption)
-                    .foregroundStyle(.secondary)
-            }
-
             Section("Widgets") {
                 Text("La disposition se modifie dans le panneau : clic droit sur la rangée pour ajouter un widget ou réinitialiser, glisser-déposer pour réordonner.")
                     .font(.caption)

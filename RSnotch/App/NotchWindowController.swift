@@ -84,7 +84,6 @@ final class NotchWindowController {
 
         observePointerExit()
         weather.start()
-        applyCalendarState()
         nowPlaying.start()
         clipboard.start()
         pocket.load(emptyOnLaunch: AppSettings.shared.emptyPocketOnLaunch)
@@ -92,7 +91,6 @@ final class NotchWindowController {
         DropInbox.empty()
         observeSettings()
         observePanelState()
-        observeWidgetsLayout()
         applyPowerState()
 
         // Toutes les annonces passent par le coordinateur : lui seul decide de
@@ -176,7 +174,6 @@ final class NotchWindowController {
 
     func stop() {
         weather.stop()
-        calendar.stop()
         nowPlaying.stop()
         power.stop()
         bluetooth.stop()
@@ -347,34 +344,6 @@ final class NotchWindowController {
         }
     }
 
-    // MARK: Agenda (§ CalendarService)
-    //
-    // Contrairement a la meteo, l'agenda demande une autorisation TCC : le
-    // demarrer inconditionnellement declencherait le dialogue pour qui n'a
-    // jamais ajoute le widget. Il ne tourne donc que si la disposition en
-    // contient un, et reagit a l'ajout/retrait a chaud comme aux reglages.
-
-    private func observeWidgetsLayout() {
-        withObservationTracking {
-            _ = widgets.widgets
-        } onChange: {
-            Task { @MainActor [weak self] in
-                self?.applyCalendarState()
-                self?.observeWidgetsLayout()
-            }
-        }
-    }
-
-    private func applyCalendarState() {
-        guard isPanelActive else { return }
-        let showsCalendarCard = widgets.widgets.contains { $0.kind == .calendar }
-        if showsCalendarCard {
-            calendar.start()
-        } else {
-            calendar.stop()
-        }
-    }
-
     private func applyPowerState() {
         // `island` compte comme actif : une notification s'affiche, autant
         // garder les jauges reactives le temps qu'elle vit.
@@ -430,7 +399,6 @@ final class NotchWindowController {
         if active {
             panel?.orderFrontRegardless()
             weather.start()
-            applyCalendarState()
             nowPlaying.start()
             clipboard.start()
             power.start()
@@ -443,7 +411,6 @@ final class NotchWindowController {
             model?.collapse()
             panel?.orderOut(nil)
             weather.stop()
-            calendar.stop()
             nowPlaying.stop()
             clipboard.stop()
             power.stop()

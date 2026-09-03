@@ -3,7 +3,7 @@ import Foundation
 import Observation
 
 // MARK: - CalendarEventSnapshot
-/// Ce dont le widget a besoin, et rien de plus — comme `WeatherSnapshot`.
+/// Ce dont l'onglet Agenda a besoin, et rien de plus.
 struct CalendarEventSnapshot: Identifiable, Equatable, Sendable {
     let id: String
     let title: String
@@ -22,14 +22,6 @@ struct CGColorWrapper: Equatable, Sendable {
     let blue: Double
 }
 
-// MARK: - CalendarAvailability
-enum CalendarAvailability: Equatable, Sendable {
-    case idle
-    case loading
-    case ready([CalendarEventSnapshot])
-    case unavailable(reason: String)
-}
-
 // MARK: - CalendarService
 /// Evenements lus depuis les calendriers deja configures dans Reglages
 /// Systeme -> Internet Accounts (iCloud compris). EventKit est l'unique API,
@@ -39,51 +31,12 @@ enum CalendarAvailability: Equatable, Sendable {
 @Observable
 final class CalendarService {
 
-    /// Evenements du jour courant : alimente le widget compact de la page
-    /// d'accueil. Rafraichi en tache de fond, independamment de l'onglet
-    /// Agenda qui interroge le magasin a la demande (§ `events(from:to:)`).
-    private(set) var availability: CalendarAvailability = .idle
-
     private let store = EKEventStore()
-    private var refreshTask: Task<Void, Never>?
 
-    /// Les evenements ne changent pas seconde par seconde ; 5 minutes suffisent
-    /// a rattraper un ajout ou une annulation sans sonder en continu.
-    private let refreshInterval: Duration = .seconds(5 * 60)
-
-    func start() {
-        guard refreshTask == nil else { return }
-        refreshTask = Task { [weak self] in
-            while !Task.isCancelled {
-                await self?.refresh()
-                guard let interval = self?.refreshInterval else { return }
-                try? await Task.sleep(for: interval)
-            }
-        }
-    }
-
-    func stop() {
-        refreshTask?.cancel()
-        refreshTask = nil
-    }
-
-    func refresh() async {
-        if case .ready = availability {} else { availability = .loading }
-
-        let granted = await requestAccessIfNeeded()
-        guard granted else {
-            availability = .unavailable(reason: "Accès au calendrier refusé.")
-            return
-        }
-
-        let calendar = Calendar.current
-        let start = calendar.startOfDay(for: .now)
-        guard let end = calendar.date(byAdding: .day, value: 1, to: start) else {
-            availability = .unavailable(reason: "Calendrier indisponible.")
-            return
-        }
-
-        availability = .ready(events(from: start, to: end))
+    /// Etat d'autorisation courant, expose pour que l'onglet Agenda affiche
+    /// directement son propre message d'accès refuse.
+    var isAuthorized: Bool {
+        EKEventStore.authorizationStatus(for: .event) == .fullAccess
     }
 
     /// Evenements sur une plage arbitraire, tries par debut. Utilise par
@@ -92,7 +45,7 @@ final class CalendarService {
     /// N'attend pas l'autorisation : appele uniquement une fois `.fullAccess`
     /// deja confirme (§ CalendarTabView, qui affiche son propre etat refuse).
     func events(from start: Date, to end: Date) -> [CalendarEventSnapshot] {
-        guard EKEventStore.authorizationStatus(for: .event) == .fullAccess else { return [] }
+        guard isAuthorized else { return [] }
         let predicate = store.predicateForEvents(withStart: start, end: end, calendars: nil)
         return store.events(matching: predicate)
             .sorted { $0.startDate < $1.startDate }
@@ -111,30 +64,17 @@ final class CalendarService {
             }
     }
 
-    /// Etat d'autorisation courant, expose pour que l'onglet Agenda affiche
-    /// directement son propre message plutot que d'attendre le prochain
-    /// `refresh()` du widget compact.
-    var isAuthorized: Bool {
-        EKEventStore.authorizationStatus(for: .event) == .fullAccess
-    }
-
     /// `requestFullAccessToEvents` declenche le dialogue TCC au premier appel.
-    /// Comme le Bluetooth (§ NotchWindowController), ce dialogue bloque
-    /// jusqu'a la reponse — appele uniquement depuis `refresh()`, jamais au
-    /// demarrage direct, pour ne pas geler le reste de l'initialisation.
+    /// Appele depuis `CalendarTabView.onAppear` uniquement (jamais au demarrage
+    /// de l'app) : demander la permission avant que l'utilisateur ait ouvert
+    /// l'onglet Agenda le surprendrait sans contexte.
     ///
     /// Sous Hardened Runtime, l'entitlement
     /// `com.apple.security.personal-information.calendars` (RSnotch.entitlements)
     /// est requis pour que tccd accepte meme d'AFFICHER ce dialogue — sans lui,
     /// `requestFullAccessToEvents` renvoie silencieusement `false`.
-    private func requestAccessIfNeeded() async -> Bool {
-        switch EKEventStore.authorizationStatus(for: .event) {
-        case .fullAccess:
-            return true
-        case .notDetermined:
-            return (try? await store.requestFullAccessToEvents()) ?? false
-        default:
-            return false
-        }
+    func requestAccessIfNeeded() async {
+        guard EKEventStore.authorizationStatus(for: .event) == .notDetermined else { return }
+        _ = try? await store.requestFullAccessToEvents()
     }
 }
