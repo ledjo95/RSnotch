@@ -39,6 +39,36 @@ struct ExpandedPanelView: View {
         }
         .padding(.vertical, Theme.Metrics.panelPadding)
         .padding(.horizontal, Theme.Metrics.panelHorizontalPadding)
+        // Le popover "Plus" (§ moreButton) est un OVERLAY, pas un `.popover`
+        // SwiftUI : ce dernier s'ouvre dans sa propre NSWindow systeme, hors du
+        // GlassEffectContainer de la coquille (§ NotchGlassSurface), et rendait
+        // donc son propre materiau plat au lieu du Liquid Glass attendu — quel
+        // que soit le style pose sur son contenu. Un overlay reste dans la
+        // MEME hierarchie de vues que la coquille et herite du meme rendu.
+        //
+        // Alignement topLeading + offset manuel plutot qu'un alignement relatif
+        // au bouton : un overlay ne redimensionne jamais son parent, donc il
+        // peut deborder de la fenetre hote (260 pt de haut, § NotchWindowController)
+        // sans etre tronque — contrairement a un element pousse dans le layout.
+        .overlay(alignment: .topLeading) {
+            if showsMoreMenu {
+                ZStack(alignment: .topLeading) {
+                    // Calque invisible plein cadre : `.popover` fermait tout
+                    // seul au clic exterieur, un overlay maison doit le faire
+                    // a la main. Sous le menu dans le ZStack, donc jamais
+                    // prioritaire sur ses propres boutons.
+                    Color.clear
+                        .contentShape(Rectangle())
+                        .onTapGesture {
+                            withAnimation(Theme.Motion.morph) { showsMoreMenu = false }
+                        }
+
+                    moreMenuContent
+                        .offset(x: 32, y: 32)
+                }
+                .transition(.opacity.combined(with: .scale(scale: 0.94, anchor: .top)))
+            }
+        }
     }
 
     // MARK: Barre d'onglets
@@ -73,8 +103,8 @@ struct ExpandedPanelView: View {
         .frame(height: 26)
     }
 
-    /// Bouton rond, identique a `GlassIconButton`, qui bascule le popover
-    /// `moreMenuOverlay` — pas un `Menu` SwiftUI (voir `showsMoreMenu`).
+    /// Bouton rond, identique a `GlassIconButton`, qui bascule l'overlay
+    /// `moreMenuContent` (§ body, voir `showsMoreMenu`).
     private var moreButton: some View {
         Button {
             withAnimation(Theme.Motion.morph) { showsMoreMenu.toggle() }
@@ -85,40 +115,35 @@ struct ExpandedPanelView: View {
         }
         .glassButton(isProminent: isNonHomeTabActive, tint: isNonHomeTabActive ? .white : nil)
         .accessibilityLabel("Plus")
-        .popover(isPresented: $showsMoreMenu, arrowEdge: .top) {
-            moreMenuContent
-        }
     }
 
-    /// Regroupe tous les onglets sauf Accueil dans une liste verticale de
-    /// pastilles, au meme gabarit visuel que le reste de l'app plutot que le
-    /// style de menu systeme de macOS.
+    /// Regroupe tous les onglets sauf Accueil en une seule rangee d'icones —
+    /// meme gabarit que `GlassIconButton`, meme largeur que la barre d'onglets
+    /// d'origine avait avant sa reduction. Une liste verticale de labels
+    /// (essais precedents) imposait sa largeur au texte le plus long
+    /// ("Statistiques système") et donnait un popover etroit mais haut ; une
+    /// rangee horizontale reste fine et se cale naturellement sur le panneau.
+    /// Habille avec `GlassCard` — la seule combinaison de materiau deja
+    /// confirmee correcte partout ailleurs dans l'app.
     private var moreMenuContent: some View {
-        VStack(alignment: .leading, spacing: 2) {
-            ForEach(NotchTab.allCases.filter { $0 != .home }) { tab in
-                Button {
-                    showsMoreMenu = false
-                    select(tab)
-                } label: {
-                    HStack(spacing: 10) {
+        GlassCard(cornerRadius: 14) {
+            HStack(spacing: 6) {
+                ForEach(NotchTab.allCases.filter { $0 != .home }) { tab in
+                    Button {
+                        showsMoreMenu = false
+                        select(tab)
+                    } label: {
                         Image(systemName: tab.symbolName)
-                            .font(.system(size: 13, weight: .medium))
-                            .frame(width: 20)
-                        Text(tab.accessibilityLabel)
-                            .font(Theme.Typography.body(13, weight: .medium))
-                        Spacer(minLength: 12)
+                            .font(.system(size: 12, weight: .semibold))
+                            .frame(width: 26, height: 26)
                     }
+                    .buttonStyle(.plain)
                     .foregroundStyle(model.selectedTab == tab ? Theme.Palette.ember : Theme.Palette.frost)
-                    .padding(.horizontal, 12)
-                    .padding(.vertical, 8)
-                    .contentShape(Rectangle())
+                    .accessibilityLabel(tab.accessibilityLabel)
                 }
-                .buttonStyle(.plain)
             }
+            .padding(8)
         }
-        .padding(6)
-        .frame(minWidth: 190)
-        .background(Theme.Palette.ink)
     }
 
     /// L'etat "actif" du bouton Plus reflete la selection courante des lors
