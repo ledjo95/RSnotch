@@ -6,6 +6,28 @@
     <description>Mises à jour de RSnotch.</description>
     <language>fr</language>
     <item>
+      <title>Version 2.1.0</title>
+      <pubDate>Thu, 03 Sep 2026 07:07:54 +0000</pubDate>
+      <sparkle:version>4</sparkle:version>
+      <sparkle:shortVersionString>2.1.0</sparkle:shortVersionString>
+      <sparkle:minimumSystemVersion>26.0</sparkle:minimumSystemVersion>
+      <description><![CDATA[
+        <ul>
+          <li>Nouvel onglet Agenda : grille mensuelle complète des évènements, connectée à vos calendriers (iCloud compris).</li>
+          <li>Nouvel onglet Statistiques système : CPU, mémoire, stockage, réseau, batterie et espace libre en un coup d'œil.</li>
+          <li>Le widget compact de la page d'accueil affiche désormais les prochains évènements du jour.</li>
+        </ul>
+      ]]></description>
+      <enclosure
+        url="https://github.com/ledjo95/RSnotch/releases/download/v2.1.0/RSnotch.dmg"
+        sparkle:version="4"
+        sparkle:shortVersionString="2.1.0"
+        length="3119390"
+        type="application/octet-stream"
+        sparkle:edSignature="oMDg0Yl4yknGgAWR246on2Q5ECgXL/K28DwB30FaMeNjiGTL0iRgRXcFqG+teQBFabQ3tYXetdTybbB3FC7oCg=="
+      />
+    </item>
+    <item>
       <title>Version 2.0.1</title>
       <pubDate>Wed, 02 Sep 2026 19:28:15 +0000</pubDate>
       <sparkle:version>3</sparkle:version>
