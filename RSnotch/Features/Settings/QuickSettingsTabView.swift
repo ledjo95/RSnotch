@@ -21,6 +21,8 @@ import SwiftUI
 
 struct QuickSettingsTabView: View {
 
+    let widgets: WidgetsViewModel
+
     @State private var settings = AppSettings.shared
     @State private var interceptor = MediaKeyInterceptor.shared
 
@@ -99,7 +101,7 @@ struct QuickSettingsTabView: View {
                 Spacer(minLength: 0)
 
                 Button {
-                    SettingsWindowController.shared.show()
+                    SettingsWindowController.shared.show(widgets: widgets)
                 } label: {
                     HStack(spacing: 5) {
                         Text("Tous les réglages")

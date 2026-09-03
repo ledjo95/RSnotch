@@ -1,3 +1,4 @@
+import AppKit
 import SwiftUI
 
 // MARK: - SettingsView
@@ -15,12 +16,16 @@ import SwiftUI
 
 struct SettingsView: View {
 
+    /// Meme instance que celle du panneau notch (§ SettingsWindowController.show),
+    /// pour que profils et disposition restent en phase entre les deux fenetres.
+    let widgets: WidgetsViewModel
+
     var body: some View {
         TabView {
-            Tab("Général", systemImage: "gearshape") { GeneralSettingsView() }
+            Tab("Général", systemImage: "gearshape") { GeneralSettingsView(widgets: widgets) }
             Tab("Panneau", systemImage: "rectangle.topthird.inset.filled") { PanelSettingsView() }
             Tab("Apparence", systemImage: "paintpalette") { AppearanceSettingsView() }
-            Tab("Contenu", systemImage: "square.grid.2x2") { ContentSettingsView() }
+            Tab("Contenu", systemImage: "square.grid.2x2") { ContentSettingsView(widgets: widgets) }
             Tab("Limites", systemImage: "info.circle") { LimitationsView() }
         }
         .frame(width: 520, height: 460)
@@ -31,9 +36,13 @@ struct SettingsView: View {
 
 private struct GeneralSettingsView: View {
 
+    let widgets: WidgetsViewModel
+
     @State private var settings = AppSettings.shared
     @State private var loginItem = LoginItemService()
     @State private var updater = AutoUpdater.shared
+    @State private var exportImportError: String?
+    @State private var importConfirmation: String?
 
     var body: some View {
         Form {
@@ -94,6 +103,26 @@ private struct GeneralSettingsView: View {
                 Text("Toutes les données restent dans le conteneur de l’app : presse-papiers, Pocket, applications épinglées, disposition. Rien n’est transmis à un serveur, aucune statistique d’usage n’est collectée. La météo est la seule requête réseau, adressée à WeatherKit.")
                     .font(.caption)
                     .foregroundStyle(.secondary)
+
+                HStack {
+                    Button("Exporter les réglages…") { exportSettings() }
+                    Button("Importer des réglages…") { importSettings() }
+                }
+
+                Text("L’export inclut les réglages, la disposition des widgets et les profils enregistrés. Les applications épinglées et les autorisations d’accès aux fichiers ne sont pas portables : après un import sur un autre Mac, il faudra re-choisir les applications épinglées.")
+                    .font(.caption)
+                    .foregroundStyle(.secondary)
+
+                if let importConfirmation {
+                    Text(importConfirmation)
+                        .font(.caption)
+                        .foregroundStyle(.green)
+                }
+                if let exportImportError {
+                    Text(exportImportError)
+                        .font(.caption)
+                        .foregroundStyle(.red)
+                }
             }
         }
         .formStyle(.grouped)
@@ -103,6 +132,52 @@ private struct GeneralSettingsView: View {
     private var lastCheckLabel: String {
         guard let date = updater.lastUpdateCheckDate else { return "Jamais" }
         return date.formatted(date: .abbreviated, time: .shortened)
+    }
+
+    // MARK: Export/Import
+
+    private func exportSettings() {
+        exportImportError = nil
+        importConfirmation = nil
+
+        let panel = NSSavePanel()
+        panel.allowedContentTypes = [.json]
+        panel.nameFieldStringValue = "RSnotch-réglages.json"
+        panel.prompt = "Exporter"
+        panel.message = "Choisissez où enregistrer vos réglages RSnotch."
+
+        NSApp.activate(ignoringOtherApps: true)
+        guard panel.runModal() == .OK, let url = panel.url else { return }
+
+        let payload = SettingsExportService.buildPayload(widgets: widgets)
+        do {
+            try SettingsExportService.write(payload, to: url)
+        } catch {
+            exportImportError = "Impossible d’exporter les réglages : \(error.localizedDescription)"
+        }
+    }
+
+    private func importSettings() {
+        exportImportError = nil
+        importConfirmation = nil
+
+        let panel = NSOpenPanel()
+        panel.allowedContentTypes = [.json]
+        panel.allowsMultipleSelection = false
+        panel.canChooseDirectories = false
+        panel.prompt = "Importer"
+        panel.message = "Choisissez un fichier de réglages RSnotch exporté."
+
+        NSApp.activate(ignoringOtherApps: true)
+        guard panel.runModal() == .OK, let url = panel.urls.first else { return }
+
+        do {
+            let payload = try SettingsExportService.read(from: url)
+            SettingsExportService.apply(payload, widgets: widgets)
+            importConfirmation = "Réglages importés. Pensez à re-lier vos applications épinglées si nécessaire."
+        } catch {
+            exportImportError = "Impossible d’importer : le fichier n’est pas un export RSnotch valide."
+        }
     }
 }
 
@@ -252,7 +327,15 @@ private struct AppearanceSettingsView: View {
 
 private struct ContentSettingsView: View {
 
+    @Bindable var widgets: WidgetsViewModel
+
     @State private var settings = AppSettings.shared
+    @State private var showingSaveSheet = false
+    @State private var newProfileName = ""
+
+    private var activeProfile: WidgetLayoutProfile? {
+        widgets.profiles.first { $0.id == widgets.activeProfileID }
+    }
 
     var body: some View {
         Form {
@@ -275,12 +358,82 @@ private struct ContentSettingsView: View {
             }
 
             Section("Widgets") {
-                Text("La disposition se modifie dans le panneau : clic droit sur la rangée pour ajouter un widget ou réinitialiser, glisser-déposer pour réordonner.")
+                if !widgets.profiles.isEmpty {
+                    Picker("Profil actif", selection: activeProfileBinding) {
+                        Text("Disposition actuelle").tag(UUID?.none)
+                        ForEach(widgets.profiles) { profile in
+                            Text(profile.name).tag(Optional(profile.id))
+                        }
+                    }
+
+                    ForEach(widgets.profiles) { profile in
+                        HStack {
+                            Text(profile.name)
+                            Spacer()
+                            Button("Supprimer", role: .destructive) {
+                                widgets.deleteProfile(profile)
+                            }
+                            .buttonStyle(.borderless)
+                        }
+                    }
+                }
+
+                HStack {
+                    Button("Enregistrer la disposition actuelle…") {
+                        newProfileName = ""
+                        showingSaveSheet = true
+                    }
+                    .disabled(widgets.profiles.count >= WidgetsViewModel.maxProfiles)
+
+                    if let activeProfile {
+                        Button("Mettre à jour « \(activeProfile.name) »") {
+                            widgets.overwriteProfile(activeProfile)
+                        }
+                    }
+                }
+
+                Text("La disposition se modifie dans le panneau : clic droit sur la rangée pour ajouter un widget ou réinitialiser, glisser-déposer pour réordonner. Un profil enregistre un instantané nommé de cette disposition, pour basculer vite entre deux configurations.")
                     .font(.caption)
                     .foregroundStyle(.secondary)
             }
         }
         .formStyle(.grouped)
+        .sheet(isPresented: $showingSaveSheet) {
+            saveProfileSheet
+        }
+    }
+
+    private var activeProfileBinding: Binding<UUID?> {
+        Binding(
+            get: { widgets.activeProfileID },
+            set: { newID in
+                guard let newID, let profile = widgets.profiles.first(where: { $0.id == newID }) else { return }
+                widgets.applyProfile(profile)
+            }
+        )
+    }
+
+    private var saveProfileSheet: some View {
+        VStack(alignment: .leading, spacing: 14) {
+            Text("Nouveau profil")
+                .font(.headline)
+            TextField("Nom du profil", text: $newProfileName)
+                .textFieldStyle(.roundedBorder)
+            HStack {
+                Spacer()
+                Button("Annuler") { showingSaveSheet = false }
+                Button("Enregistrer") {
+                    let trimmed = newProfileName.trimmingCharacters(in: .whitespacesAndNewlines)
+                    guard !trimmed.isEmpty else { return }
+                    widgets.saveProfile(name: trimmed)
+                    showingSaveSheet = false
+                }
+                .keyboardShortcut(.defaultAction)
+                .disabled(newProfileName.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty)
+            }
+        }
+        .padding(20)
+        .frame(width: 320)
     }
 }
 

@@ -33,7 +33,7 @@ struct TimerWidgetView: View {
         // chacune vers un bord : sur une carte haute de 188 pt, le cadran et sa
         // commande se retrouvaient sans rapport visible l'un avec l'autre.
         VStack(spacing: 6) {
-            Text("Minuteur")
+            Text(timer.mode == .pomodoro ? timer.pomodoroPhase.label : "Minuteur")
                 .engraved()
 
             Spacer(minLength: 0)
@@ -57,6 +57,13 @@ struct TimerWidgetView: View {
                     .lineLimit(1)
 
                 controls
+
+                if timer.mode == .pomodoro {
+                    Text("\(timer.completedWorkSessions) / \(timer.sessionsBeforeLongBreak)")
+                        .font(Theme.Typography.body(9))
+                        .foregroundStyle(Theme.Palette.mist)
+                        .monospacedDigit()
+                }
             }
 
             Spacer(minLength: 0)

@@ -26,14 +26,18 @@ final class SettingsWindowController {
 
     private var window: NSWindow?
 
-    func show() {
+    /// `widgets` doit etre la MEME instance que celle du panneau notch
+    /// (§ NotchWindowController.widgets) : les reglages et le panneau
+    /// doivent refleter les memes profils/disposition en session, sans
+    /// desynchronisation si les deux fenetres sont ouvertes a la fois.
+    func show(widgets: WidgetsViewModel) {
         if let window {
             NSApp.activate(ignoringOtherApps: true)
             window.makeKeyAndOrderFront(nil)
             return
         }
 
-        let hosting = NSHostingController(rootView: SettingsView())
+        let hosting = NSHostingController(rootView: SettingsView(widgets: widgets))
         let window = NSWindow(contentViewController: hosting)
         window.title = "Réglages RSnotch"
         window.styleMask = [.titled, .closable, .miniaturizable]

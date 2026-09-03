@@ -132,6 +132,23 @@ struct PanelWidget: Identifiable, Codable, Equatable, Sendable {
     }
 }
 
+// MARK: - WidgetLayoutProfile
+/// Instantane nomme d'une disposition, pour basculer vite entre deux
+/// configurations (ex. "Travail"/"Perso"). `widgets` est une copie de
+/// valeur : rien ne relie un profil enregistre a la disposition courante,
+/// l'appliquer REMPLACE `WidgetsViewModel.widgets` plutot que de le suivre.
+struct WidgetLayoutProfile: Identifiable, Codable, Equatable, Sendable {
+    let id: UUID
+    var name: String
+    var widgets: [PanelWidget]
+
+    init(id: UUID = UUID(), name: String, widgets: [PanelWidget]) {
+        self.id = id
+        self.name = name
+        self.widgets = widgets
+    }
+}
+
 extension PanelWidget {
     /// Disposition livree a la premiere ouverture : ce qu'on peut afficher sans
     /// demander la moindre autorisation a l'utilisateur.

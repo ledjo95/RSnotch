@@ -18,6 +18,7 @@
 		148103134BFC36FCDEB3D46E /* SystemAudioService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A04E9F66A01014DA4B0F1D1 /* SystemAudioService.swift */; };
 		158D086A9EA6071F49058E25 /* NotchWindowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60CCFE3811153BE91C1A7E97 /* NotchWindowController.swift */; };
 		16BF12388AE90D42EF87A66D /* SystemStatsService.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAD88705A2C53C227AE173D9 /* SystemStatsService.swift */; };
+		1837F83165C393661170A9CA /* SettingsExportService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 118D1124821713361B83BA63 /* SettingsExportService.swift */; };
 		20E1C7B6CF50BBA02D180560 /* WidgetRowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F1D21488F650DD47CB0DE65 /* WidgetRowView.swift */; };
 		2583F46CC6A63B45C5A2A89A /* BrightnessControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8863A5DA5E83D40C0C69A238 /* BrightnessControl.swift */; };
 		25B61946F95A4349667FAF09 /* AutoUpdater.swift in Sources */ = {isa = PBXBuildFile; fileRef = D95EC15E8CA677911C17A174 /* AutoUpdater.swift */; };
@@ -31,6 +32,7 @@
 		4273E190CD2B6032F2A99C47 /* SpaceAccent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94BF49777B4AE94B7193CE68 /* SpaceAccent.swift */; };
 		4B3B54C86F6736062423462A /* CalendarTabView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8351C1F4604D425A6757E53 /* CalendarTabView.swift */; };
 		4D767FDC4285D716DE790A4D /* AppSettingsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AF1CBC6CEF8F45E997D4F0B /* AppSettingsTests.swift */; };
+		558AF6FE6366BDC7D2E8457F /* SettingsExport.swift in Sources */ = {isa = PBXBuildFile; fileRef = B933CA4035A88904D3757660 /* SettingsExport.swift */; };
 		56A73FDDE5939DABC87A1B12 /* TimerWidgetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B599CBF1A9CC1F668C45455 /* TimerWidgetView.swift */; };
 		5B0E302AFB44372B7CC44044 /* NotchRootView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 043FE67B46DAC8F3B519C763 /* NotchRootView.swift */; };
 		5B20763EEF45DE6F62900E25 /* RSnotchApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54A6CF4445C5C01B6F861E61 /* RSnotchApp.swift */; };
@@ -89,6 +91,7 @@
 		F727D631D72A2A4AF12B3AD8 /* UpcomingWidgetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D1D1A4007FFDA3D578505F8 /* UpcomingWidgetView.swift */; };
 		F7EB5C44411BFA722B19F764 /* FileDragHandle.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF5E68524EF72B6107798D17 /* FileDragHandle.swift */; };
 		F943D2A151E6A8BEEBBCD521 /* AppLauncher.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAABAE587446EEF26BE0A92E /* AppLauncher.swift */; };
+		FA7D3F41773F1C1B39851B1C /* PomodoroSettingsSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 551B647B764D3F3C15009691 /* PomodoroSettingsSheet.swift */; };
 		FB60B5D5547EBE7C1D941DAD /* PrivacyInfo.xcprivacy in Resources */ = {isa = PBXBuildFile; fileRef = 13500BBC2CF15257FB22B0BA /* PrivacyInfo.xcprivacy */; };
 		FBECCA56E21FA057C5AEE58B /* TrayTabView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D99897310E99C65A54F50EA /* TrayTabView.swift */; };
 		FDB99F02B115FC876084BA9D /* LaunchItemsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82B7E812F4D2D6D38CDBEDC0 /* LaunchItemsViewModel.swift */; };
@@ -117,6 +120,7 @@
 		0F1D21488F650DD47CB0DE65 /* WidgetRowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WidgetRowView.swift; sourceTree = "<group>"; };
 		0F5F8AF9959067D640614772 /* MediaKeyInterceptor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MediaKeyInterceptor.swift; sourceTree = "<group>"; };
 		113FF1F64562E9E93D1F5E2E /* FormattingTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FormattingTests.swift; sourceTree = "<group>"; };
+		118D1124821713361B83BA63 /* SettingsExportService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsExportService.swift; sourceTree = "<group>"; };
 		134AFBA45FF47F6342CF6A94 /* ClipboardService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClipboardService.swift; sourceTree = "<group>"; };
 		13500BBC2CF15257FB22B0BA /* PrivacyInfo.xcprivacy */ = {isa = PBXFileReference; path = PrivacyInfo.xcprivacy; sourceTree = "<group>"; };
 		169F18D7FAAE52CC849F641A /* CalendarService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarService.swift; sourceTree = "<group>"; };
@@ -140,6 +144,7 @@
 		5196768203335BC0DFEE67C6 /* SpaceHeuristicTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpaceHeuristicTests.swift; sourceTree = "<group>"; };
 		524931059CBF3FA5A3C9B101 /* LoginItemService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginItemService.swift; sourceTree = "<group>"; };
 		54A6CF4445C5C01B6F861E61 /* RSnotchApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RSnotchApp.swift; sourceTree = "<group>"; };
+		551B647B764D3F3C15009691 /* PomodoroSettingsSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PomodoroSettingsSheet.swift; sourceTree = "<group>"; };
 		558D836EDD3B4999F737FA59 /* TimerService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimerService.swift; sourceTree = "<group>"; };
 		57B6F2C5A51DBC32D22ACC4E /* QuickSettingsTabView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuickSettingsTabView.swift; sourceTree = "<group>"; };
 		5D84AD0036CC2CED3ECEF758 /* SystemStatsWidgetView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SystemStatsWidgetView.swift; sourceTree = "<group>"; };
@@ -170,6 +175,7 @@
 		AF5E68524EF72B6107798D17 /* FileDragHandle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileDragHandle.swift; sourceTree = "<group>"; };
 		B560E82FEA7BCD70A6A924A1 /* RSnotchTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = RSnotchTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		B64EE4ADFDCF26265B590D6A /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
+		B933CA4035A88904D3757660 /* SettingsExport.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsExport.swift; sourceTree = "<group>"; };
 		BAD88705A2C53C227AE173D9 /* SystemStatsService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SystemStatsService.swift; sourceTree = "<group>"; };
 		BC5218F217BC658EF378C9B7 /* DisplayBrightnessService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DisplayBrightnessService.swift; sourceTree = "<group>"; };
 		BD5191862789570C6E085E71 /* ClipboardTabView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClipboardTabView.swift; sourceTree = "<group>"; };
@@ -386,6 +392,8 @@
 				6F070EB160E2573D26C1E128 /* AppSettings.swift */,
 				448752EC329859FB2743F874 /* BookmarkStore.swift */,
 				DF1346AF57451E71CBBFCF6D /* ClipboardStore.swift */,
+				B933CA4035A88904D3757660 /* SettingsExport.swift */,
+				118D1124821713361B83BA63 /* SettingsExportService.swift */,
 			);
 			path = Persistence;
 			sourceTree = "<group>";
@@ -477,6 +485,7 @@
 		F37A75B44E9427BA67017489 /* Timer */ = {
 			isa = PBXGroup;
 			children = (
+				551B647B764D3F3C15009691 /* PomodoroSettingsSheet.swift */,
 				04C697C4B0A11BD36ABA43A0 /* TickRuler.swift */,
 				47D87653E944C8DF22BF1E2A /* TimerTabView.swift */,
 				1B599CBF1A9CC1F668C45455 /* TimerWidgetView.swift */,
@@ -646,9 +655,12 @@
 				6135F71FBE9F1B54E9FC896E /* PermissionPrimerView.swift in Sources */,
 				B75620D5C117EE62529CE816 /* PocketStorageService.swift in Sources */,
 				B049898E9A2A3593D0FFB833 /* PocketTabView.swift in Sources */,
+				FA7D3F41773F1C1B39851B1C /* PomodoroSettingsSheet.swift in Sources */,
 				83282859E6BF871360B51097 /* PowerService.swift in Sources */,
 				0FD153A4C34567F9CCB62248 /* QuickSettingsTabView.swift in Sources */,
 				5B20763EEF45DE6F62900E25 /* RSnotchApp.swift in Sources */,
+				558AF6FE6366BDC7D2E8457F /* SettingsExport.swift in Sources */,
+				1837F83165C393661170A9CA /* SettingsExportService.swift in Sources */,
 				CE86842F95EA33E6F468F8F3 /* SettingsView.swift in Sources */,
 				12ED1BB8D4AEA75770394E51 /* SettingsWindowController.swift in Sources */,
 				4273E190CD2B6032F2A99C47 /* SpaceAccent.swift in Sources */,

@@ -258,7 +258,7 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
     #endif
 
     @objc private func openSettings() {
-        settingsWindow.show()
+        settingsWindow.show(widgets: notchController.widgets)
     }
 
     @objc private func checkForUpdates() {

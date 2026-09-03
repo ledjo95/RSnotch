@@ -17,8 +17,19 @@ import SwiftUI
 final class WidgetsViewModel {
 
     private static let storageKey = "panel.widgets.layout"
+    private static let profilesStorageKey = "panel.widgets.profiles"
+    private static let activeProfileStorageKey = "panel.widgets.activeProfile"
+
+    /// Nombre maximal de profils enregistrables — marge raisonnable pour un
+    /// Picker de reglages, pas une limite technique dure.
+    static let maxProfiles = 5
 
     private(set) var widgets: [PanelWidget]
+    private(set) var profiles: [WidgetLayoutProfile] = []
+    /// Profil applique en dernier. Ne suit PAS la divergence : si la
+    /// disposition est modifiee ensuite, ce champ reste inchange — c'est un
+    /// raccourci de bascule pour le Picker, pas une source de verite stricte.
+    private(set) var activeProfileID: UUID?
 
     private let defaults: UserDefaults
 
@@ -35,6 +46,15 @@ final class WidgetsViewModel {
             self.widgets = stored.filter { $0.kind.isAvailable }
         } else {
             self.widgets = PanelWidget.defaultLayout
+        }
+
+        if let data = defaults.data(forKey: Self.profilesStorageKey),
+           let stored = try? JSONDecoder().decode([WidgetLayoutProfile].self, from: data) {
+            self.profiles = stored
+        }
+
+        if let raw = defaults.string(forKey: Self.activeProfileStorageKey) {
+            self.activeProfileID = UUID(uuidString: raw)
         }
     }
 
@@ -75,6 +95,68 @@ final class WidgetsViewModel {
     func resetToDefaults() {
         widgets = PanelWidget.defaultLayout
         persist()
+    }
+
+    /// Remplace la disposition en bloc, sans passer par un profil (utilise
+    /// par l'import de reglages). Les identifiants de `PanelWidget` sont
+    /// preserves tels quels, donc SwiftUI anime une diff normale plutot que
+    /// de tout recreer.
+    func replaceLayout(_ newWidgets: [PanelWidget]) {
+        widgets = newWidgets
+        persist()
+    }
+
+    // MARK: Profils
+
+    @discardableResult
+    func saveProfile(name: String) -> WidgetLayoutProfile? {
+        guard profiles.count < Self.maxProfiles else { return nil }
+        let profile = WidgetLayoutProfile(name: name, widgets: widgets)
+        profiles.append(profile)
+        activeProfileID = profile.id
+        persistProfiles()
+        persistActiveProfile()
+        return profile
+    }
+
+    func overwriteProfile(_ profile: WidgetLayoutProfile) {
+        guard let index = profiles.firstIndex(where: { $0.id == profile.id }) else { return }
+        profiles[index].widgets = widgets
+        activeProfileID = profile.id
+        persistProfiles()
+        persistActiveProfile()
+    }
+
+    func renameProfile(_ profile: WidgetLayoutProfile, to name: String) {
+        guard let index = profiles.firstIndex(where: { $0.id == profile.id }) else { return }
+        profiles[index].name = name
+        persistProfiles()
+    }
+
+    func deleteProfile(_ profile: WidgetLayoutProfile) {
+        profiles.removeAll { $0.id == profile.id }
+        if activeProfileID == profile.id {
+            activeProfileID = nil
+            persistActiveProfile()
+        }
+        persistProfiles()
+    }
+
+    /// Remplace `widgets` par l'instantane du profil. Une copie de valeur,
+    /// pas une reference : modifier la disposition ensuite ne touche jamais
+    /// au profil enregistre.
+    func applyProfile(_ profile: WidgetLayoutProfile) {
+        widgets = profile.widgets.filter { $0.kind.isAvailable }
+        activeProfileID = profile.id
+        persist()
+        persistActiveProfile()
+    }
+
+    /// Remplace la liste des profils en bloc (utilise par l'import de
+    /// reglages).
+    func replaceProfiles(_ newProfiles: [WidgetLayoutProfile]) {
+        profiles = newProfiles
+        persistProfiles()
     }
 
     /// Largeur exacte de la rangee, marges comprises. Le panneau s'y ajuste :
@@ -134,5 +216,14 @@ final class WidgetsViewModel {
     private func persist() {
         guard let data = try? JSONEncoder().encode(widgets) else { return }
         defaults.set(data, forKey: Self.storageKey)
+    }
+
+    private func persistProfiles() {
+        guard let data = try? JSONEncoder().encode(profiles) else { return }
+        defaults.set(data, forKey: Self.profilesStorageKey)
+    }
+
+    private func persistActiveProfile() {
+        defaults.set(activeProfileID?.uuidString, forKey: Self.activeProfileStorageKey)
     }
 }

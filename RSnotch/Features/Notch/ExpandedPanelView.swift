@@ -197,7 +197,7 @@ struct ExpandedPanelView: View {
         case .pocket:
             PocketTabView(pocket: pocket)
         case .settings:
-            QuickSettingsTabView()
+            QuickSettingsTabView(widgets: widgets)
         }
     }
 }

@@ -20,7 +20,11 @@ final class NotchWindowController {
     private(set) var model: NotchViewModel?
 
     // Modeles de fonctionnalites, crees une fois et partages par le panneau.
-    private let widgets = WidgetsViewModel()
+    // `widgets` est expose (pas `private`) : la fenetre de reglages doit
+    // porter la MEME instance (§ SettingsWindowController.show), sinon
+    // profils et disposition se desynchronisent des que les deux fenetres
+    // sont ouvertes a la fois.
+    let widgets = WidgetsViewModel()
     private let launcher = LaunchItemsViewModel()
     private let weather = WeatherService()
     private let calendar = CalendarService()
